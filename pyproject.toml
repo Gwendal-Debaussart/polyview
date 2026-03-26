@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "polyview"
+version = "0.0.1"
+description = "A Python library for multi-view learning: fusion, clustering and embedding."
+readme = "README.md"
+authors = [
+    { name = "Gwendal Debaussart-Joniec", email = "gwendal.debaussart@ens.paris-saclay.fr" }
+]
+dependencies = [
+    "numpy",
+    "scikit-learn",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]

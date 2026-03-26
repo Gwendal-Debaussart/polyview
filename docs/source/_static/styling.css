@@ -1,0 +1,71 @@
+:root {
+  --bg-color   : #EBEBD6;
+  /* --sidebar-bg-color : #D8C8C0; */
+  --sidebar-bg-color : #EFF2EF;
+  --link-color : #072AC8;
+  --black      : #312F2F;
+  --white      : #EFF2EF;
+  --h3-color   : #444444;
+  --secondary-color : #FF8200;
+  --secondary-color-light : #ffc180;
+  /* Force light-mode presentation and remove theme controls. */
+  color-scheme: light;
+}
+
+.theme-toggle-container,
+.theme-toggle {
+  display: none !important;
+}
+
+body {
+  font-family      : Arial, Helvetica, sans-serif;
+  background-color : var(--bg-color);
+  color            : var(--black);
+  text-justify     : inter-word;
+  font-weight      : 300;
+  text-align       : justify;
+  font-size        : calc(0.75vh + 10px);
+  --color-api-pre-name : var(--secondary-color);
+  --color-api-name: var(--secondary-color);
+  --color-toc-background: var(--white);
+}
+
+h1, h2 {
+  color : var(--link-color);
+}
+
+h3 {
+  color : var(--h3-color);
+}
+
+a, a:visited {
+  color           : var(--link-color);
+  text-decoration : underline var(--link-color) solid;
+}
+
+a:visited:hover, a:hover {
+  background-color : var(--secondary-color-light);
+  color            : var(--link-color);
+  text-decoration  : none;
+}
+
+.sidebar-drawer {
+  background-color : var(--sidebar-bg-color);
+}
+
+a.sidebar-brand:hover,
+a.sidebar-brand:focus,
+a.sidebar-brand:focus-visible,
+a.sidebar-brand:visited:hover {
+  background-color : transparent !important;
+}
+
+.sidebar-brand-text {
+  color : var(--link-color);
+}
+
+/* Toc Title */
+
+.toc-title {
+  color : var(--h3-color);
+}
