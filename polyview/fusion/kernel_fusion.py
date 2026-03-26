@@ -111,8 +111,7 @@ class KernelSpec:
     ----------
     kernel : str or callable
         ``"linear"``      — dot-product kernel (sklearn linear_kernel)
-        ``"rbf"``         — RBF/Gaussian (sklearn rbf_kernel, median heuristic
-                            when gamma=None)
+        ``"rbf"``         — RBF/Gaussian (sklearn rbf_kernel, median heuristic when gamma=None)
         ``"polynomial"``  — polynomial kernel (sklearn polynomial_kernel)
         ``"precomputed"`` — the view array IS already a kernel matrix
         callable          — any ``(X: ndarray) -> ndarray`` function
