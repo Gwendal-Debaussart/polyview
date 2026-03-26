@@ -12,8 +12,7 @@ This documentation includes:
 .. _mvlearn: https://mvlearn.github.io/
 
 .. toctree::
-  :maxdepth: 2
+  :maxdepth: 1
 
-  cluster/mv_kmeans
-  fusion/early
-  fusion/kernel_fusion
+  cluster/index
+  fusion/index
