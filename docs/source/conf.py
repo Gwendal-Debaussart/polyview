@@ -8,7 +8,6 @@
 
 import sys
 import os
-import importlib.util
 import tomllib
 
 sys.path.insert(0, os.path.abspath('../..'))
@@ -42,7 +41,7 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'furo' if importlib.util.find_spec('furo') else 'alabaster'
+html_theme = 'furo'
 html_static_path = ['_static']
 html_logo = '_static/polyview.svg'
 html_favicon = '_static/polyview.svg'
