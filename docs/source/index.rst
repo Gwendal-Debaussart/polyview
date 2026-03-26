@@ -15,3 +15,5 @@ This documentation includes:
   :maxdepth: 2
 
   cluster/mv_kmeans
+  fusion/early
+  fusion/kernel_fusion
