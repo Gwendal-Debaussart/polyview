@@ -16,3 +16,4 @@ This documentation includes:
 
   cluster/index
   fusion/index
+  misc/index
