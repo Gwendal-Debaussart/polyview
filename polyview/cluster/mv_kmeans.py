@@ -215,12 +215,11 @@ class MultiviewKMeans(BaseMultiViewClusterer):
         n, K = self.n_samples_, self.n_clusters
         cost = np.zeros((n, K))
         for X, Fv, dev in zip(views, F, De):
-            # X: (n, d_v),  Fv: (K, d_v)
-            diff = X[:, None, :] - Fv[None, :, :]  # (n, K, d_v)
-            sq_dist = np.sum(diff**2, axis=2)  # (n, K)
+            diff = X[:, None, :] - Fv[None, :, :]
+            sq_dist = np.sum(diff**2, axis=2)
             cost += dev[:, None] * sq_dist
 
-        labels = np.argmin(cost, axis=1)  # (n,)
+        labels = np.argmin(cost, axis=1)
         G = np.zeros((n, K))
         G[np.arange(n), labels] = 1.0
         return G
