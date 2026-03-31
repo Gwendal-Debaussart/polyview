@@ -10,7 +10,7 @@ from sklearn.exceptions import ConvergenceWarning
 from polyview.base import BaseMultiViewClusterer
 
 
-class MultiviewKMeans(BaseMultiViewClusterer):
+class MultiViewKMeans(BaseMultiViewClusterer):
     """
     Multi-view K-Means clustering.
 
