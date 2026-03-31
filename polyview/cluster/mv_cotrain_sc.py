@@ -10,6 +10,34 @@ class MultiViewCoTrainSpectralClustering(BaseMultiViewClusterer):
     """
     Multi-view co-training spectral clustering algorithm.
 
+    Parameters
+    ----------
+    n_clusters : int, default=2
+        The number of clusters to form.
+    n_init : int, default=10
+        Number of time the k-means algorithm will be run with different centroid seeds.
+    max_iter : int, default=50
+        Maximum number of iterations of the alternating optimization.
+    affinity : str, default='rbf'
+        Kernel to use for computing the affinity matrix. Should be a valid metric for sklearn.metrics.pairwise.pairwise_kernels.
+    lambda_reg : float, default=1.0
+        Regularization parameter for co-training terms.
+    random_state : int or None, default=None
+        Determines random number generation for centroid initialization. Use an int to make the randomness deterministic.
+
+    Attributes
+    ----------
+    embedding_ : np.ndarray of shape (n_samples, n_clusters * n_views)
+        The concatenated spectral embeddings from all views after fitting.
+    objective_ : list of float
+        The objective function values at each iteration of the optimization process.
+    labels_ : np.ndarray of shape (n_samples,)
+        Cluster labels for each sample after fitting.
+
+    References
+    ----------
+    Kumar A. and Daumé H. (2011). A Co-training Approach for Multi-view Spectral Clustering. In Proceedings of the 28th International Conference on Machine Learning (ICML-11).
+
 
     """
     def __init__(
