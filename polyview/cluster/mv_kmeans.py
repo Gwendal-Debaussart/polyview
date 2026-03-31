@@ -98,7 +98,7 @@ class MultiviewKMeans(BaseMultiViewClusterer):
         F: List[np.ndarray],
         alpha: np.ndarray,
     ) -> float:
-        """
+        r"""
         Computes the objective function value for given cluster assignment G, centroids F, and view weights alpha.
 
         $\sum_v \alpha(v)^{\gamma} \|X(v) - G F(v)\|_{2,1}$
@@ -161,7 +161,7 @@ class MultiviewKMeans(BaseMultiViewClusterer):
         G: np.ndarray,
         De: np.ndarray,
     ) -> np.ndarray:
-        """
+        r"""
         Updates F(v) centroids for view v, given current cluster assignment G and D(v) diagonal De.
 
         $F^{(v)} = (G^T De G)^{-1} G^T D^{(v)} X$
@@ -192,7 +192,7 @@ class MultiviewKMeans(BaseMultiViewClusterer):
         F: List[np.ndarray],
         De: List[np.ndarray],
     ) -> np.ndarray:
-        """
+        r"""
         Updates cluster assignment G by assigning each sample to the cluster with minimum weighted distance.
 
         For each sample i:
@@ -232,7 +232,7 @@ class MultiviewKMeans(BaseMultiViewClusterer):
         F: List[np.ndarray],
         D: List[np.ndarray],
     ) -> np.ndarray:
-        """
+        r"""
         Updates view weights alpha.
 
         $\alpha^{(v)} = (\gamma H^{(v)})^{1/(1-\gamma)} / \sum_v (\gamma H^{(v)})^{1/(1-\gamma)}$
@@ -277,7 +277,7 @@ class MultiviewKMeans(BaseMultiViewClusterer):
         views: List[np.ndarray],
         rng: np.random.RandomState,
     ) -> tuple:
-        """
+        r"""
         Runs one full alternating-optimisation of the multi-view k-means algorithm.
 
         Returns
