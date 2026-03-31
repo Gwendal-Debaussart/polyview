@@ -31,7 +31,7 @@ from sklearn.metrics.pairwise import (
 
 from polyview.base import BaseMultiViewTransformer
 
-KernelFn   = Callable[[np.ndarray], np.ndarray]
+KernelFn = Callable[[np.ndarray], np.ndarray]
 KernelName = Literal["linear", "rbf", "polynomial", "precomputed"]
 
 
@@ -42,8 +42,6 @@ def center_kernel(K: np.ndarray) -> np.ndarray:
     mean is zero.  Strongly recommended before fusing kernels from different
     views — removes the constant bias term and makes kernels comparable.
 
-    K_c = K - 1_n K - K 1_n + 1_n K 1_n
-
     Parameters
     ----------
     K : ndarray of shape (n_samples, n_samples)
@@ -53,8 +51,8 @@ def center_kernel(K: np.ndarray) -> np.ndarray:
     K_centered : ndarray of shape (n_samples, n_samples), symmetric
     """
     K = np.asarray(K, dtype=float)
-    row_mean   = K.mean(axis=1, keepdims=True)
-    col_mean   = K.mean(axis=0, keepdims=True)
+    row_mean = K.mean(axis=1, keepdims=True)
+    col_mean = K.mean(axis=0, keepdims=True)
     grand_mean = K.mean()
     K_c = K - row_mean - col_mean + grand_mean
     return (K_c + K_c.T) / 2.0
@@ -153,10 +151,10 @@ class KernelSpec:
     ) -> None:
         if weight < 0:
             raise ValueError(f"weight must be >= 0, got {weight}.")
-        self.kernel        = kernel
-        self.weight        = weight
-        self.center        = center
-        self.normalize     = normalize
+        self.kernel = kernel
+        self.weight = weight
+        self.center = center
+        self.normalize = normalize
         self.kernel_params = {**(kernel_params or {}), **kwargs}
 
     def build(self, X: np.ndarray) -> np.ndarray:
@@ -188,18 +186,18 @@ class KernelSpec:
         elif k == "rbf":
             gamma = self.kernel_params.get("gamma", None)
             if gamma is None:
-                sq_dists  = pairwise_distances(X, metric="sqeuclidean")
-                upper     = sq_dists[np.triu_indices_from(sq_dists, k=1)]
+                sq_dists = pairwise_distances(X, metric="sqeuclidean")
+                upper = sq_dists[np.triu_indices_from(sq_dists, k=1)]
                 median_sq = np.median(upper)
-                gamma     = 1.0 / (2.0 * median_sq) if median_sq > 0 else 1.0
+                gamma = 1.0 / (2.0 * median_sq) if median_sq > 0 else 1.0
             K = _sk_rbf(X, gamma=gamma)
 
         elif k == "polynomial":
             K = _sk_poly(
                 X,
-                degree=self.kernel_params.get("degree", 3),
-                gamma=self.kernel_params.get("gamma", None),
-                coef0=self.kernel_params.get("coef0", 1.0),
+                degree = self.kernel_params.get("degree", 3),
+                gamma = self.kernel_params.get("gamma", None),
+                coef0 = self.kernel_params.get("coef0", 1.0),
             )
 
         elif callable(k):
@@ -279,7 +277,7 @@ class KernelFusion(BaseMultiViewTransformer):
         n_views: Optional[int] = None,
     ) -> None:
         super().__init__(n_views=n_views)
-        self.specs             = specs
+        self.specs = specs
         self.normalize_weights = normalize_weights
 
     def _resolve_specs(self, n_views: int) -> List[KernelSpec]:
@@ -290,8 +288,7 @@ class KernelFusion(BaseMultiViewTransformer):
         specs = list(self.specs)
         if len(specs) != n_views:
             raise ValueError(
-                f"Expected {n_views} KernelSpecs (one per view), "
-                f"got {len(specs)}."
+                f"Expected {n_views} KernelSpecs (one per view), " f"got {len(specs)}."
             )
         return specs
 
@@ -321,7 +318,7 @@ class KernelFusion(BaseMultiViewTransformer):
         """
         views = self._validate_views(views, reset=True)
 
-        self.specs_   = self._resolve_specs(self.n_views_in_)
+        self.specs_ = self._resolve_specs(self.n_views_in_)
         self.weights_ = self._resolve_weights(self.specs_)
         self.kernels_ = [spec.build(v) for spec, v in zip(self.specs_, views)]
 
@@ -360,7 +357,6 @@ class KernelFusion(BaseMultiViewTransformer):
         kernels_new = [spec.build(v) for spec, v in zip(self.specs_, views_arr)]
         return sum(w * K for w, K in zip(self.weights_, kernels_new))
 
-
     def kernel_matrix(self) -> np.ndarray:
         """Return a copy of the fused kernel matrix."""
         self._check_is_fitted()
@@ -369,17 +365,15 @@ class KernelFusion(BaseMultiViewTransformer):
     def view_contributions(self) -> List[dict]:
         """Per-view contribution fractions to the fused kernel (by Frobenius norm)."""
         self._check_is_fitted()
-        norms          = [np.linalg.norm(K, "fro") for K in self.kernels_]
+        norms = [np.linalg.norm(K, "fro") for K in self.kernels_]
         weighted_norms = [w * n for w, n in zip(self.weights_, norms)]
-        total          = sum(weighted_norms) or 1.0
+        total = sum(weighted_norms) or 1.0
         return [
             {
-                "spec":                    spec,
-                "weight":                  float(w),
-                "kernel_frobenius_norm":   float(n),
-                "contribution_fraction":   float(wn / total),
+                "spec": spec,
+                "weight": float(w),
+                "kernel_frobenius_norm": float(n),
+                "contribution_fraction": float(wn / total),
             }
-            for spec, w, n, wn in zip(
-                self.specs_, self.weights_, norms, weighted_norms
-            )
+            for spec, w, n, wn in zip(self.specs_, self.weights_, norms, weighted_norms)
         ]
