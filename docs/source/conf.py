@@ -52,3 +52,5 @@ html_css_files = [
 html_js_files = [
     'force-light.js',
 ]
+
+html_show_sourcelink = False
