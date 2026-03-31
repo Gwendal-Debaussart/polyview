@@ -76,3 +76,11 @@ a.sidebar-brand:visited:hover {
 .toc-title {
   color : var(--h3-color);
 }
+
+.toc-tree a.reference {
+  color: var(--link-color);
+}
+
+.toc-tree a:hover code {
+  background-color: var(--secondary-color-light);
+}
