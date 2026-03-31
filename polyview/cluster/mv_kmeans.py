@@ -51,7 +51,9 @@ class MultiViewKMeans(BaseMultiViewClusterer):
     The gamma parameter controls how the view weights alpha(v) are distributed:
         - gamma -> inf gives equal weights.
         - gamma -> 1 collapses weight onto the single best view.
+
     The paper recommends searching log10(gamma) in [0.1, 2.0].
+
     Setting ``learn_weights=False`` recovers the Simple Multi-view K-Means (SMKMC) variant from the same paper, which uses equal view weights throughout.
 
     Examples
