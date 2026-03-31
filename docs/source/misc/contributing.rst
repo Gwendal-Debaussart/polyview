@@ -7,9 +7,10 @@ Submitting an issue
 -------------------
 
 If planning on submitting an issue, please do your best to follow the following guidelines:
-- *Provide a minimal, reproducible example* that demonstrates the issue. Additional information can be found `here <https://stackoverflow.com/help/minimal-reproducible-example/>`_.
-- If the previous point is not applicable, *please provide a detailed description of the issue*, including the expected behavior and the actual behavior. Include which functions or classes are involved, and any relevant error messages or stack traces.
-- *Please include your environment details*, such as the version of polyview you are using, your Python version, and any other relevant libraries or dependencies.
+
+- **Provide a minimal, reproducible example** that demonstrates the issue. Additional information can be found `here <https://stackoverflow.com/help/minimal-reproducible-example/>`_.
+- If the previous point is not applicable, **please provide a detailed description of the issue**, including the expected behavior and the actual behavior. Include which functions or classes are involved, and any relevant error messages or stack traces.
+- **Please include your environment details**, such as the version of polyview you are using, your Python version, and any other relevant libraries or dependencies.
 
 Contributing code
 -----------------
@@ -19,8 +20,8 @@ If planning on contributing code, here are some additional guidelines to follow.
 Coding guidelines
 ^^^^^^^^^^^^^^^^^
 
-- *Follow the existing code style* as closely as possible. This includes naming conventions, formatting, and documentation style. We use `black` for code formatting and `numpy` style for docstrings.
-- *Format docstrings* properly, as they are used for documentation generation by Sphinx. Make sure to include descriptions of parameters, return values, and any relevant reference.
+- **Follow the existing code style** as closely as possible. This includes naming conventions, formatting, and documentation style. We use `black` for code formatting and `numpy` style for docstrings.
+- **Format docstrings** properly, as they are used for documentation generation by Sphinx. Make sure to include descriptions of parameters, return values, and any relevant reference.
 
 API of polyview objects
 ^^^^^^^^^^^^^^^^^^^^^^^^
