@@ -196,6 +196,8 @@
   <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="cluster/index.html">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="cluster/mv_kmeans.html">Multi-View K-Means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cluster/mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cluster/mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -238,7 +240,7 @@
           
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a></div>
+  <div class="genindex-jumpbox"><a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a></div>
 </section>
 <section id="B" class="genindex-section">
   <h2>B</h2>
@@ -258,9 +260,19 @@
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiviewKMeans.centroids_">centroids_ (polyview.cluster.mv_kmeans.MultiviewKMeans attribute)</a>
+        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.centroids_">centroids_ (polyview.cluster.mv_kmeans.MultiViewKMeans attribute)</a>
 </li>
         <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion">ConcatFusion (class in polyview.fusion.early)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="cluster/mv_coreg_sc.html#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.embedding_">embedding_ (polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering attribute)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -270,9 +282,13 @@
   <h2>F</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiviewKMeans.fit">fit() (polyview.cluster.mv_kmeans.MultiviewKMeans method)</a>
+        <li><a href="cluster/mv_coreg_sc.html#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit">fit() (polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering method)</a>
 
         <ul>
+          <li><a href="cluster/mv_cotrain_sc.html#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit">(polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering method)</a>
+</li>
+          <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.fit">(polyview.cluster.mv_kmeans.MultiViewKMeans method)</a>
+</li>
           <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion.fit">(polyview.fusion.early.ConcatFusion method)</a>
 </li>
           <li><a href="fusion/early.html#polyview.fusion.early.NormalizedFusion.fit">(polyview.fusion.early.NormalizedFusion method)</a>
@@ -284,8 +300,14 @@
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiviewKMeans.fit_predict">fit_predict() (polyview.cluster.mv_kmeans.MultiviewKMeans method)</a>
+        <li><a href="cluster/mv_coreg_sc.html#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit_predict">fit_predict() (polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering method)</a>
+
+        <ul>
+          <li><a href="cluster/mv_cotrain_sc.html#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit_predict">(polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering method)</a>
 </li>
+          <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.fit_predict">(polyview.cluster.mv_kmeans.MultiViewKMeans method)</a>
+</li>
+        </ul></li>
     </ul></td>
   </tr></table>
 </section>
@@ -293,10 +315,6 @@
 <section id="I" class="genindex-section">
   <h2>I</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiviewKMeans.inertia_">inertia_ (polyview.cluster.mv_kmeans.MultiviewKMeans attribute)</a>
-</li>
-    </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="fusion/kernel_fusion.html#polyview.fusion.kernel_fusion.is_valid_kernel">is_valid_kernel() (in module polyview.fusion.kernel_fusion)</a>
 </li>
@@ -328,12 +346,12 @@
   <h2>L</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiviewKMeans.labels_">labels_ (polyview.cluster.mv_kmeans.MultiviewKMeans attribute)</a>
+        <li><a href="cluster/mv_coreg_sc.html#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.labels_">labels_ (polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering attribute)</a>
+
+        <ul>
+          <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.labels_">(polyview.cluster.mv_kmeans.MultiViewKMeans attribute)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiviewKMeans.labels_per_view_">labels_per_view_ (polyview.cluster.mv_kmeans.MultiviewKMeans attribute)</a>
-</li>
+        </ul></li>
     </ul></td>
   </tr></table>
 </section>
@@ -348,6 +366,10 @@
     module
 
         <ul>
+          <li><a href="cluster/mv_coreg_sc.html#module-polyview.cluster.mv_coreg_sc">polyview.cluster.mv_coreg_sc</a>
+</li>
+          <li><a href="cluster/mv_cotrain_sc.html#module-polyview.cluster.mv_cotrain_sc">polyview.cluster.mv_cotrain_sc</a>
+</li>
           <li><a href="cluster/mv_kmeans.html#module-polyview.cluster.mv_kmeans">polyview.cluster.mv_kmeans</a>
 </li>
           <li><a href="fusion/early.html#module-polyview.fusion.early">polyview.fusion.early</a>
@@ -357,7 +379,11 @@
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiviewKMeans">MultiviewKMeans (class in polyview.cluster.mv_kmeans)</a>
+        <li><a href="cluster/mv_coreg_sc.html#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering">MultiViewCoRegSpectralClustering (class in polyview.cluster.mv_coreg_sc)</a>
+</li>
+        <li><a href="cluster/mv_cotrain_sc.html#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering">MultiViewCoTrainSpectralClustering (class in polyview.cluster.mv_cotrain_sc)</a>
+</li>
+        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans">MultiViewKMeans (class in polyview.cluster.mv_kmeans)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -371,7 +397,7 @@
 </li>
         <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion.n_features_out_">n_features_out_ (polyview.fusion.early.ConcatFusion attribute)</a>
 </li>
-        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiviewKMeans.n_iter_">n_iter_ (polyview.cluster.mv_kmeans.MultiviewKMeans attribute)</a>
+        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.n_iter_">n_iter_ (polyview.cluster.mv_kmeans.MultiViewKMeans attribute)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
@@ -385,10 +411,38 @@
   </tr></table>
 </section>
 
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="cluster/mv_coreg_sc.html#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.objective_">objective_ (polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering attribute)</a>
+
+        <ul>
+          <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.objective_">(polyview.cluster.mv_kmeans.MultiViewKMeans attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
 <section id="P" class="genindex-section">
   <h2>P</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    polyview.cluster.mv_coreg_sc
+
+        <ul>
+          <li><a href="cluster/mv_coreg_sc.html#module-polyview.cluster.mv_coreg_sc">module</a>
+</li>
+        </ul></li>
+        <li>
+    polyview.cluster.mv_cotrain_sc
+
+        <ul>
+          <li><a href="cluster/mv_cotrain_sc.html#module-polyview.cluster.mv_cotrain_sc">module</a>
+</li>
+        </ul></li>
         <li>
     polyview.cluster.mv_kmeans
 
@@ -396,6 +450,8 @@
           <li><a href="cluster/mv_kmeans.html#module-polyview.cluster.mv_kmeans">module</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     polyview.fusion.early
 
@@ -403,8 +459,6 @@
           <li><a href="fusion/early.html#module-polyview.fusion.early">module</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     polyview.fusion.kernel_fusion
 
@@ -412,7 +466,7 @@
           <li><a href="fusion/kernel_fusion.html#module-polyview.fusion.kernel_fusion">module</a>
 </li>
         </ul></li>
-        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiviewKMeans.predict">predict() (polyview.cluster.mv_kmeans.MultiviewKMeans method)</a>
+        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.predict">predict() (polyview.cluster.mv_kmeans.MultiViewKMeans method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -466,9 +520,11 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="fusion/early.html#polyview.fusion.early.WeightedFusion">WeightedFusion (class in polyview.fusion.early)</a>
 </li>
-        <li><a href="fusion/early.html#polyview.fusion.early.NormalizedFusion.weights_">weights_ (polyview.fusion.early.NormalizedFusion attribute)</a>
+        <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.weights_">weights_ (polyview.cluster.mv_kmeans.MultiViewKMeans attribute)</a>
 
         <ul>
+          <li><a href="fusion/early.html#polyview.fusion.early.NormalizedFusion.weights_">(polyview.fusion.early.NormalizedFusion attribute)</a>
+</li>
           <li><a href="fusion/early.html#polyview.fusion.early.WeightedFusion.weights_">(polyview.fusion.early.WeightedFusion attribute)</a>
 </li>
           <li><a href="fusion/kernel_fusion.html#polyview.fusion.kernel_fusion.KernelFusion.weights_">(polyview.fusion.kernel_fusion.KernelFusion attribute)</a>

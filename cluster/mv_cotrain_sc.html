@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Early Fusion" href="early.html"><link rel="prev" title="Multi-View Co-Regularized Spectral Clustering" href="../cluster/mv_coreg_sc.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Multi-View Co-Regularized Spectral Clustering" href="mv_coreg_sc.html"><link rel="prev" title="Multi-View K-Means" href="mv_kmeans.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Fusion methods - polyview 0.0.1 documentation</title>
+        <title>Multi-View Co-Training Spectral Clustering - polyview 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -174,7 +174,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -196,15 +196,15 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../cluster/index.html">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_kmeans.html">Multi-View K-Means</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mv_kmeans.html">Multi-View K-Means</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Multi-View Co-Training Spectral Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="early.html">Early Fusion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kernel_fusion.html">Kernel Fusion</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fusion/early.html">Early Fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fusion/kernel_fusion.html">Kernel Fusion</a></li>
 </ul>
 </li>
 </ul>
@@ -227,7 +227,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/fusion/index.rst.txt" title="View this page">
+  <a class="muted-link" href="../_sources/cluster/mv_cotrain_sc.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -240,19 +240,45 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="fusion-methods">
-<h1>Fusion methods<a class="headerlink" href="#fusion-methods" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="early.html">Early Fusion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="kernel_fusion.html">Kernel Fusion</a></li>
+          <section id="module-polyview.cluster.mv_cotrain_sc">
+<span id="multi-view-co-training-spectral-clustering"></span><h1>Multi-View Co-Training Spectral Clustering<a class="headerlink" href="#module-polyview.cluster.mv_cotrain_sc" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.cluster.mv_cotrain_sc.</span></span><span class="sig-name descname"><span class="pre">MultiViewCoTrainSpectralClustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewClusterer</span></code></p>
+<p>Multi-view co-training spectral clustering algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit_predict" title="Link to this definition">¶</a></dt>
+<dd><p>Fit and return cluster labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>)</p></li>
+<li><p><strong>y</strong> (<em>ignored</em>)</p></li>
 </ul>
-</div>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>labels</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -260,23 +286,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="early.html">
+          <a class="next-page" href="mv_coreg_sc.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Early Fusion</div>
+                <div class="title">Multi-View Co-Regularized Spectral Clustering</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../cluster/mv_coreg_sc.html">
+          <a class="prev-page" href="mv_kmeans.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Multi-View Co-Regularized Spectral Clustering</div>
+                <div class="title">Multi-View K-Means</div>
                 
               </div>
             </a>
@@ -298,8 +324,31 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Multi-View Co-Training Spectral Clustering</a><ul>
+<li><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering"><code class="docutils literal notranslate"><span class="pre">MultiViewCoTrainSpectralClustering</span></code></a><ul>
+<li><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit"><code class="docutils literal notranslate"><span class="pre">MultiViewCoTrainSpectralClustering.fit()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit_predict"><code class="docutils literal notranslate"><span class="pre">MultiViewCoTrainSpectralClustering.fit_predict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

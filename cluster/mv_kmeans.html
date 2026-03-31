@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Fusion methods" href="../fusion/index.html"><link rel="prev" title="Multi-View Clustering" href="index.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Multi-View Co-Training Spectral Clustering" href="mv_cotrain_sc.html"><link rel="prev" title="Multi-View Clustering" href="index.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
@@ -198,6 +198,8 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Multi-View K-Means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -247,35 +249,28 @@
 <h1>Multi-View K-Means<a class="headerlink" href="#multi-view-k-means" title="Link to this heading">¶</a></h1>
 <p>The <cite>MultiViewKMeans</cite> class implements a multi-view extension of the traditional K-Means clustering algorithm. It is designed to handle multiple views of the same data, allowing for a more comprehensive clustering approach that leverages the information from all views.</p>
 <dl class="py class" id="module-polyview.cluster.mv_kmeans">
-<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiviewKMeans">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.cluster.mv_kmeans.</span></span><span class="sig-name descname"><span class="pre">MultiviewKMeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiviewKMeans" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiViewKMeans">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.cluster.mv_kmeans.</span></span><span class="sig-name descname"><span class="pre">MultiViewKMeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiViewKMeans" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewClusterer</span></code></p>
-<p>Co-regularized multi-view K-Means clustering.</p>
-<p>Runs one K-Means instance per view but couples them through a shared
-soft assignment matrix <span class="math notranslate nohighlight">\(H\)</span> that is updated after each round of
-per-view fits.  The coupling term penalizes disagreement between views,
-pushing them towards a consensus partition.</p>
+<p>Multi-view K-Means clustering.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n_clusters</strong> (<em>int</em><em>, </em><em>default=2</em>) – Number of clusters.</p></li>
-<li><p><strong>lambda</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Co-regularization strength.  <span class="math notranslate nohighlight">\(0\)</span> → independent per-view K-Means.
-Larger values force stronger consensus.</p></li>
-<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=10</em>) – Maximum number of alternating-optimization rounds.</p></li>
-<li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=10</em>) – Number of random restarts for the <em>initial</em> (uncoupled) K-Means.</p></li>
-<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – Stop early when the fraction of samples that change cluster
-assignment falls below this threshold.</p></li>
-<li><p><strong>temperature</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Temperature for the soft-assignment softmax.  Lower → harder
-assignments.</p></li>
-<li><p><strong>random_state</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Seed for reproducibility.</p></li>
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>)</p></li>
+<li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>default=2.0</em>) – Controls the distribution of view weights alpha(v).</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=50</em>) – Maximum number of alternating-update iterations.</p></li>
+<li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=10</em>) – Number of random restarts. Best result (lowest objective) kept.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-6</em>) – Stop when the relative change in objective falls below this.</p></li>
+<li><p><strong>learn_weights</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, run RMKMC (adaptive view weights). If False, run SMKMC (equal view weights, simpler).</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>default=1e-10</em>) – Small constant added to row norms before inversion (D update) to avoid division by zero on zero-residual samples.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Random seed.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiviewKMeans.labels_">
-<span class="sig-name descname"><span class="pre">labels_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.labels_" title="Link to this definition">¶</a></dt>
-<dd><p>Final consensus cluster labels.</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiViewKMeans.labels_">
+<span class="sig-name descname"><span class="pre">labels_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.labels_" title="Link to this definition">¶</a></dt>
+<dd><p>Consensus cluster assignment.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
@@ -284,20 +279,31 @@ assignments.</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiviewKMeans.labels_per_view_">
-<span class="sig-name descname"><span class="pre">labels_per_view_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.labels_per_view_" title="Link to this definition">¶</a></dt>
-<dd><p>Per-view cluster labels at convergence (may disagree slightly).</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiViewKMeans.centroids_">
+<span class="sig-name descname"><span class="pre">centroids_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.centroids_" title="Link to this definition">¶</a></dt>
+<dd><p>Per-view cluster centroid matrices F(v).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of ndarray</p>
+<dd class="field-odd"><p>list of ndarray, shape (n_clusters, n_features_v)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiviewKMeans.inertia_">
-<span class="sig-name descname"><span class="pre">inertia_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.inertia_" title="Link to this definition">¶</a></dt>
-<dd><p>Sum of inertias across all views at convergence.</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiViewKMeans.weights_">
+<span class="sig-name descname"><span class="pre">weights_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.weights_" title="Link to this definition">¶</a></dt>
+<dd><p>Learned view importance weights alpha(v). All equal to 1/n_views when learn_weights=False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of shape (n_views,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiViewKMeans.objective_">
+<span class="sig-name descname"><span class="pre">objective_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.objective_" title="Link to this definition">¶</a></dt>
+<dd><p>Final value of the objective function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -306,9 +312,9 @@ assignments.</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiviewKMeans.n_iter_">
-<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.n_iter_" title="Link to this definition">¶</a></dt>
-<dd><p>Number of alternating-optimization rounds performed.</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiViewKMeans.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.n_iter_" title="Link to this definition">¶</a></dt>
+<dd><p>Number of iterations performed in the best run.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
@@ -316,33 +322,16 @@ assignments.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiviewKMeans.centroids_">
-<span class="sig-name descname"><span class="pre">centroids_</span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.centroids_" title="Link to this definition">¶</a></dt>
-<dd><p>Per-view cluster centroids.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of ndarray of shape (n_clusters, n_features_i)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<section id="algorithm-one-iteration">
-<h2>Algorithm (one iteration)<a class="headerlink" href="#algorithm-one-iteration" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><dl class="simple">
-<dt>For each view <span class="math notranslate nohighlight">\(v\)</span>, build augmented data</dt><dd><p><span class="math notranslate nohighlight">\(X_v^{aug} = [X_v \mid \lambda H]\)</span>.</p>
-</dd>
-</dl>
-</li>
-<li><p>Run K-Means on each augmented view.</p></li>
-<li><p>Update <span class="math notranslate nohighlight">\(H_v = softmax(-dist(X_v, centroids_v) / T)\)</span>.</p></li>
-<li><p>Update shared <span class="math notranslate nohighlight">\(H = \frac{1}{V} \sum_{v=1}^V H_v\)</span>.</p></li>
-<li><p>Repeat until <span class="math notranslate nohighlight">\(y\)</span> stops changing or <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> is reached.</p></li>
+<p class="rubric">Notes</p>
+<dl class="simple">
+<dt>The gamma parameter controls how the view weights alpha(v) are distributed:</dt><dd><ul class="simple">
+<li><p>gamma -&gt; inf gives equal weights.</p></li>
+<li><p>gamma -&gt; 1 collapses weight onto the single best view.</p></li>
 </ul>
-<p>The augmented-data trick avoids modifying the K-Means objective
-directly — the regularization weight <span class="math notranslate nohighlight">\(\lambda\)</span> controls how strongly
-views pull each other’s assignments.</p>
+</dd>
+</dl>
+<p>The paper recommends searching log10(gamma) in [0.1, 2.0].</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">learn_weights=False</span></code> recovers the Simple Multi-view K-Means (SMKMC) variant from the same paper, which uses equal view weights throughout.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.cluster.kmeans</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiviewKMeans</span>
@@ -354,47 +343,59 @@ views pull each other’s assignments.</p>
 <span class="go">(100,)</span>
 </pre></div>
 </div>
-</section>
 <section id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
-<p>Kumar, A., Rai, P., &amp; Daumé, H. (2011).
-Co-regularized multi-view spectral clustering.
-Advances in Neural Information Processing Systems, 24.</p>
+<p>Cai, X. et al. (2013). Multi-view K-means Clustering on Big Data. IEEE Transactions on Knowledge and Data Engineering.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiviewKMeans.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans" title="polyview.cluster.mv_kmeans.MultiviewKMeans"><span class="pre">MultiviewKMeans</span></a></span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.fit" title="Link to this definition">¶</a></dt>
-<dd><p>Fit the model.</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiViewKMeans.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">RMKMC</span></span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Fit the multi-view k-means model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
-<li><p><strong>y</strong> (<em>ignored</em>)</p></li>
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_v</em><em>)</em>) – List of view data arrays.</p></li>
+<li><p><strong>y</strong> (<em>None</em>) – Ignored.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>self</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>self</strong> – Fitted estimator.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiviewKMeans.fit_predict">
-<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.fit_predict" title="Link to this definition">¶</a></dt>
-<dd><p>Fit and return cluster labels (uses training assignments).</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiViewKMeans.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.fit_predict" title="Link to this definition">¶</a></dt>
+<dd><p>Fit the model and return cluster labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>) – List of view data arrays.</p></li>
+<li><p><strong>y</strong> (<em>None</em>) – Ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>labels</strong> – Cluster labels for each sample.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiviewKMeans.predict">
-<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.predict" title="Link to this definition">¶</a></dt>
-<dd><p>Assign cluster labels to new samples.</p>
-<p>Uses the nearest centroid in each view and takes a majority vote
-across views.</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_kmeans.MultiViewKMeans.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.predict" title="Link to this definition">¶</a></dt>
+<dd><p>Assign cluster labels to new samples (nearest centroid per view, weighted by learned alpha).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>)</p>
+<dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>) – List of view data arrays for prediction.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>labels</strong></p>
+<dd class="field-even"><p><strong>labels</strong> – Predicted cluster labels.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
@@ -412,12 +413,12 @@ across views.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../fusion/index.html">
+          <a class="next-page" href="mv_cotrain_sc.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Fusion methods</div>
+                <div class="title">Multi-View Co-Training Spectral Clustering</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -463,15 +464,15 @@ across views.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Multi-View K-Means</a><ul>
-<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans"><code class="docutils literal notranslate"><span class="pre">MultiviewKMeans</span></code></a><ul>
-<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.labels_"><code class="docutils literal notranslate"><span class="pre">MultiviewKMeans.labels_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.labels_per_view_"><code class="docutils literal notranslate"><span class="pre">MultiviewKMeans.labels_per_view_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.inertia_"><code class="docutils literal notranslate"><span class="pre">MultiviewKMeans.inertia_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.n_iter_"><code class="docutils literal notranslate"><span class="pre">MultiviewKMeans.n_iter_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.centroids_"><code class="docutils literal notranslate"><span class="pre">MultiviewKMeans.centroids_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.fit"><code class="docutils literal notranslate"><span class="pre">MultiviewKMeans.fit()</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.fit_predict"><code class="docutils literal notranslate"><span class="pre">MultiviewKMeans.fit_predict()</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiviewKMeans.predict"><code class="docutils literal notranslate"><span class="pre">MultiviewKMeans.predict()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiViewKMeans"><code class="docutils literal notranslate"><span class="pre">MultiViewKMeans</span></code></a><ul>
+<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.labels_"><code class="docutils literal notranslate"><span class="pre">MultiViewKMeans.labels_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.centroids_"><code class="docutils literal notranslate"><span class="pre">MultiViewKMeans.centroids_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.weights_"><code class="docutils literal notranslate"><span class="pre">MultiViewKMeans.weights_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.objective_"><code class="docutils literal notranslate"><span class="pre">MultiViewKMeans.objective_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.n_iter_"><code class="docutils literal notranslate"><span class="pre">MultiViewKMeans.n_iter_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.fit"><code class="docutils literal notranslate"><span class="pre">MultiViewKMeans.fit()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.fit_predict"><code class="docutils literal notranslate"><span class="pre">MultiViewKMeans.fit_predict()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_kmeans.MultiViewKMeans.predict"><code class="docutils literal notranslate"><span class="pre">MultiViewKMeans.predict()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -489,7 +490,6 @@ across views.</p>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../_static/force-light.js?v=2e695fa3"></script>
     </body>
 </html>
