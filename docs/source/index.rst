@@ -15,5 +15,6 @@ This documentation includes:
   :maxdepth: 1
 
   cluster/index
+  datasets/index
   fusion/index
   misc/index
