@@ -102,25 +102,6 @@ class MultiViewCoRegSpectralClustering(BaseMultiViewClusterer):
                     )
         return obj
 
-    def _init_spectral_embeddings(self, laplacians: List[np.ndarray]) -> List[np.ndarray]:
-        """
-        Initializes spectral embeddings for each view.
-
-        Parameters
-        ----------
-        laplacians : list of np.ndarray
-            List of graph Laplacian matrices for each view, where each matrix has shape (n_samples, n_samples).
-
-        Returns
-        -------
-        list of np.ndarray
-            List of spectral embedding matrices for each view, where each matrix has shape (n_samples, n_clusters).
-        """
-        embeddings = []
-        for L in laplacians:
-            embedding = SpectralEmbedding(n_components=self.n_clusters, affinity = "precomputed")
-            embeddings.append(embedding.fit_transform(L))
-        return embeddings
 
     def _update_spectral_embedding(
         self, laplacians: List[np.ndarray], embeddings: List[np.ndarray]
@@ -150,8 +131,16 @@ class MultiViewCoRegSpectralClustering(BaseMultiViewClusterer):
         views : list of np.ndarray
             List of data matrices for each view, where each matrix has shape (n_samples, n_features_v).
         """
-        laplacians = self._compute_graph_laplacians(views)
-        embeddings = self._init_spectral_embeddings(laplacians)
+
+        embeddings = []
+        laplacians = []
+        for X in views:
+            A = pairwise_kernels(X, metric=self.affinity)
+            embedding = SpectralEmbedding(n_components=self.n_clusters, affinity = "precomputed")
+            embeddings.append(embedding.fit_transform(A))
+            D = np.diag(A.sum(axis=1))
+            laplacians.append(D - A)
+
         obj_vals = []
         for it in range(self.max_iter):
             embeddings = self._update_spectral_embedding(laplacians, embeddings)
