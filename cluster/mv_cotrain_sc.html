@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=8f965cdf" />
+    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=e2fb1cbc" />
     
     
 
@@ -202,9 +202,17 @@
 <li class="toctree-l2"><a class="reference internal" href="mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../fusion/early.html">Early Fusion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fusion/kernel_fusion.html">Kernel Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
 </ul>
@@ -226,12 +234,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="view-this-page">
-  <a class="muted-link" href="../_sources/cluster/mv_cotrain_sc.rst.txt" title="View this page">
-    <svg><use href="#svg-eye"></use></svg>
-    <span class="visually-hidden">View this page</span>
-  </a>
-</div>
+          
+
 <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
@@ -252,6 +256,53 @@
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.cluster.mv_cotrain_sc.</span></span><span class="sig-name descname"><span class="pre">MultiViewCoTrainSpectralClustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewClusterer</span></code></p>
 <p>Multi-view co-training spectral clustering algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_clusters</strong> (<em>int</em><em>, </em><em>default=2</em>) – The number of clusters to form.</p></li>
+<li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=10</em>) – Number of time the k-means algorithm will be run with different centroid seeds.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=50</em>) – Maximum number of iterations of the alternating optimization.</p></li>
+<li><p><strong>affinity</strong> (<em>str</em><em>, </em><em>default='rbf'</em>) – Kernel to use for computing the affinity matrix. Should be a valid metric for sklearn.metrics.pairwise.pairwise_kernels.</p></li>
+<li><p><strong>lambda_reg</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Regularization parameter for co-training terms.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation for centroid initialization. Use an int to make the randomness deterministic.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.embedding_">
+<span class="sig-name descname"><span class="pre">embedding_</span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.embedding_" title="Link to this definition">¶</a></dt>
+<dd><p>The concatenated spectral embeddings from all views after fitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray of shape (n_samples, n_clusters * n_views)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.objective_">
+<span class="sig-name descname"><span class="pre">objective_</span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.objective_" title="Link to this definition">¶</a></dt>
+<dd><p>The objective function values at each iteration of the optimization process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.labels_">
+<span class="sig-name descname"><span class="pre">labels_</span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.labels_" title="Link to this definition">¶</a></dt>
+<dd><p>Cluster labels for each sample after fitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p>Kumar A. and Daumé H. (2011). A Co-training Approach for Multi-view Spectral Clustering. In Proceedings of the 28th International Conference on Machine Learning (ICML-11).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit" title="Link to this definition">¶</a></dt>
@@ -338,6 +389,9 @@
             <ul>
 <li><a class="reference internal" href="#">Multi-View Co-Training Spectral Clustering</a><ul>
 <li><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering"><code class="docutils literal notranslate"><span class="pre">MultiViewCoTrainSpectralClustering</span></code></a><ul>
+<li><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.embedding_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoTrainSpectralClustering.embedding_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.objective_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoTrainSpectralClustering.objective_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.labels_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoTrainSpectralClustering.labels_</span></code></a></li>
 <li><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit"><code class="docutils literal notranslate"><span class="pre">MultiViewCoTrainSpectralClustering.fit()</span></code></a></li>
 <li><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit_predict"><code class="docutils literal notranslate"><span class="pre">MultiViewCoTrainSpectralClustering.fit_predict()</span></code></a></li>
 </ul>

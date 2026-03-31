@@ -22,12 +22,19 @@ body {
   background-color : var(--bg-color);
   color            : var(--black);
   text-justify     : inter-word;
-  font-weight      : 300;
   text-align       : justify;
   font-size        : calc(0.75vh + 10px);
   --color-api-pre-name : var(--secondary-color);
   --color-api-name: var(--secondary-color);
   --color-toc-background: var(--white);
+}
+
+p {
+    font-weight : 300;
+}
+
+strong, b {
+  font-weight: 700;
 }
 
 h1, h2 {
@@ -68,4 +75,12 @@ a.sidebar-brand:visited:hover {
 
 .toc-title {
   color : var(--h3-color);
+}
+
+.toc-tree a.reference {
+  color: var(--link-color);
+}
+
+.toc-tree a:hover code {
+  background-color: var(--secondary-color-light);
 }
