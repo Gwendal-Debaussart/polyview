@@ -2,6 +2,6 @@
 Multiview embedding methods.
 """
 
-from .cca import GCCA
+from .gcca import GCCA
 
 __all__ = ["GCCA"]
