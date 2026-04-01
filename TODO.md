@@ -7,6 +7,7 @@ This file tracks todos for the project. It is not meant to be backlog of todos b
 ## fusion
 
 - CCA and classical variants of CCA (e.g. kernel CCA, deep CCA) for multi-view embedding
+- Late fustion methods, e.g. ensemble clustering, co-training, etc.
 
 ## embedd
 
@@ -16,6 +17,14 @@ This file tracks todos for the project. It is not meant to be backlog of todos b
 ## metrics
 
 - consensus scores
+
+## Pipelines
+
+- A pipeline that takes in multiple views of data, applies appropriate preprocessing steps (e.g. normalization, dimensionality reduction), and then applies a fusion method to produce a final embedding or clustering result.
+
+## Partial multiview methods
+
+- Implement partial multiview methods that can handle missing views, e.g. matrix completion-based methods, or methods that can learn from incomplete data.
 
 ## viz
 
