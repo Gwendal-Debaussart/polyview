@@ -57,8 +57,8 @@ fused = pv.fusion.NormalizedFusion().fit_transform(mvd)
 |---|---|
 | `polyview.datasets` | `MultiViewDataset` — typed container with save/load, split, subsetting |
 | `polyview.fusion` | `ConcatFusion`, `WeightedFusion`, `NormalizedFusion` |
-| `polyview.cluster` | `MultiviewKMeans` — co-regularized (Kumar et al., 2011) |
-| `polyview.embed` | *(coming)* MVMDS, MultiviewTSNE |
+| `polyview.cluster` | `MultiviewKMeans`, `MultiviewCoRegSpectralClustering`, `MultiviewCoTrainSpectralClustering` |
+| `polyview.embed` | *(coming)* MVMDS, MultiviewTSNE, GCCA, ... |
 | `polyview.metrics` | *(coming)* consensus score, view agreement |
 | `polyview.semisupervised` | *(coming)* CoTraining, label propagation |
 | `polyview.viz` | *(coming)* view scatter grids, embedding plots |
@@ -69,6 +69,6 @@ All estimators are **sklearn-compatible**: they work with `GridSearchCV`,
 
 ---
 
-## License
+## ⚖️ License
 
 MIT License. See [LICENSE](LICENSE) for details.
