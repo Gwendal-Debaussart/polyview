@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Multi-View K-Means" href="mv_kmeans.html"><link rel="prev" title="polyview overview" href="../index.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="GCCA" href="gcca.html"><link rel="prev" title="Multi-view latent Gaussian dataset" href="../datasets/multiview_latent_gaussian.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Multi-View Clustering - polyview 0.0.1 documentation</title>
+        <title>Embedd - polyview 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -196,18 +196,18 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="mv_kmeans.html">Multi-View K-Means</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cluster/index.html">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_kmeans.html">Multi-View K-Means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Embedd</a><input aria-label="Toggle navigation of Embedd" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="gcca.html">GCCA</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -253,14 +253,12 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="multi-view-clustering">
-<h1>Multi-View Clustering<a class="headerlink" href="#multi-view-clustering" title="Link to this heading">¶</a></h1>
-<p>Some unsupervised multi-view clustering algorithms.</p>
+          <section id="embedd">
+<h1>Embedd<a class="headerlink" href="#embedd" title="Link to this heading">¶</a></h1>
+<p>Some multiview embedding methods.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="mv_kmeans.html">Multi-View K-Means</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcca.html">GCCA</a></li>
 </ul>
 </div>
 </section>
@@ -270,23 +268,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="mv_kmeans.html">
+          <a class="next-page" href="gcca.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Multi-View K-Means</div>
+                <div class="title">GCCA</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../index.html">
+          <a class="prev-page" href="../datasets/multiview_latent_gaussian.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title">Multi-view latent Gaussian dataset</div>
                 
               </div>
             </a>

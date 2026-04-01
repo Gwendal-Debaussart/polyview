@@ -16,5 +16,6 @@ This documentation includes:
 
   cluster/index
   datasets/index
+  embedd/index
   fusion/index
   misc/index

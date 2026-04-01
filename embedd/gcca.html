@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Multi-View K-Means" href="mv_kmeans.html"><link rel="prev" title="polyview overview" href="../index.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Fusion methods" href="../fusion/index.html"><link rel="prev" title="Embedd" href="index.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Multi-View Clustering - polyview 0.0.1 documentation</title>
+        <title>GCCA - polyview 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -174,7 +174,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -196,18 +196,18 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="mv_kmeans.html">Multi-View K-Means</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cluster/index.html">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_kmeans.html">Multi-View K-Means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">GCCA</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -248,20 +248,100 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="multi-view-clustering">
-<h1>Multi-View Clustering<a class="headerlink" href="#multi-view-clustering" title="Link to this heading">¶</a></h1>
-<p>Some unsupervised multi-view clustering algorithms.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="mv_kmeans.html">Multi-View K-Means</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
-</ul>
+          <section id="gcca">
+<h1>GCCA<a class="headerlink" href="#gcca" title="Link to this heading">¶</a></h1>
+<p>Generalised Canonical Correlation Analysis (GCCA) is a multiview extension of CCA that finds a shared embedding across all views. It does this by maximising the sum of pairwise correlations between the views in the shared space, while also applying regularisation to prevent overfitting.</p>
+<p id="module-polyview.embedd.GCCA">Generalised Canonical Correlation Analysis (GCCA).</p>
+<p>Finds a shared low-dimensional embedding G that maximises linear
+agreement across all views simultaneously (MAXVAR criterion).</p>
+<p>Works with M &gt;= 2 views.  When M = 2 this recovers classical CCA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param n_components<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of shared dimensions k.</p>
+</dd>
+<dt class="field-even">type n_components<span class="colon">:</span></dt>
+<dd class="field-even"><p>int, default=2</p>
+</dd>
+<dt class="field-odd">param regularisation<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Ridge regularisation added to each view’s covariance before
+inversion.  A single float applies the same value to all views;
+a list gives per-view values.  Larger values = stronger
+regularisation (useful when d_v &gt; n or features are collinear).</p>
+</dd>
+<dt class="field-even">type regularisation<span class="colon">:</span></dt>
+<dd class="field-even"><p>float or list of float, default=1e-4</p>
+</dd>
+<dt class="field-odd">param output<span class="colon">:</span></dt>
+<dd class="field-odd"><p>How to combine per-view projections in transform():
+- “concat” : [Z1 | Z2 | … | ZM]  shape (n, M*k)
+- “mean”   : (Z1 + Z2 + … + ZM) / M  shape (n, k)
+- “list”   : [Z1, Z2, …, ZM]  list of (n, k) arrays</p>
+</dd>
+<dt class="field-even">type output<span class="colon">:</span></dt>
+<dd class="field-even"><p>{“concat”, “mean”, “list”}, default=”concat”</p>
+</dd>
+<dt class="field-odd">param centre<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Subtract column means from each view before fitting.</p>
+</dd>
+<dt class="field-even">type centre<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool, default=True</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.embedd.GCCA.G_">
+<span class="sig-prename descclassname"><span class="pre">polyview.embedd.GCCA.</span></span><span class="sig-name descname"><span class="pre">G_</span></span><a class="headerlink" href="#polyview.embedd.GCCA.G_" title="Link to this definition">¶</a></dt>
+<dd><p>Shared embedding of the training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of shape (n_train, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.embedd.GCCA.weights_">
+<span class="sig-prename descclassname"><span class="pre">polyview.embedd.GCCA.</span></span><span class="sig-name descname"><span class="pre">weights_</span></span><a class="headerlink" href="#polyview.embedd.GCCA.weights_" title="Link to this definition">¶</a></dt>
+<dd><p>Per-view projection matrices W(v).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of ndarray, shape (n_features_v, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.embedd.GCCA.means_">
+<span class="sig-prename descclassname"><span class="pre">polyview.embedd.GCCA.</span></span><span class="sig-name descname"><span class="pre">means_</span></span><a class="headerlink" href="#polyview.embedd.GCCA.means_" title="Link to this definition">¶</a></dt>
+<dd><p>Per-view column means (used to centre test data).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of ndarray, shape (n_features_v,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.embedd.GCCA.eigenvalues_">
+<span class="sig-prename descclassname"><span class="pre">polyview.embedd.GCCA.</span></span><span class="sig-name descname"><span class="pre">eigenvalues_</span></span><a class="headerlink" href="#polyview.embedd.GCCA.eigenvalues_" title="Link to this definition">¶</a></dt>
+<dd><p>Top-k eigenvalues of the aggregated smoother matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of shape (n_components,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.embed.cca</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCCA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcca</span> <span class="o">=</span> <span class="n">GCCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;concat&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z_train</span> <span class="o">=</span> <span class="n">gcca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">X3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z_test</span>  <span class="o">=</span> <span class="n">gcca</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">])</span>
+</pre></div>
 </div>
 </section>
 
@@ -270,23 +350,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="mv_kmeans.html">
+          <a class="next-page" href="../fusion/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Multi-View K-Means</div>
+                <div class="title">Fusion methods</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../index.html">
+          <a class="prev-page" href="index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title">Embedd</div>
                 
               </div>
             </a>
@@ -308,8 +388,30 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">GCCA</a><ul>
+<li><a class="reference internal" href="#polyview.embedd.GCCA.G_"><code class="docutils literal notranslate"><span class="pre">G_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embedd.GCCA.weights_"><code class="docutils literal notranslate"><span class="pre">weights_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embedd.GCCA.means_"><code class="docutils literal notranslate"><span class="pre">means_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embedd.GCCA.eigenvalues_"><code class="docutils literal notranslate"><span class="pre">eigenvalues_</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
