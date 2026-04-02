@@ -1,15 +1,4 @@
 """
-Kernel-space fusion via weighted sum of per-view kernel matrices.
-
-Classes / functions
--------------------
-
-center_kernel(K)        remove mean in RKHS
-normalize_kernel(K)     scale so K[i,i] = 1 for all i
-is_valid_kernel(K)      check symmetry + PSD
-KernelSpec              per-view kernel configuration
-KernelFusion            fit/transform estimator producing a fused kernel
-
 References
 ----------
 
