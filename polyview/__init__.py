@@ -23,7 +23,8 @@ from .cluster.mv_kmeans import (
 from .cluster.mv_coreg_sc import (
     MultiViewCoRegSpectralClustering,
 )
-from .dataset.multiview import MultiViewDataset
+from .cluster.mv_nmf import MultiViewNMF
+from .dataset.multiviewdataset import MultiViewDataset
 from .fusion.early import ConcatFusion, NormalizedFusion, WeightedFusion
 from .fusion.kernel_fusion import (
     KernelFusion,
@@ -64,4 +65,6 @@ __all__ = [
     "normalize_kernel",
     "is_valid_kernel",
     "PolyPipeline",
+    "make_multiview_gaussian",
+    "GCCA",
 ]
