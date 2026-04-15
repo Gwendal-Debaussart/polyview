@@ -17,3 +17,6 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["."]
+
+[project.urls]
+Repository = "https://github.com/Gwendal-Debaussart/polyview"
