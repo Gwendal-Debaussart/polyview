@@ -137,6 +137,25 @@ class MultiViewDataset:
     def view_names(self) -> List[str]:
         return list(self._view_names)
 
+    @view_names.setter
+    def view_names(self, value):
+        if value is None:
+            self._view_names = [f"view_{i}" for i in range(self.n_views)]
+            return
+        if not hasattr(value, "__iter__") or isinstance(value, (str, bytes)):
+            raise TypeError(
+                "view_names must be an iterable of strings or None."
+            )
+        names = list(value)
+        if len(names) != self.n_views:
+            raise ValueError(
+                f"view_names has {len(names)} entries but there are "
+                f"{self.n_views} views."
+            )
+        if not all(isinstance(name, str) for name in names):
+            raise TypeError("Each view name must be a string.")
+        self._view_names = names
+
     @property
     def n_views(self) -> int:
         return len(self._views)

@@ -1,9 +1,9 @@
 from sklearn.datasets import make_blobs
-from polyview.dataset.multiview import MultiViewDataset
+from polyview.dataset.multiviewdataset import MultiViewDataset
 import numpy as np
 
 
-def generate_multiview_gaussian(
+def make_multiview_gaussian(
     n_samples=300,
     n_features=10,
     latent_dim=3,
