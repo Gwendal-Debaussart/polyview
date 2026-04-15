@@ -32,6 +32,7 @@ from .fusion.kernel_fusion import (
     is_valid_kernel,
     normalize_kernel,
 )
+from .pipeline.polypipeline import PolyPipeline
 
 # Backward-compatible alias matching the README namespace.
 datasets = dataset
@@ -62,4 +63,5 @@ __all__ = [
     "center_kernel",
     "normalize_kernel",
     "is_valid_kernel",
+    "PolyPipeline",
 ]
