@@ -16,6 +16,9 @@ Kernel utilities  (standalone helpers)
     center_kernel       remove mean in RKHS
     normalize_kernel    scale so K[i,i] = 1
     is_valid_kernel     check symmetry + PSD
+
+Late fusion  (combine per-view predictions)
+    MajorityVote        sample-wise vote across views
 """
 
 from polyview.fusion.early import ConcatFusion, WeightedFusion, NormalizedFusion
@@ -26,6 +29,7 @@ from polyview.fusion.kernel_fusion import (
     normalize_kernel,
     is_valid_kernel,
 )
+from polyview.fusion.late import MajorityVote
 
 __all__ = [
     # early
@@ -39,4 +43,6 @@ __all__ = [
     "center_kernel",
     "normalize_kernel",
     "is_valid_kernel",
+    # late fusion
+    "MajorityVote",
 ]
