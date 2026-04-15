@@ -46,12 +46,10 @@ def _center_columns(X: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
 
 
 class GCCA(BaseMultiViewTransformer):
-    """Generalised Canonical Correlation Analysis (GCCA).
+    """
+    Generalised Canonical Correlation Analysis (GCCA).
 
-    Finds a shared low-dimensional embedding G that maximises linear
-    agreement across all views simultaneously (MAXVAR criterion).
-
-    Works with M >= 2 views.  When M = 2 this recovers classical CCA.
+    Finds a shared low-dimensional embedding G that maximises linear agreement across all views simultaneously (MAXVAR criterion). Works with M >= 2 views.  When M = 2 this recovers classical CCA.
 
     Parameters
     ----------
@@ -59,10 +57,8 @@ class GCCA(BaseMultiViewTransformer):
         Number of shared dimensions k.
     regularisation : float or list of float, default=1e-4
         Ridge regularisation added to each view's covariance before
-        inversion.  A single float applies the same value to all views;
-        a list gives per-view values.  Larger values = stronger
-        regularisation (useful when d_v > n or features are collinear).
-    output : {"concat", "mean", "list"}, default="concat"
+        inversion.  A single float applies the same value to all views; a list gives per-view values.  Larger values = stronger regularisation (useful when d_v > n or features are collinear).
+    output : str {"concat", "mean", "list"}, default="concat"
         How to combine per-view projections in transform():
         - "concat" : [Z1 | Z2 | ... | ZM]  shape (n, M*k)
         - "mean"   : (Z1 + Z2 + ... + ZM) / M  shape (n, k)
