@@ -6,3 +6,6 @@ docs/build/*
 
 # Jupyter Notebook temporary test files.
 polyview/test/personal.ipynb
+
+# dist for Pypi distribution.
+dist/*
