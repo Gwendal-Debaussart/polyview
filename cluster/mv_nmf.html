@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Datasets" href="../datasets/index.html"><link rel="prev" title="Multi-View Co-Training Spectral Clustering" href="mv_cotrain_sc.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Multi-View Co-Training Spectral Clustering" href="mv_cotrain_sc.html"><link rel="prev" title="Multi-View K-Means" href="mv_kmeans.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Multi-View Co-Regularized Spectral Clustering - polyview 0.0.1 documentation</title>
+        <title>Multi-View NMF - polyview 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -198,9 +198,9 @@
   <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="mv_kmeans.html">Multi-View K-Means</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mv_nmf.html">Multi-View NMF</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Multi-View NMF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Multi-View Co-Regularized Spectral Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -269,87 +269,185 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="module-polyview.cluster.mv_coreg_sc">
-<span id="multi-view-co-regularized-spectral-clustering"></span><h1>Multi-View Co-Regularized Spectral Clustering<a class="headerlink" href="#module-polyview.cluster.mv_coreg_sc" title="Link to this heading">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.cluster.mv_coreg_sc.</span></span><span class="sig-name descname"><span class="pre">MultiViewCoRegSpectralClustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering" title="Link to this definition">¶</a></dt>
+          <section id="multi-view-nmf">
+<h1>Multi-View NMF<a class="headerlink" href="#multi-view-nmf" title="Link to this heading">¶</a></h1>
+<p>The <cite>MultiViewNMF</cite> class performs consensus clustering with a shared
+non-negative representation across views. It can optionally learn
+per-view weights based on reconstruction quality.</p>
+<dl class="py class" id="module-polyview.cluster.mv_nmf">
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.cluster.mv_nmf.</span></span><span class="sig-name descname"><span class="pre">MultiViewNMF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseMultiViewClusterer" title="polyview.base.BaseMultiViewClusterer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewClusterer</span></code></a></p>
-<p>Multi-view co-regularized spectral clustering algorithm.</p>
+<p>Multi-view Non-negative Matrix Factorisation clustering.</p>
+<p>Finds a shared non-negative coefficient matrix H (the consensus
+representation) and per-view basis matrices W(v) by jointly
+minimising weighted Frobenius reconstruction error across all views.</p>
+<p>The row argmax of H gives cluster labels.  H itself is a soft
+assignment matrix useful as a low-dimensional embedding.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_clusters</strong> (<em>int</em><em>, </em><em>default=2</em>) – The number of clusters to form.</p></li>
-<li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=10</em>) – Number of time the k-means algorithm will be run with different centroid seeds.</p></li>
-<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=50</em>) – Maximum number of iterations of the alternating optimization.</p></li>
-<li><p><strong>v_lambda</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Regularization parameter for co-regularization terms.</p></li>
-<li><p><strong>affinity</strong> (<em>str</em><em>, </em><em>default='rbf'</em>) – Kernel to use for computing the affinity matrix. Should be a valid metric for sklearn.metrics.pairwise.pairwise_kernels.</p></li>
-<li><p><strong>random_state</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation for centroid initialization. Use an int to make the randomness deterministic.</p></li>
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=2</em>) – Rank k of the factorisation — number of clusters / latent dims.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=200</em>) – Maximum number of multiplicative update iterations.</p></li>
+<li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=10</em>) – Number of random initialisations; best (lowest objective) is kept.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – Stop when relative change in objective falls below this.</p></li>
+<li><p><strong>learn_weights</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, adapt per-view weights lambda(v) from reconstruction
+quality.  If False (default), use equal weights 1/M.</p></li>
+<li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>default=2.0</em>) – Controls weight concentration when learn_weights=True.
+Higher gamma -&gt; more uniform weights (approaches equal weighting).
+Only used when learn_weights=True.</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>default=1e-10</em>) – Small floor added to denominators to prevent division by zero,
+and used to clip H and W away from exact zero.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.embedding_">
-<span class="sig-name descname"><span class="pre">embedding_</span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.embedding_" title="Link to this definition">¶</a></dt>
-<dd><p>The concatenated spectral embeddings from all views after fitting.</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.H_">
+<span class="sig-name descname"><span class="pre">H_</span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.H_" title="Link to this definition">¶</a></dt>
+<dd><p>Shared non-negative coefficient matrix (soft cluster assignments).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np.ndarray of shape (n_samples, n_clusters * n_views)</p>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_components)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.objective_">
-<span class="sig-name descname"><span class="pre">objective_</span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.objective_" title="Link to this definition">¶</a></dt>
-<dd><p>The objective function values at each iteration of the optimization process.</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.W_">
+<span class="sig-name descname"><span class="pre">W_</span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.W_" title="Link to this definition">¶</a></dt>
+<dd><p>Per-view basis matrices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of float</p>
+<dd class="field-odd"><p>list of ndarray, shape (n_components, n_features_v)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.labels_">
-<span class="sig-name descname"><span class="pre">labels_</span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.labels_" title="Link to this definition">¶</a></dt>
-<dd><p>Cluster labels for each sample after fitting.</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.weights_">
+<span class="sig-name descname"><span class="pre">weights_</span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.weights_" title="Link to this definition">¶</a></dt>
+<dd><p>Final per-view reconstruction weights lambda(v).
+Equal to 1/M when learn_weights=False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np.ndarray of shape (n_samples,)</p>
+<dd class="field-odd"><p>ndarray of shape (n_views,)</p>
 </dd>
 </dl>
 </dd></dl>
 
-<p class="rubric">Notes</p>
-<p>This implementation follows the approach of co-regularized spectral clustering, where spectral embeddings for each view are learned jointly with a regularization term that encourages the embeddings to be similar across views. The algorithm alternates between updating the spectral embeddings for each view and updating the cluster assignments based on the combined embeddings. The objective function includes both the spectral clustering objective for each view and the co-regularization terms that penalize differences between the embeddings of different views.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit" title="Link to this definition">¶</a></dt>
-<dd><p>Fits the multi-view co-regularized spectral clustering model to the provided views.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.labels_">
+<span class="sig-name descname"><span class="pre">labels_</span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.labels_" title="Link to this definition">¶</a></dt>
+<dd><p>Hard cluster labels = argmax(<code class="docutils literal notranslate"><span class="pre">H_</span></code>, axis=1).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>np.ndarray</em>) – List of data matrices for each view, where each matrix has shape (n_samples, n_features_v).</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
 </dd>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.reconstruction_errors_">
+<span class="sig-name descname"><span class="pre">reconstruction_errors_</span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.reconstruction_errors_" title="Link to this definition">¶</a></dt>
+<dd><p>Per-view Frobenius reconstruction error at convergence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of shape (n_views,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.objective_">
+<span class="sig-name descname"><span class="pre">objective_</span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.objective_" title="Link to this definition">¶</a></dt>
+<dd><p>Weighted sum of reconstruction errors at convergence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.n_iter_" title="Link to this definition">¶</a></dt>
+<dd><p>Number of iterations performed in the best run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.cluster.mv_nmf</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiViewNMF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">MultiViewNMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">H_</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(n_samples, 3)</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">H_</span></code> as a soft embedding downstream:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">H_</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or use <code class="docutils literal notranslate"><span class="pre">H_</span></code> as cluster probabilities for soft clustering:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">H_</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<p>Gao, Jing et al. “Multi-View Clustering via Joint Nonnegative Matrix Factorization.” SDM (2013).</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit_predict">
-<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit_predict" title="Link to this definition">¶</a></dt>
-<dd><p>Fit and return cluster labels.</p>
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF" title="polyview.cluster.mv_nmf.MultiViewNMF"><span class="pre">MultiViewNMF</span></a></span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Fit the model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>)</p></li>
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_v</em><em>)</em>) – All values should be non-negative.  Negative values are
+clipped to zero before factorisation with a warning.</p></li>
 <li><p><strong>y</strong> (<em>ignored</em>)</p></li>
 </ul>
 </dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.fit_predict" title="Link to this definition">¶</a></dt>
+<dd><p>Fit and return cluster labels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.fit_transform" title="Link to this definition">¶</a></dt>
+<dd><p>Fit and return <code class="docutils literal notranslate"><span class="pre">H_</span></code> directly (no re-projection needed).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Project new samples into the shared H space.</p>
+<p>Solves the NNLS problem for H given fixed W(v):</p>
+<blockquote>
+<div><p>min_H  sum_v lambda(v) * ||X(v) - H W(v)||^2_F   s.t. H &gt;= 0</p>
+</div></blockquote>
+<p>via the same multiplicative update rule, starting from a
+uniform initialisation, with W(v) held fixed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples_new</em><em>, </em><em>n_features_v</em><em>)</em>)</p>
+</dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>labels</strong></p>
+<dd class="field-even"><p><strong>H_new</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+<dd class="field-odd"><p>ndarray of shape (n_samples_new, n_components)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -363,23 +461,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../datasets/index.html">
+          <a class="next-page" href="mv_cotrain_sc.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Datasets</div>
+                <div class="title">Multi-View Co-Training Spectral Clustering</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="mv_cotrain_sc.html">
+          <a class="prev-page" href="mv_kmeans.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Multi-View Co-Training Spectral Clustering</div>
+                <div class="title">Multi-View K-Means</div>
                 
               </div>
             </a>
@@ -413,13 +511,19 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Multi-View Co-Regularized Spectral Clustering</a><ul>
-<li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering</span></code></a><ul>
-<li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.embedding_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.embedding_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.objective_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.objective_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.labels_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.labels_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.fit()</span></code></a></li>
-<li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit_predict"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.fit_predict()</span></code></a></li>
+<li><a class="reference internal" href="#">Multi-View NMF</a><ul>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF</span></code></a><ul>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.H_"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.H_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.W_"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.W_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.weights_"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.weights_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.labels_"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.labels_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.reconstruction_errors_"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.reconstruction_errors_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.objective_"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.objective_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.n_iter_"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.n_iter_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.fit"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.fit()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.fit_predict"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.fit_predict()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.fit_transform"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.fit_transform()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF.transform"><code class="docutils literal notranslate"><span class="pre">MultiViewNMF.transform()</span></code></a></li>
 </ul>
 </li>
 </ul>

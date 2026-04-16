@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Miscellaneous" href="../misc/index.html"><link rel="prev" title="Early Fusion" href="early.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Late Fusion" href="late.html"><link rel="prev" title="Early Fusion" href="early.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
@@ -198,6 +198,7 @@
   <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../cluster/index.html">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../cluster/mv_kmeans.html">Multi-View K-Means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_nmf.html">Multi-View NMF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster/mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster/mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
@@ -210,12 +211,27 @@
 <li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="early.html">Early Fusion</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Kernel Fusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="early.html">Early Fusion</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Kernel Fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="late.html">Late Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a><input aria-label="Toggle navigation of PolyPipeline" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline/polypipeline.html">PolyPipeline API</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -256,22 +272,13 @@
           <section id="kernel-fusion">
 <h1>Kernel Fusion<a class="headerlink" href="#kernel-fusion" title="Link to this heading">¶</a></h1>
 <p>Kernel fusion is a technique used in machine learning to combine multiple kernels, which are functions that measure the similarity between data points. This approach allows for the integration of different types of data or features, enabling the model to capture complex relationships and improve performance. Typically, kernel fusion involves weighting and summing the outputs of individual kernels, which can be designed for specific data modalities or feature sets.</p>
-<p id="module-polyview.fusion.kernel_fusion">Kernel-space fusion via weighted sum of per-view kernel matrices.</p>
-<section id="classes-functions">
-<h2>Classes / functions<a class="headerlink" href="#classes-functions" title="Link to this heading">¶</a></h2>
-<p>center_kernel(K)        remove mean in RKHS
-normalize_kernel(K)     scale so K[i,i] = 1 for all i
-is_valid_kernel(K)      check symmetry + PSD
-KernelSpec              per-view kernel configuration
-KernelFusion            fit/transform estimator producing a fused kernel</p>
-<p class="rubric">References</p>
+<p class="rubric" id="module-polyview.fusion.kernel_fusion">References</p>
 <p>Gönen &amp; Alpaydin (2011). Multiple kernel learning algorithms.
 JMLR 12, 2211-2268.</p>
-</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="polyview.fusion.kernel_fusion.KernelFusion">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.fusion.kernel_fusion.</span></span><span class="sig-name descname"><span class="pre">KernelFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.fusion.kernel_fusion.KernelFusion" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseMultiViewTransformer" title="polyview.base.BaseMultiViewTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code></a></p>
 <p>Fuse views via a weighted sum of per-view kernel matrices.</p>
 <p>Each view is mapped to a kernel matrix by its <code class="docutils literal notranslate"><span class="pre">KernelSpec</span></code>, then:</p>
 <blockquote>
@@ -283,7 +290,7 @@ any kernel method: spectral clustering, kernel SVM, kernel PCA, etc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>specs</strong> (<a class="reference internal" href="#polyview.fusion.kernel_fusion.KernelSpec" title="polyview.fusion.kernel_fusion.KernelSpec"><em>KernelSpec</em></a><em> or </em><em>list</em><em> of </em><a class="reference internal" href="#polyview.fusion.kernel_fusion.KernelSpec" title="polyview.fusion.kernel_fusion.KernelSpec"><em>KernelSpec</em></a><em> or </em><em>None</em>) – One spec per view.  <code class="docutils literal notranslate"><span class="pre">None</span></code> or a single spec is broadcast:
+<li><p><strong>specs</strong> (<em>KernelSpec</em><em> or </em><em>list</em><em> of </em><em>KernelSpec</em><em> or </em><em>None</em>) – One spec per view.  <code class="docutils literal notranslate"><span class="pre">None</span></code> or a single spec is broadcast:
 - <code class="docutils literal notranslate"><span class="pre">None</span></code>         -&gt; RBF, weight=1, center+normalize on each view
 - single KernelSpec -&gt; same spec applied to every view</p></li>
 <li><p><strong>normalize_weights</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Divide weights by their sum (convex combination).</p></li>
@@ -325,7 +332,7 @@ any kernel method: spectral clustering, kernel SVM, kernel PCA, etc.</p>
 <span class="sig-name descname"><span class="pre">specs_</span></span><a class="headerlink" href="#polyview.fusion.kernel_fusion.KernelFusion.specs_" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of <a class="reference internal" href="#polyview.fusion.kernel_fusion.KernelSpec" title="polyview.fusion.kernel_fusion.KernelSpec">KernelSpec</a></p>
+<dd class="field-odd"><p>list of KernelSpec</p>
 </dd>
 </dl>
 </dd></dl>
@@ -394,116 +401,6 @@ matrices (n_samples, n_samples) paired with
 
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="polyview.fusion.kernel_fusion.KernelSpec">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.fusion.kernel_fusion.</span></span><span class="sig-name descname"><span class="pre">KernelSpec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'linear'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'rbf'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'polynomial'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'precomputed'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'rbf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.fusion.kernel_fusion.KernelSpec" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Configuration for one view’s kernel.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>kernel</strong> (<em>str</em><em> or </em><em>callable</em>) – <code class="docutils literal notranslate"><span class="pre">&quot;linear&quot;</span></code>      — dot-product kernel (sklearn linear_kernel)
-<code class="docutils literal notranslate"><span class="pre">&quot;rbf&quot;</span></code>         — RBF/Gaussian (sklearn rbf_kernel, median heuristic when gamma=None)
-<code class="docutils literal notranslate"><span class="pre">&quot;polynomial&quot;</span></code>  — polynomial kernel (sklearn polynomial_kernel)
-<code class="docutils literal notranslate"><span class="pre">&quot;precomputed&quot;</span></code> — the view array IS already a kernel matrix
-callable          — any <code class="docutils literal notranslate"><span class="pre">(X:</span> <span class="pre">ndarray)</span> <span class="pre">-&gt;</span> <span class="pre">ndarray</span></code> function</p></li>
-<li><p><strong>weight</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Scalar weight in the weighted sum.  Must be &gt;= 0.</p></li>
-<li><p><strong>center</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Center the kernel in the RKHS before fusion.</p></li>
-<li><p><strong>normalize</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Normalize K so diagonals equal 1 before fusion.</p></li>
-<li><p><strong>kernel_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Extra kwargs forwarded to the kernel function, e.g.
-<code class="docutils literal notranslate"><span class="pre">{&quot;gamma&quot;:</span> <span class="pre">0.1}</span></code> for RBF or <code class="docutils literal notranslate"><span class="pre">{&quot;degree&quot;:</span> <span class="pre">2}</span></code> for polynomial.</p></li>
-<li><p><strong>**kwargs</strong> – Shorthand for kernel_params — <code class="docutils literal notranslate"><span class="pre">KernelSpec(&quot;rbf&quot;,</span> <span class="pre">gamma=0.5)</span></code>
-is equivalent to <code class="docutils literal notranslate"><span class="pre">KernelSpec(&quot;rbf&quot;,</span> <span class="pre">kernel_params={&quot;gamma&quot;:</span> <span class="pre">0.5})</span></code>.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">KernelSpec</span><span class="p">(</span><span class="s2">&quot;rbf&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">KernelSpec</span><span class="p">(</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">KernelSpec</span><span class="p">(</span><span class="s2">&quot;polynomial&quot;</span><span class="p">,</span> <span class="n">kernel_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;degree&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;coef0&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">KernelSpec</span><span class="p">(</span><span class="s2">&quot;precomputed&quot;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">KernelSpec</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="polyview.fusion.kernel_fusion.KernelSpec.build">
-<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.fusion.kernel_fusion.KernelSpec.build" title="Link to this definition">¶</a></dt>
-<dd><p>Compute (and preprocess) the kernel matrix for view X.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>ndarray</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em><em>, or </em><em>(</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – when <code class="docutils literal notranslate"><span class="pre">kernel=&quot;precomputed&quot;</span></code>.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>K</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples, n_samples)</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="polyview.fusion.kernel_fusion.center_kernel">
-<span class="sig-prename descclassname"><span class="pre">polyview.fusion.kernel_fusion.</span></span><span class="sig-name descname"><span class="pre">center_kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.fusion.kernel_fusion.center_kernel" title="Link to this definition">¶</a></dt>
-<dd><p>Center a kernel matrix in the RKHS.</p>
-<p>Equivalent to centering the implicit feature map phi(x) so its empirical
-mean is zero.  Strongly recommended before fusing kernels from different
-views — removes the constant bias term and makes kernels comparable.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>K</strong> (<em>ndarray</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>)</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>K_centered</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples, n_samples), symmetric</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="polyview.fusion.kernel_fusion.is_valid_kernel">
-<span class="sig-prename descclassname"><span class="pre">polyview.fusion.kernel_fusion.</span></span><span class="sig-name descname"><span class="pre">is_valid_kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#polyview.fusion.kernel_fusion.is_valid_kernel" title="Link to this definition">¶</a></dt>
-<dd><p>Return True if K is a valid symmetric PSD kernel matrix.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>K</strong> (<em>ndarray</em>)</p></li>
-<li><p><strong>tol</strong> (<em>float</em>) – Tolerance for symmetry check and minimum eigenvalue.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="polyview.fusion.kernel_fusion.normalize_kernel">
-<span class="sig-prename descclassname"><span class="pre">polyview.fusion.kernel_fusion.</span></span><span class="sig-name descname"><span class="pre">normalize_kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.fusion.kernel_fusion.normalize_kernel" title="Link to this definition">¶</a></dt>
-<dd><p>Normalize a kernel so that K[i, i] = 1 for all i.</p>
-<p>K_n[i, j] = K[i, j] / sqrt(K[i, i] * K[j, j])</p>
-<p>Prevents views with larger-magnitude kernels from dominating the
-weighted sum in KernelFusion.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>K</strong> (<em>ndarray</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>)</p></li>
-<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>default=1e-10</em>) – Guards against zero-norm samples.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>K_normalized</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples, n_samples), values in [-1, 1]</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
         </article>
@@ -511,12 +408,12 @@ weighted sum in KernelFusion.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../misc/index.html">
+          <a class="next-page" href="late.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Miscellaneous</div>
+                <div class="title">Late Fusion</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -562,7 +459,6 @@ weighted sum in KernelFusion.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Kernel Fusion</a><ul>
-<li><a class="reference internal" href="#classes-functions">Classes / functions</a></li>
 <li><a class="reference internal" href="#polyview.fusion.kernel_fusion.KernelFusion"><code class="docutils literal notranslate"><span class="pre">KernelFusion</span></code></a><ul>
 <li><a class="reference internal" href="#polyview.fusion.kernel_fusion.KernelFusion.kernels_"><code class="docutils literal notranslate"><span class="pre">KernelFusion.kernels_</span></code></a></li>
 <li><a class="reference internal" href="#polyview.fusion.kernel_fusion.KernelFusion.weights_"><code class="docutils literal notranslate"><span class="pre">KernelFusion.weights_</span></code></a></li>
@@ -574,13 +470,6 @@ weighted sum in KernelFusion.</p>
 <li><a class="reference internal" href="#polyview.fusion.kernel_fusion.KernelFusion.view_contributions"><code class="docutils literal notranslate"><span class="pre">KernelFusion.view_contributions()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#polyview.fusion.kernel_fusion.KernelSpec"><code class="docutils literal notranslate"><span class="pre">KernelSpec</span></code></a><ul>
-<li><a class="reference internal" href="#polyview.fusion.kernel_fusion.KernelSpec.build"><code class="docutils literal notranslate"><span class="pre">KernelSpec.build()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#polyview.fusion.kernel_fusion.center_kernel"><code class="docutils literal notranslate"><span class="pre">center_kernel()</span></code></a></li>
-<li><a class="reference internal" href="#polyview.fusion.kernel_fusion.is_valid_kernel"><code class="docutils literal notranslate"><span class="pre">is_valid_kernel()</span></code></a></li>
-<li><a class="reference internal" href="#polyview.fusion.kernel_fusion.normalize_kernel"><code class="docutils literal notranslate"><span class="pre">normalize_kernel()</span></code></a></li>
 </ul>
 </li>
 </ul>

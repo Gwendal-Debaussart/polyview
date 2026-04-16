@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Fusion methods" href="../fusion/index.html"><link rel="prev" title="Embedd" href="index.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Base API" href="../base/index.html"><link rel="prev" title="Embedd" href="index.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
@@ -198,6 +198,7 @@
   <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../cluster/index.html">Multi-View Clustering</a><input aria-label="Toggle navigation of Multi-View Clustering" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../cluster/mv_kmeans.html">Multi-View K-Means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster/mv_nmf.html">Multi-View NMF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster/mv_cotrain_sc.html">Multi-View Co-Training Spectral Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster/mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
@@ -210,12 +211,27 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">GCCA</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../fusion/early.html">Early Fusion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../fusion/kernel_fusion.html">Kernel Fusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fusion/early.html">Early Fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fusion/kernel_fusion.html">Kernel Fusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a><input aria-label="Toggle navigation of PolyPipeline" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pipeline/polypipeline.html">PolyPipeline API</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -256,45 +272,29 @@
           <section id="gcca">
 <h1>GCCA<a class="headerlink" href="#gcca" title="Link to this heading">¶</a></h1>
 <p>Generalised Canonical Correlation Analysis (GCCA) is a multiview extension of CCA that finds a shared embedding across all views. It does this by maximising the sum of pairwise correlations between the views in the shared space, while also applying regularisation to prevent overfitting.</p>
-<p id="module-polyview.embedd.GCCA">Generalised Canonical Correlation Analysis (GCCA).</p>
-<p>Finds a shared low-dimensional embedding G that maximises linear
-agreement across all views simultaneously (MAXVAR criterion).</p>
-<p>Works with M &gt;= 2 views.  When M = 2 this recovers classical CCA.</p>
+<dl class="py class" id="module-polyview.embed.gcca">
+<dt class="sig sig-object py" id="polyview.embed.gcca.GCCA">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.embed.gcca.</span></span><span class="sig-name descname"><span class="pre">GCCA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.embed.gcca.GCCA" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseMultiViewTransformer" title="polyview.base.BaseMultiViewTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code></a></p>
+<p>Generalised Canonical Correlation Analysis (GCCA).</p>
+<p>Finds a shared low-dimensional embedding G that maximises linear agreement across all views simultaneously (MAXVAR criterion). Works with M &gt;= 2 views.  When M = 2 this recovers classical CCA.</p>
 <dl class="field-list simple">
-<dt class="field-odd">param n_components<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Number of shared dimensions k.</p>
-</dd>
-<dt class="field-even">type n_components<span class="colon">:</span></dt>
-<dd class="field-even"><p>int, default=2</p>
-</dd>
-<dt class="field-odd">param regularisation<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Ridge regularisation added to each view’s covariance before
-inversion.  A single float applies the same value to all views;
-a list gives per-view values.  Larger values = stronger
-regularisation (useful when d_v &gt; n or features are collinear).</p>
-</dd>
-<dt class="field-even">type regularisation<span class="colon">:</span></dt>
-<dd class="field-even"><p>float or list of float, default=1e-4</p>
-</dd>
-<dt class="field-odd">param output<span class="colon">:</span></dt>
-<dd class="field-odd"><p>How to combine per-view projections in transform():
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=2</em>) – Number of shared dimensions k.</p></li>
+<li><p><strong>regularisation</strong> (<em>float</em><em> or </em><em>list</em><em> of </em><em>float</em><em>, </em><em>default=1e-4</em>) – Ridge regularisation added to each view’s covariance before
+inversion.  A single float applies the same value to all views; a list gives per-view values.  Larger values = stronger regularisation (useful when d_v &gt; n or features are collinear).</p></li>
+<li><p><strong>output</strong> (<em>str {&quot;concat&quot;</em><em>, </em><em>&quot;mean&quot;</em><em>, </em><em>&quot;list&quot;}</em><em>, </em><em>default=&quot;concat&quot;</em>) – How to combine per-view projections in transform():
 - “concat” : [Z1 | Z2 | … | ZM]  shape (n, M*k)
 - “mean”   : (Z1 + Z2 + … + ZM) / M  shape (n, k)
-- “list”   : [Z1, Z2, …, ZM]  list of (n, k) arrays</p>
-</dd>
-<dt class="field-even">type output<span class="colon">:</span></dt>
-<dd class="field-even"><p>{“concat”, “mean”, “list”}, default=”concat”</p>
-</dd>
-<dt class="field-odd">param centre<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Subtract column means from each view before fitting.</p>
-</dd>
-<dt class="field-even">type centre<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool, default=True</p>
+- “list”   : [Z1, Z2, …, ZM]  list of (n, k) arrays</p></li>
+<li><p><strong>centre</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Subtract column means from each view before fitting.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.embedd.GCCA.G_">
-<span class="sig-prename descclassname"><span class="pre">polyview.embedd.GCCA.</span></span><span class="sig-name descname"><span class="pre">G_</span></span><a class="headerlink" href="#polyview.embedd.GCCA.G_" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="polyview.embed.gcca.GCCA.G_">
+<span class="sig-name descname"><span class="pre">G_</span></span><a class="headerlink" href="#polyview.embed.gcca.GCCA.G_" title="Link to this definition">¶</a></dt>
 <dd><p>Shared embedding of the training data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -304,8 +304,8 @@ regularisation (useful when d_v &gt; n or features are collinear).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.embedd.GCCA.weights_">
-<span class="sig-prename descclassname"><span class="pre">polyview.embedd.GCCA.</span></span><span class="sig-name descname"><span class="pre">weights_</span></span><a class="headerlink" href="#polyview.embedd.GCCA.weights_" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="polyview.embed.gcca.GCCA.weights_">
+<span class="sig-name descname"><span class="pre">weights_</span></span><a class="headerlink" href="#polyview.embed.gcca.GCCA.weights_" title="Link to this definition">¶</a></dt>
 <dd><p>Per-view projection matrices W(v).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -315,8 +315,8 @@ regularisation (useful when d_v &gt; n or features are collinear).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.embedd.GCCA.means_">
-<span class="sig-prename descclassname"><span class="pre">polyview.embedd.GCCA.</span></span><span class="sig-name descname"><span class="pre">means_</span></span><a class="headerlink" href="#polyview.embedd.GCCA.means_" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="polyview.embed.gcca.GCCA.means_">
+<span class="sig-name descname"><span class="pre">means_</span></span><a class="headerlink" href="#polyview.embed.gcca.GCCA.means_" title="Link to this definition">¶</a></dt>
 <dd><p>Per-view column means (used to centre test data).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -326,8 +326,8 @@ regularisation (useful when d_v &gt; n or features are collinear).</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="polyview.embedd.GCCA.eigenvalues_">
-<span class="sig-prename descclassname"><span class="pre">polyview.embedd.GCCA.</span></span><span class="sig-name descname"><span class="pre">eigenvalues_</span></span><a class="headerlink" href="#polyview.embedd.GCCA.eigenvalues_" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="polyview.embed.gcca.GCCA.eigenvalues_">
+<span class="sig-name descname"><span class="pre">eigenvalues_</span></span><a class="headerlink" href="#polyview.embed.gcca.GCCA.eigenvalues_" title="Link to this definition">¶</a></dt>
 <dd><p>Top-k eigenvalues of the aggregated smoother matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -343,6 +343,57 @@ regularisation (useful when d_v &gt; n or features are collinear).</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Z_test</span>  <span class="o">=</span> <span class="n">gcca</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">])</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.embed.gcca.GCCA.canonical_correlations">
+<span class="sig-name descname"><span class="pre">canonical_correlations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.embed.gcca.GCCA.canonical_correlations" title="Link to this definition">¶</a></dt>
+<dd><p>Pairwise canonical correlations between all view pairs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>corrs[v1, v2, :] = per-component correlation between
+projections of view v1 and view v2.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray of shape (n_views, n_views, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.embed.gcca.GCCA.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#polyview.embed.gcca.GCCA" title="polyview.embed.gcca.GCCA"><span class="pre">GCCA</span></a></span></span><a class="headerlink" href="#polyview.embed.gcca.GCCA.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Fit the GCCA model to the training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>(</em><em>n</em><em>, </em><em>d_v</em><em>) </em><em>arrays</em>) – Training data from each view.</p></li>
+<li><p><strong>y</strong> (<em>ignored</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>self</strong> – The fitted GCCA model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#polyview.embed.gcca.GCCA" title="polyview.embed.gcca.GCCA">GCCA</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.embed.gcca.GCCA.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#polyview.embed.gcca.GCCA.transform" title="Link to this definition">¶</a></dt>
+<dd><p>Project views into the shared embedding space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_v</em><em>)</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Depends on <code class="docutils literal notranslate"><span class="pre">output</span></code> parameter — see class docstring.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -350,12 +401,12 @@ regularisation (useful when d_v &gt; n or features are collinear).</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../fusion/index.html">
+          <a class="next-page" href="../base/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Fusion methods</div>
+                <div class="title">Base API</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -401,10 +452,16 @@ regularisation (useful when d_v &gt; n or features are collinear).</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">GCCA</a><ul>
-<li><a class="reference internal" href="#polyview.embedd.GCCA.G_"><code class="docutils literal notranslate"><span class="pre">G_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.embedd.GCCA.weights_"><code class="docutils literal notranslate"><span class="pre">weights_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.embedd.GCCA.means_"><code class="docutils literal notranslate"><span class="pre">means_</span></code></a></li>
-<li><a class="reference internal" href="#polyview.embedd.GCCA.eigenvalues_"><code class="docutils literal notranslate"><span class="pre">eigenvalues_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embed.gcca.GCCA"><code class="docutils literal notranslate"><span class="pre">GCCA</span></code></a><ul>
+<li><a class="reference internal" href="#polyview.embed.gcca.GCCA.G_"><code class="docutils literal notranslate"><span class="pre">GCCA.G_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embed.gcca.GCCA.weights_"><code class="docutils literal notranslate"><span class="pre">GCCA.weights_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embed.gcca.GCCA.means_"><code class="docutils literal notranslate"><span class="pre">GCCA.means_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embed.gcca.GCCA.eigenvalues_"><code class="docutils literal notranslate"><span class="pre">GCCA.eigenvalues_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embed.gcca.GCCA.canonical_correlations"><code class="docutils literal notranslate"><span class="pre">GCCA.canonical_correlations()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embed.gcca.GCCA.fit"><code class="docutils literal notranslate"><span class="pre">GCCA.fit()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.embed.gcca.GCCA.transform"><code class="docutils literal notranslate"><span class="pre">GCCA.transform()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

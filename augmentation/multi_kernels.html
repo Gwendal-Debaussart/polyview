@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Multi-view latent Gaussian dataset" href="multiview_latent_gaussian.html"><link rel="prev" title="Multi-View Co-Regularized Spectral Clustering" href="../cluster/mv_coreg_sc.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Fusion methods" href="../fusion/index.html"><link rel="prev" title="Random Projections" href="random_projections.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Datasets - polyview 0.0.1 documentation</title>
+        <title>Multi Kernels - polyview 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -174,7 +174,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -203,8 +203,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../cluster/mv_coreg_sc.html">Multi-View Co-Regularized Spectral Clustering</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Datasets</a><input aria-label="Toggle navigation of Datasets" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -212,9 +212,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="random_projections.html">Random Projections</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Multi Kernels</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -264,19 +264,52 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="datasets">
-<h1>Datasets<a class="headerlink" href="#datasets" title="Link to this heading">¶</a></h1>
-<p>Some datasets for testing and benchmarking.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
+          <section id="multi-kernels">
+<h1>Multi Kernels<a class="headerlink" href="#multi-kernels" title="Link to this heading">¶</a></h1>
+<p>Generate multiple kernel views from a single feature matrix.</p>
+<dl class="py class" id="module-polyview.augmentation.multi_kernels">
+<dt class="sig sig-object py" id="polyview.augmentation.multi_kernels.MultiKernel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.augmentation.multi_kernels.</span></span><span class="sig-name descname"><span class="pre">MultiKernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.augmentation.multi_kernels.MultiKernel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code></p>
+<p>Generate multiple kernel-matrix views from one input matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>specs</strong> (<em>sequence</em><em> of </em><em>KernelSpec</em><em> or </em><em>kernel-name strings</em><em>, </em><em>optional</em>) – Kernel definitions to apply to the same input matrix. If omitted,
+defaults to three complementary kernels: <code class="docutils literal notranslate"><span class="pre">linear</span></code>, <code class="docutils literal notranslate"><span class="pre">rbf</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">polynomial</span></code>.</p></li>
+<li><p><strong>view_names</strong> (<em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Names to assign to the generated views.</p></li>
 </ul>
-</div>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.augmentation.multi_kernels.MultiKernel.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#polyview.augmentation.multi_kernels.MultiKernel" title="polyview.augmentation.multi_kernels.MultiKernel"><span class="pre">MultiKernel</span></a></span></span><a class="headerlink" href="#polyview.augmentation.multi_kernels.MultiKernel.fit" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.augmentation.multi_kernels.MultiKernel.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">MultiViewDataset</span></span></span><a class="headerlink" href="#polyview.augmentation.multi_kernels.MultiKernel.fit_transform" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polyview.augmentation.multi_kernels.MultiKernel.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">MultiViewDataset</span></span></span><a class="headerlink" href="#polyview.augmentation.multi_kernels.MultiKernel.transform" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="polyview.augmentation.multi_kernels.multi_kernels">
+<span class="sig-prename descclassname"><span class="pre">polyview.augmentation.multi_kernels.</span></span><span class="sig-name descname"><span class="pre">multi_kernels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">KernelSpec</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'linear'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'rbf'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'polynomial'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'precomputed'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">MultiViewDataset</span></span></span><a class="headerlink" href="#polyview.augmentation.multi_kernels.multi_kernels" title="Link to this definition">¶</a></dt>
+<dd><p>Build a MultiViewDataset of kernel matrices from a single matrix.</p>
+</dd></dl>
+
 </section>
 
         </article>
@@ -284,23 +317,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="multiview_latent_gaussian.html">
+          <a class="next-page" href="../fusion/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Multi-view latent Gaussian dataset</div>
+                <div class="title">Fusion methods</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../cluster/mv_coreg_sc.html">
+          <a class="prev-page" href="random_projections.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Multi-View Co-Regularized Spectral Clustering</div>
+                <div class="title">Random Projections</div>
                 
               </div>
             </a>
@@ -322,8 +355,33 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Multi Kernels</a><ul>
+<li><a class="reference internal" href="#polyview.augmentation.multi_kernels.MultiKernel"><code class="docutils literal notranslate"><span class="pre">MultiKernel</span></code></a><ul>
+<li><a class="reference internal" href="#polyview.augmentation.multi_kernels.MultiKernel.fit"><code class="docutils literal notranslate"><span class="pre">MultiKernel.fit()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.augmentation.multi_kernels.MultiKernel.fit_transform"><code class="docutils literal notranslate"><span class="pre">MultiKernel.fit_transform()</span></code></a></li>
+<li><a class="reference internal" href="#polyview.augmentation.multi_kernels.MultiKernel.transform"><code class="docutils literal notranslate"><span class="pre">MultiKernel.transform()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#polyview.augmentation.multi_kernels.multi_kernels"><code class="docutils literal notranslate"><span class="pre">multi_kernels()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
