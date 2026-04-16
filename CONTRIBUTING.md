@@ -1,13 +1,13 @@
 # Contributing to polyview
 
-We welcome contributions to polyview! If you have an idea for a new feature, have found a bug, or want to improve the documentation, please feel free to submit a pull request directly on the `github repository <https://github.com/Gwendal-Debaussart/polyview>`_.
+We welcome contributions to polyview! If you have an idea for a new feature, have found a bug, or want to improve the documentation, please feel free to submit a pull request directly on the [github repository](https://github.com/Gwendal-Debaussart/polyview).
 
 ## Submitting an issue
 
 
 If planning on submitting an issue, please do your best to follow the following guidelines:
 
-- **Provide a minimal, reproducible example** that demonstrates the issue. Additional information can be found `here <https://stackoverflow.com/help/minimal-reproducible-example/>`_.
+- **Provide a minimal, reproducible example** that demonstrates the issue. Additional information can be found here [https://stackoverflow.com/help/minimal-reproducible-example/](https://stackoverflow.com/help/minimal-reproducible-example/).
 - If the previous point is not applicable, **please provide a detailed description of the issue**, including the expected behavior and the actual behavior. Include which functions or classes are involved, and any relevant error messages or stack traces.
 - **Please include your environment details**, such as the version of polyview you are using, your Python version, and any other relevant libraries or dependencies.
 
