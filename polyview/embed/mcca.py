@@ -34,16 +34,13 @@ class MCCA(BaseMultiViewTransformer):
     """Multi-set CCA (Kettenring, 1971) with selectable objective.
 
     Supported objectives:
-    - ``"sumcor"``: SUMCOR criterion, solved via generalized eigenproblem
-      over concatenated feature-space covariance blocks.
-    - ``"maxvar"``: MAXVAR-style shared latent criterion, solved in sample
-      space using summed smoother matrices (GCCA-like formulation).
+    - ``"sumcor"``: SUMCOR criterion, solved via generalized eigenproblem over concatenated feature-space covariance blocks.
+    - ``"maxvar"``: MAXVAR-style shared latent criterion, solved in sample space using summed smoother matrices (GCCA-like formulation).
 
     Parameters
     ----------
     n_components : int or None, default=None
-      Number of canonical components. If ``None``, use the smallest
-      feature dimension across views.
+      Number of canonical components. If ``None``, use the smallest feature dimension across views.
     regularisation : float or list of float, default=1e-6
       Ridge term added to each within-view covariance block.
     objective : {"sumcor", "maxvar"}, default="sumcor"
@@ -70,6 +67,7 @@ class MCCA(BaseMultiViewTransformer):
     Biometrika, 58(3), 433-451.
 
     Guo, Chenfeng and Dongrui Wu. Canonical Correlation Analysis (CCA) Based Multi-View Learning: An Overview.
+    ArXiv preprint arXiv:1907.01693 (2021).
     """
 
     def __init__(
