@@ -71,8 +71,16 @@ a.sidebar-brand:visited:hover {
   color : var(--link-color);
 }
 
-/* Toc Title */
+/* Hide the "On this page" sidebar */
+.toc-tree {
+    display: none;
+}
+.toc-drawer {
+    display: none;
+}
 
+
+/* Toc Title */
 .toc-title {
   color : var(--h3-color);
 }
