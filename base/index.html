@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Augmentation" href="../augmentation/index.html"><link rel="prev" title="GCCA" href="../embedd/gcca.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Augmentation" href="../augmentation/index.html"><link rel="prev" title="MCCA" href="../embedd/mcca.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=e2fb1cbc" />
+    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=ca4db986" />
     
     
 
@@ -209,11 +209,13 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedd/mcca.html">MCCA</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Base API</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
 </ul>
 </li>
@@ -223,15 +225,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a><input aria-label="Toggle navigation of PolyPipeline" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline/polypipeline.html">PolyPipeline API</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -272,14 +271,33 @@
           <section id="base-api">
 <h1>Base API<a class="headerlink" href="#base-api" title="Link to this heading">¶</a></h1>
 <p>Core base classes shared across polyview modules.</p>
-<p id="module-polyview.base">Base classes for all multi-view estimators.</p>
-<dl class="py class">
+<section id="design-contract-for-every-subclass">
+<h2>Design contract for every subclass<a class="headerlink" href="#design-contract-for-every-subclass" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__</span></code> stores hyperparameters only — no data, no fitting.</p></li>
+<li><p>Every hyperparameter must be a keyword argument with a default.</p></li>
+<li><p>Learned attributes are written as <code class="docutils literal notranslate"><span class="pre">attr_</span></code> (trailing underscore), following sklearn convention, so <code class="docutils literal notranslate"><span class="pre">check_is_fitted</span></code> works.</p></li>
+<li><p>Views are always passed as <code class="docutils literal notranslate"><span class="pre">list[np.ndarray]</span></code> (or a <code class="docutils literal notranslate"><span class="pre">MultiViewDataset</span></code>), <em>never</em> as a single array.</p></li>
+</ul>
+<dl class="py class" id="module-polyview.base">
 <dt class="sig sig-object py" id="polyview.base.BaseLateFusion">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.base.</span></span><span class="sig-name descname"><span class="pre">BaseLateFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.base.BaseLateFusion" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code></p>
 <p>Base class for late-fusion estimators over per-view predictions.</p>
 <p>Late-fusion estimators consume one 1-D prediction vector per view and
 return one fused 1-D prediction vector.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">MeanVote</span><span class="p">(</span><span class="n">BaseLateFusion</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds_by_view</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds_by_view</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">preds_by_view</span><span class="p">])</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">preds</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MeanVote</span><span class="p">()</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+<span class="go">array([0, 1, 0])</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.base.BaseLateFusion.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds_by_view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.base.BaseLateFusion.fit" title="Link to this definition">¶</a></dt>
@@ -316,17 +334,18 @@ raises if the data has a different count.  <code class="docutils literal notrans
 “accept any number of views ≥ 1”.</p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<section id="design-contract-for-every-subclass">
-<h2>Design contract for every subclass<a class="headerlink" href="#design-contract-for-every-subclass" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">__init__</span></code> stores hyperparameters only — no data, no fitting.</p></li>
-<li><p>Every hyperparameter must be a keyword argument with a default.</p></li>
-<li><p>Learned attributes are written as <code class="docutils literal notranslate"><span class="pre">attr_</span></code> (trailing underscore),
-following sklearn convention, so <code class="docutils literal notranslate"><span class="pre">check_is_fitted</span></code> works.</p></li>
-<li><p>Views are always passed as <code class="docutils literal notranslate"><span class="pre">list[np.ndarray]</span></code> (or a
-<code class="docutils literal notranslate"><span class="pre">MultiViewDataset</span></code>), <em>never</em> as a single array.</p></li>
-</ul>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">DummyMV</span><span class="p">(</span><span class="n">BaseMultiView</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted_</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DummyMV</span><span class="p">(</span><span class="n">n_views</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">])</span><span class="o">.</span><span class="n">is_fitted_</span>
+<span class="go">True</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.base.BaseMultiView.fit">
 <span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#polyview.base.BaseMultiView" title="polyview.base.BaseMultiView"><span class="pre">BaseMultiView</span></a></span></span><a class="headerlink" href="#polyview.base.BaseMultiView.fit" title="Link to this definition">¶</a></dt>
@@ -344,7 +363,6 @@ following sklearn convention, so <code class="docutils literal notranslate"><spa
 </dl>
 </dd></dl>
 
-</section>
 </dd></dl>
 
 <dl class="py class">
@@ -375,6 +393,17 @@ must be set as an attribute.</p>
 <p>Ready-to-subclass base for multi-view embedding methods.</p>
 <p>Subclasses must implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">transform()</span></code>.
 Store the embedding in <code class="docutils literal notranslate"><span class="pre">self.embedding_</span></code> after fitting.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">IdentityEmbedder</span><span class="p">(</span><span class="n">BaseMultiViewEmbedder</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">validated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_</span> <span class="o">=</span> <span class="n">validated</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">validated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">validated</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py class">
@@ -402,6 +431,15 @@ Store the embedding in <code class="docutils literal notranslate"><span class="p
 <p>Mixin for estimators that produce cluster labels.</p>
 <p>Provides <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code> and enforces that <code class="docutils literal notranslate"><span class="pre">fit</span></code> stores
 <code class="docutils literal notranslate"><span class="pre">labels_</span></code> as a fitted attribute.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">ToyClusterer</span><span class="p">(</span><span class="n">MultiViewClusterMixin</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">labels_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">views</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ToyClusterer</span><span class="p">()</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+<span class="go">array([0, 0, 0, 0])</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.base.MultiViewClusterMixin.fit_predict">
 <span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.base.MultiViewClusterMixin.fit_predict" title="Link to this definition">¶</a></dt>
@@ -434,6 +472,18 @@ that the output is an <em>embedding</em> (not a feature transformation),
 so callers can make different downstream choices (e.g. skip PCA
 post-processing).</p>
 <p>Subclasses should store the final embedding in <code class="docutils literal notranslate"><span class="pre">embedding_</span></code>.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">ToyEmbedder</span><span class="p">(</span><span class="n">MultiViewEmbedderMixin</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">views</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">views</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">emb</span> <span class="o">=</span> <span class="n">ToyEmbedder</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">embedding_</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">emb</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 2)</span>
+</pre></div>
+</div>
 <dl class="py property">
 <dt class="sig sig-object py" id="polyview.base.MultiViewEmbedderMixin.embedding_">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">embedding_</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></span><a class="headerlink" href="#polyview.base.MultiViewEmbedderMixin.embedding_" title="Link to this definition">¶</a></dt>
@@ -448,6 +498,16 @@ post-processing).</p>
 <p>Mixin for estimators that implement <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p>
 <p>Provides a default <code class="docutils literal notranslate"><span class="pre">fit_transform</span></code> that calls <code class="docutils literal notranslate"><span class="pre">fit</span></code> then
 <code class="docutils literal notranslate"><span class="pre">transform</span></code> — subclasses only need to implement both methods.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">AddOneTransformer</span><span class="p">(</span><span class="n">MultiViewTransformerMixin</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">views</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AddOneTransformer</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">]])])</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="go">array([2., 3.])</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.base.MultiViewTransformerMixin.fit_transform">
 <span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.base.MultiViewTransformerMixin.fit_transform" title="Link to this definition">¶</a></dt>
@@ -484,6 +544,7 @@ overridden for efficiency (e.g. CCA can reuse intermediate results).</p>
 </dd></dl>
 
 </section>
+</section>
 
         </article>
       </div>
@@ -499,14 +560,14 @@ overridden for efficiency (e.g. CCA can reuse intermediate results).</p>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../embedd/gcca.html">
+          <a class="prev-page" href="../embedd/mcca.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">GCCA</div>
+                <div class="title">MCCA</div>
                 
               </div>
             </a>
@@ -541,6 +602,7 @@ overridden for efficiency (e.g. CCA can reuse intermediate results).</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Base API</a><ul>
+<li><a class="reference internal" href="#design-contract-for-every-subclass">Design contract for every subclass</a><ul>
 <li><a class="reference internal" href="#polyview.base.BaseLateFusion"><code class="docutils literal notranslate"><span class="pre">BaseLateFusion</span></code></a><ul>
 <li><a class="reference internal" href="#polyview.base.BaseLateFusion.fit"><code class="docutils literal notranslate"><span class="pre">BaseLateFusion.fit()</span></code></a></li>
 <li><a class="reference internal" href="#polyview.base.BaseLateFusion.fit_predict"><code class="docutils literal notranslate"><span class="pre">BaseLateFusion.fit_predict()</span></code></a></li>
@@ -565,6 +627,8 @@ overridden for efficiency (e.g. CCA can reuse intermediate results).</p>
 <li><a class="reference internal" href="#polyview.base.MultiViewTransformerMixin"><code class="docutils literal notranslate"><span class="pre">MultiViewTransformerMixin</span></code></a><ul>
 <li><a class="reference internal" href="#polyview.base.MultiViewTransformerMixin.fit_transform"><code class="docutils literal notranslate"><span class="pre">MultiViewTransformerMixin.fit_transform()</span></code></a></li>
 <li><a class="reference internal" href="#polyview.base.MultiViewTransformerMixin.transform"><code class="docutils literal notranslate"><span class="pre">MultiViewTransformerMixin.transform()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

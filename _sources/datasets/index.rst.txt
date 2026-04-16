@@ -7,3 +7,8 @@ Some datasets for testing and benchmarking.
   :maxdepth: 1
 
   multiview_latent_gaussian
+
+See also
+--------
+
+- :doc:`../base/index`

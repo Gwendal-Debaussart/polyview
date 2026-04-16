@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=e2fb1cbc" />
+    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=ca4db986" />
     
     
 
@@ -209,11 +209,13 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedd/mcca.html">MCCA</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
 </ul>
 </li>
@@ -223,15 +225,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a><input aria-label="Toggle navigation of PolyPipeline" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline/polypipeline.html">PolyPipeline API</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -282,6 +281,11 @@ per-view weights based on reconstruction quality.</p>
 <p>Finds a shared non-negative coefficient matrix H (the consensus
 representation) and per-view basis matrices W(v) by jointly
 minimising weighted Frobenius reconstruction error across all views.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\min_{H} \sum_{v=1}^{M} \lambda_v \left\|X^{(v)} - H W^{(v)}\right\|_F^2
+\quad \text{s.t.} \quad H \ge 0\]</div>
+</div>
 <p>The row argmax of H gives cluster labels.  H itself is a soft
 assignment matrix useful as a low-dimensional embedding.</p>
 <dl class="field-list simple">
@@ -398,7 +402,11 @@ Equal to 1/M when learn_weights=False.</p>
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<p>Gao, Jing et al. “Multi-View Clustering via Joint Nonnegative Matrix Factorization.” SDM (2013).</p>
+<ul class="simple">
+<li><p>Gao, J., He, L., Zhang, X., Zhou, J., &amp; Wu, D. (2013).
+Multi-view clustering via joint nonnegative matrix factorization.
+In Proceedings of the 2013 SIAM International Conference on Data Mining (SDM).</p></li>
+</ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#polyview.cluster.mv_nmf.MultiViewNMF" title="polyview.cluster.mv_nmf.MultiViewNMF"><span class="pre">MultiViewNMF</span></a></span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.fit" title="Link to this definition">¶</a></dt>
@@ -433,12 +441,8 @@ clipped to zero before factorisation with a warning.</p></li>
 <dt class="sig sig-object py" id="polyview.cluster.mv_nmf.MultiViewNMF.transform">
 <span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_nmf.MultiViewNMF.transform" title="Link to this definition">¶</a></dt>
 <dd><p>Project new samples into the shared H space.</p>
-<p>Solves the NNLS problem for H given fixed W(v):</p>
-<blockquote>
-<div><p>min_H  sum_v lambda(v) * ||X(v) - H W(v)||^2_F   s.t. H &gt;= 0</p>
-</div></blockquote>
-<p>via the same multiplicative update rule, starting from a
-uniform initialisation, with W(v) held fixed.</p>
+<p>Solves the NNLS problem for H given fixed W(v) via the same multiplicative update rule,
+starting from a uniform initialisation, with W(v) held fixed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples_new</em><em>, </em><em>n_features_v</em><em>)</em>)</p>
@@ -541,6 +545,7 @@ uniform initialisation, with W(v) held fixed.</p>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../_static/force-light.js?v=2e695fa3"></script>
     </body>
 </html>

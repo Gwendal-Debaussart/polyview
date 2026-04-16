@@ -1,13 +1,12 @@
 Pipeline Workflows
 ==================
 
-This page demonstrates common `PolyPipeline` patterns.
+This page demonstrates common `PolyPipeline` patterns. It includes examples of typical multiview workflows, including per-view sklearn steps, fusion flows, and native multiview methods.
 
-1. MV → MV (per-view sklearn step + per-view outputs)
-------------------------------------------------------
+MV → MV (per-view sklearn)
+-----------------------------
 
-Use a single-view sklearn estimator directly in multiview mode. The
-pipeline adapts it per view and returns one output per branch.
+Use a single-view sklearn estimator directly in multiview mode. The pipeline adapts it per view and returns one output per branch. Preprocessing steps (StandardScaler in this example) are applied per view, and the final KMeans step is also applied per view, returning one set of cluster labels per view. Those labels can be fused later with a late fusion step (see below) or analyzed separately.
 
 .. code-block:: python
 
@@ -28,36 +27,34 @@ pipeline adapts it per view and returns one output per branch.
    labels_by_view = pipe.fit_predict(mvd.views)
    print(len(labels_by_view))  # 3
 
-2. MV → SV (fusion)
+MV → SV (fusion)
 --------------------
 
-Fuse per-view transformed features into a single representation for a
-single-view model.
+Fuse per-view transformed features into a single representation for a single-view model.
+Alternatives for the fusion step include elements from the `fusion` module, and some of the `embed` module's methods.
 
 .. code-block:: python
 
    from polyview.pipeline.polypipeline import PolyPipeline
    from polyview.fusion.early import ConcatFusion
    from sklearn.decomposition import PCA
-   from sklearn.cluster import KMeans as SKKMeans
+   from sklearn.cluster import KMeans
 
    pipe = PolyPipeline(
        steps=[
            ("pca", PCA(n_components=5)),
            ("fusion", ConcatFusion()),
-           ("kmeans", SKKMeans(n_clusters=3, random_state=0)),
+           ("kmeans", KMeans(n_clusters=3, random_state=0)),
        ]
    )
 
    labels = pipe.fit_predict(mvd.views)
    print(labels.shape)
 
-3. MV preprocessing → MultiViewNMF clustering
-----------------------------------------------
+MV preprocessing → MV clustering
+-----------------------------------
 
-Apply per-view dimensionality reduction first, then cluster with a
-native multiview method (`MultiViewNMF`) that learns a consensus
-representation.
+Apply per-view dimensionality reduction first, then cluster with a native multiview method (`MultiViewNMF`) that learns a consensus representation.
 
 .. code-block:: python
 
@@ -75,38 +72,9 @@ representation.
    labels = pipe.fit_predict(mvd.views)
    print(labels.shape)
 
-4. MV preprocessing → co-regularized spectral clustering
----------------------------------------------------------
 
-You can chain per-view sklearn preprocessing with other multiview
-clusterers, such as co-regularized spectral clustering.
-
-.. code-block:: python
-
-   from polyview.pipeline.polypipeline import PolyPipeline
-   from polyview.cluster.mv_coreg_sc import MultiViewCoRegSpectralClustering
-   from sklearn.preprocessing import StandardScaler
-
-   pipe = PolyPipeline(
-       steps=[
-           ("scale", StandardScaler()),
-           (
-               "coreg_sc",
-               MultiViewCoRegSpectralClustering(
-                   n_clusters=3,
-                   n_init=5,
-                   max_iter=20,
-                   random_state=0,
-               ),
-           ),
-       ]
-   )
-
-   labels = pipe.fit_predict(mvd.views)
-   print(labels.shape)
-
-5. Late fusion (inside and outside pipeline)
---------------------------------------------
+Late fusion (inside and outside pipeline)
+-----------------------------------------
 
 Late fusion can be either part of the same pipeline or applied as a
 separate post-processing step.
@@ -137,17 +105,16 @@ separate post-processing step.
 
    fused_outside = MajorityVote(tie_break="first").fit_predict(labels_by_view)
 
-6. Single matrix -> multiview pipeline
---------------------------------------
+SV → MV
+-------
 
-Start from one feature matrix, generate multiple projected views, then
-continue with a standard multiview clustering step.
+Start from one feature matrix, generate multiple projected views, then continue with a standard multiview clustering step.
 
 .. code-block:: python
 
    import numpy as np
    from polyview.pipeline.polypipeline import PolyPipeline
-    from polyview.augmentation.random_projections import RandomProjectionViews
+   from polyview.augmentation.random_projections import RandomProjectionViews
    from sklearn.preprocessing import StandardScaler
    from polyview.cluster.mv_kmeans import MultiViewKMeans
 
@@ -165,8 +132,8 @@ continue with a standard multiview clustering step.
    print(labels.shape)  # (100,)
    pipe.draw_diagram()
 
-7. Pipeline diagram introspection
----------------------------------
+Pipeline diagram introspection
+-------------------------------
 
 `draw_diagram()` prints a branch-aware text diagram of step flow.
 

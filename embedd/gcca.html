@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Base API" href="../base/index.html"><link rel="prev" title="Embedd" href="index.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="MCCA" href="mcca.html"><link rel="prev" title="Embedd" href="index.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=e2fb1cbc" />
+    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=ca4db986" />
     
     
 
@@ -209,11 +209,13 @@
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">GCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcca.html">MCCA</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
 </ul>
 </li>
@@ -223,15 +225,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a><input aria-label="Toggle navigation of PolyPipeline" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline/polypipeline.html">PolyPipeline API</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -271,7 +270,7 @@
         <article role="main" id="furo-main-content">
           <section id="gcca">
 <h1>GCCA<a class="headerlink" href="#gcca" title="Link to this heading">¶</a></h1>
-<p>Generalised Canonical Correlation Analysis (GCCA) is a multiview extension of CCA that finds a shared embedding across all views. It does this by maximising the sum of pairwise correlations between the views in the shared space, while also applying regularisation to prevent overfitting.</p>
+<p>Generalised Canonical Correlation Analysis (GCCA) is a multiview extension of CCA that finds a <em>shared embedding</em> across all views. It does this by maximising the sum of pairwise correlations between the views in the shared space, while also applying regularisation to prevent overfitting.</p>
 <dl class="py class" id="module-polyview.embed.gcca">
 <dt class="sig sig-object py" id="polyview.embed.gcca.GCCA">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.embed.gcca.</span></span><span class="sig-name descname"><span class="pre">GCCA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.embed.gcca.GCCA" title="Link to this definition">¶</a></dt>
@@ -343,6 +342,14 @@ inversion.  A single float applies the same value to all views; a list gives per
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Z_test</span>  <span class="o">=</span> <span class="n">gcca</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">])</span>
 </pre></div>
 </div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Guo, C., &amp; Wu, D. (2021). Canonical correlation analysis (CCA) based multi-view learning: An overview.</dt><dd><p>arXiv preprint arXiv:1907.01693.</p>
+</dd>
+</dl>
+</li>
+</ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.embed.gcca.GCCA.canonical_correlations">
 <span class="sig-name descname"><span class="pre">canonical_correlations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.embed.gcca.GCCA.canonical_correlations" title="Link to this definition">¶</a></dt>
@@ -401,12 +408,12 @@ projections of view v1 and view v2.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../base/index.html">
+          <a class="next-page" href="mcca.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Base API</div>
+                <div class="title">MCCA</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=e2fb1cbc" />
+    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=ca4db986" />
     
     
 
@@ -209,11 +209,13 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedd/mcca.html">MCCA</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
 </ul>
 </li>
@@ -223,15 +225,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a><input aria-label="Toggle navigation of PolyPipeline" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline/polypipeline.html">PolyPipeline API</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Examples</a><input aria-label="Toggle navigation of Examples" checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Examples</a><input aria-label="Toggle navigation of Examples" checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -271,11 +270,10 @@
         <article role="main" id="furo-main-content">
           <section id="pipeline-workflows">
 <h1>Pipeline Workflows<a class="headerlink" href="#pipeline-workflows" title="Link to this heading">¶</a></h1>
-<p>This page demonstrates common <cite>PolyPipeline</cite> patterns.</p>
-<section id="mv-mv-per-view-sklearn-step-per-view-outputs">
-<h2>1. MV → MV (per-view sklearn step + per-view outputs)<a class="headerlink" href="#mv-mv-per-view-sklearn-step-per-view-outputs" title="Link to this heading">¶</a></h2>
-<p>Use a single-view sklearn estimator directly in multiview mode. The
-pipeline adapts it per view and returns one output per branch.</p>
+<p>This page demonstrates common <cite>PolyPipeline</cite> patterns. It includes examples of typical multiview workflows, including per-view sklearn steps, fusion flows, and native multiview methods.</p>
+<section id="mv-mv-per-view-sklearn">
+<h2>MV → MV (per-view sklearn)<a class="headerlink" href="#mv-mv-per-view-sklearn" title="Link to this heading">¶</a></h2>
+<p>Use a single-view sklearn estimator directly in multiview mode. The pipeline adapts it per view and returns one output per branch. Preprocessing steps (StandardScaler in this example) are applied per view, and the final KMeans step is also applied per view, returning one set of cluster labels per view. Those labels can be fused later with a late fusion step (see below) or analyzed separately.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.pipeline.polypipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolyPipeline</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polyview.dataset.make_multiview_gaussian</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_multiview_gaussian</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -296,19 +294,19 @@ pipeline adapts it per view and returns one output per branch.</p>
 </div>
 </section>
 <section id="mv-sv-fusion">
-<h2>2. MV → SV (fusion)<a class="headerlink" href="#mv-sv-fusion" title="Link to this heading">¶</a></h2>
-<p>Fuse per-view transformed features into a single representation for a
-single-view model.</p>
+<h2>MV → SV (fusion)<a class="headerlink" href="#mv-sv-fusion" title="Link to this heading">¶</a></h2>
+<p>Fuse per-view transformed features into a single representation for a single-view model.
+Alternatives for the fusion step include elements from the <cite>fusion</cite> module, and some of the <cite>embed</cite> module’s methods.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.pipeline.polypipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolyPipeline</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polyview.fusion.early</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConcatFusion</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span> <span class="k">as</span> <span class="n">SKKMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 
 <span class="n">pipe</span> <span class="o">=</span> <span class="n">PolyPipeline</span><span class="p">(</span>
     <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s2">&quot;pca&quot;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">5</span><span class="p">)),</span>
         <span class="p">(</span><span class="s2">&quot;fusion&quot;</span><span class="p">,</span> <span class="n">ConcatFusion</span><span class="p">()),</span>
-        <span class="p">(</span><span class="s2">&quot;kmeans&quot;</span><span class="p">,</span> <span class="n">SKKMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;kmeans&quot;</span><span class="p">,</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>
     <span class="p">]</span>
 <span class="p">)</span>
 
@@ -317,11 +315,9 @@ single-view model.</p>
 </pre></div>
 </div>
 </section>
-<section id="mv-preprocessing-multiviewnmf-clustering">
-<h2>3. MV preprocessing → MultiViewNMF clustering<a class="headerlink" href="#mv-preprocessing-multiviewnmf-clustering" title="Link to this heading">¶</a></h2>
-<p>Apply per-view dimensionality reduction first, then cluster with a
-native multiview method (<cite>MultiViewNMF</cite>) that learns a consensus
-representation.</p>
+<section id="mv-preprocessing-mv-clustering">
+<h2>MV preprocessing → MV clustering<a class="headerlink" href="#mv-preprocessing-mv-clustering" title="Link to this heading">¶</a></h2>
+<p>Apply per-view dimensionality reduction first, then cluster with a native multiview method (<cite>MultiViewNMF</cite>) that learns a consensus representation.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.pipeline.polypipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolyPipeline</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polyview.cluster.mv_nmf</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiViewNMF</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
@@ -338,36 +334,8 @@ representation.</p>
 </pre></div>
 </div>
 </section>
-<section id="mv-preprocessing-co-regularized-spectral-clustering">
-<h2>4. MV preprocessing → co-regularized spectral clustering<a class="headerlink" href="#mv-preprocessing-co-regularized-spectral-clustering" title="Link to this heading">¶</a></h2>
-<p>You can chain per-view sklearn preprocessing with other multiview
-clusterers, such as co-regularized spectral clustering.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.pipeline.polypipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolyPipeline</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">polyview.cluster.mv_coreg_sc</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiViewCoRegSpectralClustering</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
-
-<span class="n">pipe</span> <span class="o">=</span> <span class="n">PolyPipeline</span><span class="p">(</span>
-    <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">(</span><span class="s2">&quot;scale&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
-        <span class="p">(</span>
-            <span class="s2">&quot;coreg_sc&quot;</span><span class="p">,</span>
-            <span class="n">MultiViewCoRegSpectralClustering</span><span class="p">(</span>
-                <span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                <span class="n">n_init</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                <span class="n">max_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-                <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="p">),</span>
-        <span class="p">),</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-
-<span class="n">labels</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">mvd</span><span class="o">.</span><span class="n">views</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
 <section id="late-fusion-inside-and-outside-pipeline">
-<h2>5. Late fusion (inside and outside pipeline)<a class="headerlink" href="#late-fusion-inside-and-outside-pipeline" title="Link to this heading">¶</a></h2>
+<h2>Late fusion (inside and outside pipeline)<a class="headerlink" href="#late-fusion-inside-and-outside-pipeline" title="Link to this heading">¶</a></h2>
 <p>Late fusion can be either part of the same pipeline or applied as a
 separate post-processing step.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.pipeline.polypipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolyPipeline</span>
@@ -396,13 +364,12 @@ separate post-processing step.</p>
 </pre></div>
 </div>
 </section>
-<section id="single-matrix-multiview-pipeline">
-<h2>6. Single matrix -&gt; multiview pipeline<a class="headerlink" href="#single-matrix-multiview-pipeline" title="Link to this heading">¶</a></h2>
-<p>Start from one feature matrix, generate multiple projected views, then
-continue with a standard multiview clustering step.</p>
+<section id="sv-mv">
+<h2>SV → MV<a class="headerlink" href="#sv-mv" title="Link to this heading">¶</a></h2>
+<p>Start from one feature matrix, generate multiple projected views, then continue with a standard multiview clustering step.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polyview.pipeline.polypipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolyPipeline</span>
- <span class="kn">from</span><span class="w"> </span><span class="nn">polyview.augmentation.random_projections</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomProjectionViews</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polyview.augmentation.random_projections</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomProjectionViews</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">polyview.cluster.mv_kmeans</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiViewKMeans</span>
 
@@ -423,7 +390,7 @@ continue with a standard multiview clustering step.</p>
 </div>
 </section>
 <section id="pipeline-diagram-introspection">
-<h2>7. Pipeline diagram introspection<a class="headerlink" href="#pipeline-diagram-introspection" title="Link to this heading">¶</a></h2>
+<h2>Pipeline diagram introspection<a class="headerlink" href="#pipeline-diagram-introspection" title="Link to this heading">¶</a></h2>
 <p><cite>draw_diagram()</cite> prints a branch-aware text diagram of step flow.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pipe</span><span class="o">.</span><span class="n">draw_diagram</span><span class="p">()</span>           <span class="c1"># before fit</span>
 <span class="n">_</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">mvd</span><span class="o">.</span><span class="n">views</span><span class="p">)</span>
@@ -489,13 +456,12 @@ continue with a standard multiview clustering step.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Pipeline Workflows</a><ul>
-<li><a class="reference internal" href="#mv-mv-per-view-sklearn-step-per-view-outputs">1. MV → MV (per-view sklearn step + per-view outputs)</a></li>
-<li><a class="reference internal" href="#mv-sv-fusion">2. MV → SV (fusion)</a></li>
-<li><a class="reference internal" href="#mv-preprocessing-multiviewnmf-clustering">3. MV preprocessing → MultiViewNMF clustering</a></li>
-<li><a class="reference internal" href="#mv-preprocessing-co-regularized-spectral-clustering">4. MV preprocessing → co-regularized spectral clustering</a></li>
-<li><a class="reference internal" href="#late-fusion-inside-and-outside-pipeline">5. Late fusion (inside and outside pipeline)</a></li>
-<li><a class="reference internal" href="#single-matrix-multiview-pipeline">6. Single matrix -&gt; multiview pipeline</a></li>
-<li><a class="reference internal" href="#pipeline-diagram-introspection">7. Pipeline diagram introspection</a></li>
+<li><a class="reference internal" href="#mv-mv-per-view-sklearn">MV → MV (per-view sklearn)</a></li>
+<li><a class="reference internal" href="#mv-sv-fusion">MV → SV (fusion)</a></li>
+<li><a class="reference internal" href="#mv-preprocessing-mv-clustering">MV preprocessing → MV clustering</a></li>
+<li><a class="reference internal" href="#late-fusion-inside-and-outside-pipeline">Late fusion (inside and outside pipeline)</a></li>
+<li><a class="reference internal" href="#sv-mv">SV → MV</a></li>
+<li><a class="reference internal" href="#pipeline-diagram-introspection">Pipeline diagram introspection</a></li>
 </ul>
 </li>
 </ul>

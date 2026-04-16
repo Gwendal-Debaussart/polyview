@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/styling.css?v=e2fb1cbc" />
+    <link rel="stylesheet" type="text/css" href="_static/styling.css?v=ca4db986" />
     
     
 
@@ -209,11 +209,13 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="embedd/gcca.html">GCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="embedd/mcca.html">MCCA</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="base/index.html">Base API</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="augmentation/random_projections.html">Random Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="augmentation/multi_kernels.html">Multi Kernels</a></li>
 </ul>
 </li>
@@ -223,15 +225,12 @@
 <li class="toctree-l2"><a class="reference internal" href="fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="pipeline/index.html">PolyPipeline</a><input aria-label="Toggle navigation of PolyPipeline" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/polypipeline.html">PolyPipeline API</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/index.html">PolyPipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -271,12 +270,25 @@
         <article role="main" id="furo-main-content">
           <section id="polyview-overview">
 <h1>polyview overview<a class="headerlink" href="#polyview-overview" title="Link to this heading">¶</a></h1>
-<p><em>polyview</em> is a sklearn-compatible multi-view learning toolkit. It provides a range of multi-view learning algorithms, including clustering, dimensionality reduction, fusion methods, data augmentation methods, and more.</p>
-<p>This documentation includes:</p>
+<p><em>polyview</em> is a sklearn-compatible multi-view learning toolkit for data where
+each sample is represented by several complementary views, such as audio and
+video, multiple sensor streams, or heterogeneous feature extractors.
+Examples and workflow walkthroughs are available in <a class="reference internal" href="examples/index.html"><span class="doc">Examples</span></a>.</p>
+<p>The library provides:</p>
 <ul class="simple">
-<li><p>A brief introduction to the package</p></li>
-<li><p>A complete API reference</p></li>
+<li><p>native multi-view clustering algorithms such as multi-view K-means,
+co-training spectral clustering, co-regularized spectral clustering, and
+multi-view NMF,</p></li>
+<li><p>embedding methods including GCCA and MCCA,</p></li>
+<li><p>fusion utilities for early fusion, late fusion, and kernel fusion,</p></li>
+<li><p>data augmentation tools that turn a single matrix into multiple views via
+random projections, random subspaces, or multiple kernels,</p></li>
+<li><p>a pipeline layer that moves between single-view and multi-view stages in a
+consistent sklearn-style API.</p></li>
 </ul>
+<p>The documentation is organized by algorithm family so you can move quickly
+from the overview to the relevant API reference or example workflow.</p>
+<p>This library is inspired by <a class="reference external" href="https://mvlearn.github.io/">mvlearn</a>, which has not been updated since 2020.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cluster/index.html">Multi-View Clustering</a></li>

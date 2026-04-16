@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/styling.css?v=e2fb1cbc" />
+    <link rel="stylesheet" type="text/css" href="_static/styling.css?v=ca4db986" />
     
     
 
@@ -207,11 +207,13 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="embedd/gcca.html">GCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="embedd/mcca.html">MCCA</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="base/index.html">Base API</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="augmentation/random_projections.html">Random Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="augmentation/multi_kernels.html">Multi Kernels</a></li>
 </ul>
 </li>
@@ -221,15 +223,12 @@
 <li class="toctree-l2"><a class="reference internal" href="fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="pipeline/index.html">PolyPipeline</a><input aria-label="Toggle navigation of PolyPipeline" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/polypipeline.html">PolyPipeline API</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/index.html">PolyPipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -295,7 +294,11 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="embedd/gcca.html#polyview.embed.gcca.GCCA.canonical_correlations">canonical_correlations() (polyview.embed.gcca.GCCA method)</a>
+
+        <ul>
+          <li><a href="embedd/mcca.html#polyview.embed.mcca.MCCA.canonical_correlations">(polyview.embed.mcca.MCCA method)</a>
 </li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.centroids_">centroids_ (polyview.cluster.mv_kmeans.MultiViewKMeans attribute)</a>
@@ -310,7 +313,7 @@
   <h2>D</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="pipeline/polypipeline.html#polyview.pipeline.polypipeline.PolyPipeline.draw_diagram">draw_diagram() (polyview.pipeline.polypipeline.PolyPipeline method)</a>
+        <li><a href="pipeline/index.html#polyview.pipeline.polypipeline.PolyPipeline.draw_diagram">draw_diagram() (polyview.pipeline.polypipeline.PolyPipeline method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -321,7 +324,13 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="embedd/gcca.html#polyview.embed.gcca.GCCA.eigenvalues_">eigenvalues_ (polyview.embed.gcca.GCCA attribute)</a>
+
+        <ul>
+          <li><a href="embedd/mcca.html#polyview.embed.mcca.MCCA.eigenvalues_">(polyview.embed.mcca.MCCA attribute)</a>
 </li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="base/index.html#polyview.base.MultiViewEmbedderMixin.embedding_">embedding_ (polyview.base.MultiViewEmbedderMixin property)</a>
 
         <ul>
@@ -338,10 +347,14 @@
   <h2>F</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="augmentation/random_subspace.html#polyview.augmentation.random_subspace.RandomSubspaceViews.feature_indices_">feature_indices_ (polyview.augmentation.random_subspace.RandomSubspaceViews attribute)</a>
+</li>
         <li><a href="augmentation/multi_kernels.html#polyview.augmentation.multi_kernels.MultiKernel.fit">fit() (polyview.augmentation.multi_kernels.MultiKernel method)</a>
 
         <ul>
           <li><a href="augmentation/random_projections.html#polyview.augmentation.random_projections.RandomProjectionViews.fit">(polyview.augmentation.random_projections.RandomProjectionViews method)</a>
+</li>
+          <li><a href="augmentation/random_subspace.html#polyview.augmentation.random_subspace.RandomSubspaceViews.fit">(polyview.augmentation.random_subspace.RandomSubspaceViews method)</a>
 </li>
           <li><a href="base/index.html#polyview.base.BaseLateFusion.fit">(polyview.base.BaseLateFusion method)</a>
 </li>
@@ -357,6 +370,8 @@
 </li>
           <li><a href="embedd/gcca.html#polyview.embed.gcca.GCCA.fit">(polyview.embed.gcca.GCCA method)</a>
 </li>
+          <li><a href="embedd/mcca.html#polyview.embed.mcca.MCCA.fit">(polyview.embed.mcca.MCCA method)</a>
+</li>
           <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion.fit">(polyview.fusion.early.ConcatFusion method)</a>
 </li>
           <li><a href="fusion/early.html#polyview.fusion.early.NormalizedFusion.fit">(polyview.fusion.early.NormalizedFusion method)</a>
@@ -367,7 +382,7 @@
 </li>
           <li><a href="fusion/late.html#polyview.fusion.late.MajorityVote.fit">(polyview.fusion.late.MajorityVote method)</a>
 </li>
-          <li><a href="pipeline/polypipeline.html#polyview.pipeline.polypipeline.PolyPipeline.fit">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
+          <li><a href="pipeline/index.html#polyview.pipeline.polypipeline.PolyPipeline.fit">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -387,7 +402,7 @@
 </li>
           <li><a href="fusion/late.html#polyview.fusion.late.MajorityVote.fit_predict">(polyview.fusion.late.MajorityVote method)</a>
 </li>
-          <li><a href="pipeline/polypipeline.html#polyview.pipeline.polypipeline.PolyPipeline.fit_predict">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
+          <li><a href="pipeline/index.html#polyview.pipeline.polypipeline.PolyPipeline.fit_predict">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
 </li>
         </ul></li>
         <li><a href="augmentation/multi_kernels.html#polyview.augmentation.multi_kernels.MultiKernel.fit_transform">fit_transform() (polyview.augmentation.multi_kernels.MultiKernel method)</a>
@@ -395,11 +410,13 @@
         <ul>
           <li><a href="augmentation/random_projections.html#polyview.augmentation.random_projections.RandomProjectionViews.fit_transform">(polyview.augmentation.random_projections.RandomProjectionViews method)</a>
 </li>
+          <li><a href="augmentation/random_subspace.html#polyview.augmentation.random_subspace.RandomSubspaceViews.fit_transform">(polyview.augmentation.random_subspace.RandomSubspaceViews method)</a>
+</li>
           <li><a href="base/index.html#polyview.base.MultiViewTransformerMixin.fit_transform">(polyview.base.MultiViewTransformerMixin method)</a>
 </li>
           <li><a href="cluster/mv_nmf.html#polyview.cluster.mv_nmf.MultiViewNMF.fit_transform">(polyview.cluster.mv_nmf.MultiViewNMF method)</a>
 </li>
-          <li><a href="pipeline/polypipeline.html#polyview.pipeline.polypipeline.PolyPipeline.fit_transform">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
+          <li><a href="pipeline/index.html#polyview.pipeline.polypipeline.PolyPipeline.fit_transform">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -474,9 +491,13 @@
 </li>
         <li><a href="datasets/multiview_latent_gaussian.html#polyview.dataset.make_multiview_gaussian.make_multiview_gaussian">make_multiview_gaussian() (in module polyview.dataset.make_multiview_gaussian)</a>
 </li>
+        <li><a href="embedd/mcca.html#polyview.embed.mcca.MCCA">MCCA (class in polyview.embed.mcca)</a>
+</li>
         <li><a href="embedd/gcca.html#polyview.embed.gcca.GCCA.means_">means_ (polyview.embed.gcca.GCCA attribute)</a>
 
         <ul>
+          <li><a href="embedd/mcca.html#polyview.embed.mcca.MCCA.means_">(polyview.embed.mcca.MCCA attribute)</a>
+</li>
           <li><a href="fusion/early.html#polyview.fusion.early.NormalizedFusion.means_">(polyview.fusion.early.NormalizedFusion attribute)</a>
 </li>
         </ul></li>
@@ -487,6 +508,8 @@
           <li><a href="augmentation/multi_kernels.html#module-polyview.augmentation.multi_kernels">polyview.augmentation.multi_kernels</a>
 </li>
           <li><a href="augmentation/random_projections.html#module-polyview.augmentation.random_projections">polyview.augmentation.random_projections</a>
+</li>
+          <li><a href="augmentation/random_subspace.html#module-polyview.augmentation.random_subspace">polyview.augmentation.random_subspace</a>
 </li>
           <li><a href="base/index.html#module-polyview.base">polyview.base</a>
 </li>
@@ -502,13 +525,15 @@
 </li>
           <li><a href="embedd/gcca.html#module-polyview.embed.gcca">polyview.embed.gcca</a>
 </li>
+          <li><a href="embedd/mcca.html#module-polyview.embed.mcca">polyview.embed.mcca</a>
+</li>
           <li><a href="fusion/early.html#module-polyview.fusion.early">polyview.fusion.early</a>
 </li>
           <li><a href="fusion/kernel_fusion.html#module-polyview.fusion.kernel_fusion">polyview.fusion.kernel_fusion</a>
 </li>
           <li><a href="fusion/late.html#module-polyview.fusion.late">polyview.fusion.late</a>
 </li>
-          <li><a href="pipeline/polypipeline.html#module-polyview.pipeline.polypipeline">polyview.pipeline.polypipeline</a>
+          <li><a href="pipeline/index.html#module-polyview.pipeline.polypipeline">polyview.pipeline.polypipeline</a>
 </li>
         </ul></li>
     </ul></td>
@@ -539,8 +564,12 @@
   <h2>N</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion.n_features_in_">n_features_in_ (polyview.fusion.early.ConcatFusion attribute)</a>
+        <li><a href="augmentation/random_subspace.html#polyview.augmentation.random_subspace.RandomSubspaceViews.n_features_in_">n_features_in_ (polyview.augmentation.random_subspace.RandomSubspaceViews attribute)</a>
+
+        <ul>
+          <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion.n_features_in_">(polyview.fusion.early.ConcatFusion attribute)</a>
 </li>
+        </ul></li>
         <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion.n_features_out_">n_features_out_ (polyview.fusion.early.ConcatFusion attribute)</a>
 </li>
         <li><a href="cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans.n_iter_">n_iter_ (polyview.cluster.mv_kmeans.MultiViewKMeans attribute)</a>
@@ -551,8 +580,12 @@
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion.n_views_in_">n_views_in_ (polyview.fusion.early.ConcatFusion attribute)</a>
+        <li><a href="augmentation/random_subspace.html#polyview.augmentation.random_subspace.RandomSubspaceViews.n_views_in_">n_views_in_ (polyview.augmentation.random_subspace.RandomSubspaceViews attribute)</a>
+
+        <ul>
+          <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion.n_views_in_">(polyview.fusion.early.ConcatFusion attribute)</a>
 </li>
+        </ul></li>
         <li><a href="fusion/early.html#polyview.fusion.early.NormalizedFusion">NormalizedFusion (class in polyview.fusion.early)</a>
 </li>
     </ul></td>
@@ -581,7 +614,7 @@
   <h2>P</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="pipeline/polypipeline.html#polyview.pipeline.polypipeline.PolyPipeline">PolyPipeline (class in polyview.pipeline.polypipeline)</a>
+        <li><a href="pipeline/index.html#polyview.pipeline.polypipeline.PolyPipeline">PolyPipeline (class in polyview.pipeline.polypipeline)</a>
 </li>
         <li>
     polyview.augmentation.multi_kernels
@@ -595,6 +628,13 @@
 
         <ul>
           <li><a href="augmentation/random_projections.html#module-polyview.augmentation.random_projections">module</a>
+</li>
+        </ul></li>
+        <li>
+    polyview.augmentation.random_subspace
+
+        <ul>
+          <li><a href="augmentation/random_subspace.html#module-polyview.augmentation.random_subspace">module</a>
 </li>
         </ul></li>
         <li>
@@ -649,6 +689,13 @@
 </li>
         </ul></li>
         <li>
+    polyview.embed.mcca
+
+        <ul>
+          <li><a href="embedd/mcca.html#module-polyview.embed.mcca">module</a>
+</li>
+        </ul></li>
+        <li>
     polyview.fusion.early
 
         <ul>
@@ -673,7 +720,7 @@
     polyview.pipeline.polypipeline
 
         <ul>
-          <li><a href="pipeline/polypipeline.html#module-polyview.pipeline.polypipeline">module</a>
+          <li><a href="pipeline/index.html#module-polyview.pipeline.polypipeline">module</a>
 </li>
         </ul></li>
         <li><a href="base/index.html#polyview.base.BaseLateFusion.predict">predict() (polyview.base.BaseLateFusion method)</a>
@@ -683,7 +730,7 @@
 </li>
           <li><a href="fusion/late.html#polyview.fusion.late.MajorityVote.predict">(polyview.fusion.late.MajorityVote method)</a>
 </li>
-          <li><a href="pipeline/polypipeline.html#polyview.pipeline.polypipeline.PolyPipeline.predict">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
+          <li><a href="pipeline/index.html#polyview.pipeline.polypipeline.PolyPipeline.predict">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -696,9 +743,13 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="augmentation/random_projections.html#polyview.augmentation.random_projections.random_projection">random_projection() (in module polyview.augmentation.random_projections)</a>
 </li>
+        <li><a href="augmentation/random_subspace.html#polyview.augmentation.random_subspace.random_subspace">random_subspace() (in module polyview.augmentation.random_subspace)</a>
+</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="augmentation/random_projections.html#polyview.augmentation.random_projections.RandomProjectionViews">RandomProjectionViews (class in polyview.augmentation.random_projections)</a>
+</li>
+        <li><a href="augmentation/random_subspace.html#polyview.augmentation.random_subspace.RandomSubspaceViews">RandomSubspaceViews (class in polyview.augmentation.random_subspace)</a>
 </li>
         <li><a href="cluster/mv_nmf.html#polyview.cluster.mv_nmf.MultiViewNMF.reconstruction_errors_">reconstruction_errors_ (polyview.cluster.mv_nmf.MultiViewNMF attribute)</a>
 </li>
@@ -710,7 +761,7 @@
   <h2>S</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="pipeline/polypipeline.html#polyview.pipeline.polypipeline.PolyPipeline.score">score() (polyview.pipeline.polypipeline.PolyPipeline method)</a>
+        <li><a href="pipeline/index.html#polyview.pipeline.polypipeline.PolyPipeline.score">score() (polyview.pipeline.polypipeline.PolyPipeline method)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
@@ -731,11 +782,15 @@
         <ul>
           <li><a href="augmentation/random_projections.html#polyview.augmentation.random_projections.RandomProjectionViews.transform">(polyview.augmentation.random_projections.RandomProjectionViews method)</a>
 </li>
+          <li><a href="augmentation/random_subspace.html#polyview.augmentation.random_subspace.RandomSubspaceViews.transform">(polyview.augmentation.random_subspace.RandomSubspaceViews method)</a>
+</li>
           <li><a href="base/index.html#polyview.base.MultiViewTransformerMixin.transform">(polyview.base.MultiViewTransformerMixin method)</a>
 </li>
           <li><a href="cluster/mv_nmf.html#polyview.cluster.mv_nmf.MultiViewNMF.transform">(polyview.cluster.mv_nmf.MultiViewNMF method)</a>
 </li>
           <li><a href="embedd/gcca.html#polyview.embed.gcca.GCCA.transform">(polyview.embed.gcca.GCCA method)</a>
+</li>
+          <li><a href="embedd/mcca.html#polyview.embed.mcca.MCCA.transform">(polyview.embed.mcca.MCCA method)</a>
 </li>
           <li><a href="fusion/early.html#polyview.fusion.early.ConcatFusion.transform">(polyview.fusion.early.ConcatFusion method)</a>
 </li>
@@ -745,7 +800,7 @@
 </li>
           <li><a href="fusion/kernel_fusion.html#polyview.fusion.kernel_fusion.KernelFusion.transform">(polyview.fusion.kernel_fusion.KernelFusion method)</a>
 </li>
-          <li><a href="pipeline/polypipeline.html#polyview.pipeline.polypipeline.PolyPipeline.transform">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
+          <li><a href="pipeline/index.html#polyview.pipeline.polypipeline.PolyPipeline.transform">(polyview.pipeline.polypipeline.PolyPipeline method)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -757,6 +812,10 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="fusion/kernel_fusion.html#polyview.fusion.kernel_fusion.KernelFusion.view_contributions">view_contributions() (polyview.fusion.kernel_fusion.KernelFusion method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="augmentation/random_subspace.html#polyview.augmentation.random_subspace.RandomSubspaceViews.view_names_">view_names_ (polyview.augmentation.random_subspace.RandomSubspaceViews attribute)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -776,6 +835,8 @@
           <li><a href="cluster/mv_nmf.html#polyview.cluster.mv_nmf.MultiViewNMF.weights_">(polyview.cluster.mv_nmf.MultiViewNMF attribute)</a>
 </li>
           <li><a href="embedd/gcca.html#polyview.embed.gcca.GCCA.weights_">(polyview.embed.gcca.GCCA attribute)</a>
+</li>
+          <li><a href="embedd/mcca.html#polyview.embed.mcca.MCCA.weights_">(polyview.embed.mcca.MCCA attribute)</a>
 </li>
           <li><a href="fusion/early.html#polyview.fusion.early.NormalizedFusion.weights_">(polyview.fusion.early.NormalizedFusion attribute)</a>
 </li>

@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=e2fb1cbc" />
+    <link rel="stylesheet" type="text/css" href="../_static/styling.css?v=ca4db986" />
     
     
 
@@ -209,11 +209,13 @@
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedd/mcca.html">MCCA</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../augmentation/index.html">Augmentation</a><input aria-label="Toggle navigation of Augmentation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
 </ul>
 </li>
@@ -223,15 +225,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a><input aria-label="Toggle navigation of PolyPipeline" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pipeline/polypipeline.html">PolyPipeline API</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -287,17 +286,37 @@
 <section id="coding-guidelines">
 <h3>Coding guidelines<a class="headerlink" href="#coding-guidelines" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong>Follow the existing code style</strong> as closely as possible. This includes naming conventions, formatting, and documentation style. We use <cite>black</cite> for code formatting and <cite>numpy</cite> style for docstrings.</p></li>
-<li><p><strong>Format docstrings</strong> properly, as they are used for documentation generation by Sphinx. Make sure to include descriptions of parameters, return values, and any relevant reference.</p></li>
+<li><p><strong>Follow the existing code style</strong> as closely as possible. This includes naming conventions, formatting, and documentation style. We use <cite>ruff</cite> for code formatting and <cite>numpy</cite> style for docstrings.</p></li>
+<li><p><strong>Format docstrings</strong> properly, as they are used for documentation generation by Sphinx. Make sure to include descriptions of parameters, return values, and any relevant reference. References should be included in a “References” section at the end of the docstring, following the format of existing references, and examples should be included in an “Examples” section.</p></li>
 </ul>
 </section>
 <section id="api-of-polyview-objects">
 <h3>API of polyview objects<a class="headerlink" href="#api-of-polyview-objects" title="Link to this heading">¶</a></h3>
-<p>Please ensure that all public methods and attributes of the proposed change follows the API of polyview.
-The API of polyview objects is designed to be consistent with <cite>sklearn</cite>’s API, which includes methods such as <code class="docutils literal notranslate"><span class="pre">fit</span></code>, <code class="docutils literal notranslate"><span class="pre">predict</span></code>, and <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>.</p>
+<p>Please ensure that all public methods and attributes of the proposed change follows the API of polyview. The API of polyview objects is designed to be consistent with <cite>sklearn</cite>’s API, which includes methods such as <code class="docutils literal notranslate"><span class="pre">fit</span></code>, <code class="docutils literal notranslate"><span class="pre">predict</span></code>, and <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>.</p>
 <p><strong>Initialization.</strong> The initialization of method through <code class="docutils literal notranslate"><span class="pre">__init__</span></code> may accept some values that changes the behavior of the method, but should not take as input the data itself. The data should be passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method. All parameters passed to the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method should have default values, so that the method can be initialized without any arguments.</p>
 <p><strong>Fitting.</strong> The <code class="docutils literal notranslate"><span class="pre">fit</span></code> method should be used to train the model on the provided data, and should return the instance itself. Generally, the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method should take as input a list of views and an optional array of labels.</p>
 </section>
+</section>
+<section id="code-of-conduct">
+<h2>Code of conduct<a class="headerlink" href="#code-of-conduct" title="Link to this heading">¶</a></h2>
+<p>In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.</p>
+<p>Examples of behavior that contributes to creating a positive environment
+include:</p>
+<ul class="simple">
+<li><p>Using welcoming and inclusive language</p></li>
+<li><p>Being respectful of differing viewpoints and experiences</p></li>
+<li><p>Gracefully accepting constructive criticism</p></li>
+<li><p>Focusing on what is best for the community</p></li>
+<li><p>Showing empathy towards other community members</p></li>
+</ul>
+<p>Examples of unacceptable behavior by participants include:</p>
+<ul class="simple">
+<li><p>The use of sexualized language or imagery and unwelcome sexual attention or advances</p></li>
+<li><p>Trolling, insulting/derogatory comments, and personal or political attacks</p></li>
+<li><p>Public or private harassment</p></li>
+<li><p>Publishing others’ private information, such as a physical or electronic address, without explicit permission</p></li>
+<li><p>Other conduct which could reasonably be considered inappropriate in a professional setting</p></li>
+</ul>
 </section>
 </section>
 
@@ -355,6 +374,7 @@ The API of polyview objects is designed to be consistent with <cite>sklearn</cit
 <li><a class="reference internal" href="#api-of-polyview-objects">API of polyview objects</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#code-of-conduct">Code of conduct</a></li>
 </ul>
 </li>
 </ul>
