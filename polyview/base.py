@@ -1,7 +1,3 @@
-"""
-Base classes for all multi-view estimators.
-"""
-
 from __future__ import annotations
 
 import warnings
@@ -32,16 +28,17 @@ class BaseMultiView(BaseEstimator, ABC):
         raises if the data has a different count.  ``None`` means
         "accept any number of views ≥ 1".
 
-    Notes
-    -----
-    Design contract for every subclass
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    * ``__init__`` stores hyperparameters only — no data, no fitting.
-    * Every hyperparameter must be a keyword argument with a default.
-    * Learned attributes are written as ``attr_`` (trailing underscore),
-      following sklearn convention, so ``check_is_fitted`` works.
-    * Views are always passed as ``list[np.ndarray]`` (or a
-      ``MultiViewDataset``), *never* as a single array.
+    Example
+    -------
+    >>> class DummyMV(BaseMultiView):
+    ...     def fit(self, views, y=None):
+    ...         self._validate_views(views)
+    ...         self.is_fitted_ = True
+    ...         return self
+    >>> X1 = np.random.rand(8, 3)
+    >>> X2 = np.random.rand(8, 5)
+    >>> DummyMV(n_views=2).fit([X1, X2]).is_fitted_
+    True
     """
 
     def __init__(self, n_views: Optional[int] = None) -> None:
@@ -167,6 +164,16 @@ class MultiViewTransformerMixin:
 
     Provides a default ``fit_transform`` that calls ``fit`` then
     ``transform`` — subclasses only need to implement both methods.
+
+    Example
+    -------
+    >>> class AddOneTransformer(MultiViewTransformerMixin):
+    ...     def fit(self, views, y=None):
+    ...         return self
+    ...     def transform(self, views):
+    ...         return np.asarray(views[0]) + 1
+    >>> AddOneTransformer().fit_transform([np.array([[1.0], [2.0]])]).ravel()
+    array([2., 3.])
     """
 
     @abstractmethod
@@ -205,6 +212,15 @@ class MultiViewClusterMixin:
 
     Provides ``fit_predict`` and enforces that ``fit`` stores
     ``labels_`` as a fitted attribute.
+
+    Example
+    -------
+    >>> class ToyClusterer(MultiViewClusterMixin):
+    ...     def fit(self, views, y=None):
+    ...         self.labels_ = np.zeros(len(views[0]), dtype=int)
+    ...         return self
+    >>> ToyClusterer().fit_predict([np.random.rand(4, 2)])
+    array([0, 0, 0, 0])
     """
 
     def fit_predict(self, views: List, y=None) -> np.ndarray:
@@ -233,6 +249,18 @@ class MultiViewEmbedderMixin(MultiViewTransformerMixin):
     post-processing).
 
     Subclasses should store the final embedding in ``embedding_``.
+
+    Example
+    -------
+    >>> class ToyEmbedder(MultiViewEmbedderMixin):
+    ...     def fit(self, views, y=None):
+    ...         self.embedding_ = np.asarray(views[0])
+    ...         return self
+    ...     def transform(self, views):
+    ...         return np.asarray(views[0])
+    >>> emb = ToyEmbedder().fit([np.random.rand(3, 2)]).embedding_
+    >>> emb.shape
+    (3, 2)
     """
 
     @property
@@ -287,6 +315,17 @@ class BaseMultiViewEmbedder(BaseMultiView, MultiViewEmbedderMixin):
 
     Subclasses must implement :meth:`fit` and :meth:`transform`.
     Store the embedding in ``self.embedding_`` after fitting.
+
+    Example
+    -------
+    >>> class IdentityEmbedder(BaseMultiViewEmbedder):
+    ...     def fit(self, views, y=None):
+    ...         validated = self._validate_views(views)
+    ...         self.embedding_ = validated[0]
+    ...         return self
+    ...     def transform(self, views):
+    ...         validated = self._validate_views(views, reset=False)
+    ...         return validated[0]
     """
 
 
@@ -295,6 +334,18 @@ class BaseLateFusion(BaseEstimator):
 
     Late-fusion estimators consume one 1-D prediction vector per view and
     return one fused 1-D prediction vector.
+
+    Example
+    -------
+    >>> class MeanVote(BaseLateFusion):
+    ...     def fit(self, preds_by_view, y=None):
+    ...         return self
+    ...     def predict(self, preds_by_view):
+    ...         P = np.vstack([np.asarray(p, dtype=float) for p in preds_by_view])
+    ...         return np.rint(P.mean(axis=0)).astype(int)
+    >>> preds = [np.array([0, 1, 1]), np.array([1, 1, 0])]
+    >>> MeanVote().fit_predict(preds)
+    array([0, 1, 0])
     """
 
     def fit(self, preds_by_view: List[Iterable], y=None):

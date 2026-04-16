@@ -35,10 +35,11 @@ class MultiViewCoTrainSpectralClustering(BaseMultiViewClusterer):
     labels_ : np.ndarray of shape (n_samples,)
         Cluster labels for each sample after fitting.
 
+
     References
     ----------
     - Kumar, A., & Daumé, H. (2011). A co-training approach for multi-view spectral clustering.
-      In Proceedings of the 28th International Conference on Machine Learning (ICML 2011).
+      In Proceedings of the 28th International Conference on Machine Learning (ICML).
     """
 
     def __init__(

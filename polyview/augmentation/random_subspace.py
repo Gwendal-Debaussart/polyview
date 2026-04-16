@@ -32,10 +32,10 @@ class RandomSubspaceViews(BaseEstimator):
     view_names_ : list of str
         Names of each view.
 
-    References
-    ----------
+    .. rubric:: References
+
     - Ho, T. K. (1998). The random subspace method for constructing decision forests.
-      IEEE Transactions on Pattern Analysis and Machine Intelligence, 20(8), 832-844.
+        IEEE Transactions on Pattern Analysis and Machine Intelligence.
 
     Examples
     --------

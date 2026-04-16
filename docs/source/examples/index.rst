@@ -8,3 +8,8 @@ in realistic workflows.
   :maxdepth: 1
 
   pipeline_workflows
+
+See also
+--------
+
+- :doc:`../base/index`

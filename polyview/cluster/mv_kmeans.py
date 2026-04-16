@@ -69,9 +69,8 @@ class MultiViewKMeans(BaseMultiViewClusterer):
 
     References
     ----------
-    - Cai, X., Nie, F., Huang, H., & Kamangar, F. (2013).
-      Multi-view K-means clustering on big data.
-      IEEE Transactions on Knowledge and Data Engineering, 25(12), 2429-2441.
+    - Cai, X., Nie, F., Huang, H., & Kamangar, F. (2013). Multi-view K-means clustering on big data.
+      IEEE Transactions on Knowledge and Data Engineering.
     """
 
     def __init__(

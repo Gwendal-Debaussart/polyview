@@ -41,10 +41,10 @@ class KernelFusion(BaseMultiViewTransformer):
     K_fused_ : ndarray (n_samples, n_samples)
     specs_   : list of KernelSpec
 
-    References
-    ----------
+    .. rubric:: References
+
     - Gönen, M., & Alpaydin, E. (2011). Multiple kernel learning algorithms.
-        Journal of Machine Learning Research, 12, 2211-2268.
+      Journal of Machine Learning Research, 12, 2211-2268.
 
     Examples
     --------

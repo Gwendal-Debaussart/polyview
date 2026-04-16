@@ -61,12 +61,12 @@ class MCCA(BaseMultiViewTransformer):
     means_ : list of ndarray
       Per-view means used for centering.
 
-    References
-    ----------
+    .. rubric:: References
+
     - Kettenring, J. R. (1971). Canonical analysis of several sets of variables.
-      Biometrika, 58(3), 433-451.
+        Biometrika, 58(3), 433-451.
     - Guo, C., & Wu, D. (2021). Canonical correlation analysis (CCA) based multi-view learning: An overview.
-      arXiv preprint arXiv:1907.01693.
+        arXiv preprint arXiv:1907.01693.
     """
 
     def __init__(

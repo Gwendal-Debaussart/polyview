@@ -14,4 +14,4 @@ matrix, including random projections, random subspaces, and kernel-based view ge
 See also
 --------
 
-- :doc:`../examples/pipeline_workflows`
+- :doc:`../base/index`

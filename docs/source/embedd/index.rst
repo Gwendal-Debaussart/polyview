@@ -8,3 +8,8 @@ Some multiview embedding methods.
 
   gcca
   mcca
+
+See also
+--------
+
+- :doc:`../base/index`

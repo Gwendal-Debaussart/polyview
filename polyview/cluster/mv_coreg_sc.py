@@ -38,6 +38,11 @@ class MultiViewCoRegSpectralClustering(BaseMultiViewClusterer):
     Notes
     -----
     This implementation follows the approach of co-regularized spectral clustering, where spectral embeddings for each view are learned jointly with a regularization term that encourages the embeddings to be similar across views. The algorithm alternates between updating the spectral embeddings for each view and updating the cluster assignments based on the combined embeddings. The objective function includes both the spectral clustering objective for each view and the co-regularization terms that penalize differences between the embeddings of different views.
+
+    References
+    ----------
+    - Kumar, A. et al. (2011). Co-regularized Multi-view Spectral Clustering.
+      Advances in Neural Information Processing Systems 24.
     """
 
     def __init__(

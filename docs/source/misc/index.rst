@@ -7,3 +7,8 @@ Some miscellaneous topics related to polyview.
   :maxdepth: 1
 
   contributing
+
+See also
+--------
+
+- :doc:`../base/index`

@@ -6,8 +6,7 @@ This page demonstrates common `PolyPipeline` patterns. It includes examples of t
 MV → MV (per-view sklearn)
 -----------------------------
 
-Use a single-view sklearn estimator directly in multiview mode. The
-pipeline adapts it per view and returns one output per branch.
+Use a single-view sklearn estimator directly in multiview mode. The pipeline adapts it per view and returns one output per branch. Preprocessing steps (StandardScaler in this example) are applied per view, and the final KMeans step is also applied per view, returning one set of cluster labels per view. Those labels can be fused later with a late fusion step (see below) or analyzed separately.
 
 .. code-block:: python
 

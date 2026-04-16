@@ -83,6 +83,11 @@ class GCCA(BaseMultiViewTransformer):
     >>> gcca = GCCA(n_components=10, output="concat")
     >>> Z_train = gcca.fit_transform([X1, X2, X3])
     >>> Z_test  = gcca.transform([T1, T2, T3])
+
+    .. rubric:: References
+
+    - Guo, C., & Wu, D. (2021). Canonical correlation analysis (CCA) based multi-view learning: An overview.
+        arXiv preprint arXiv:1907.01693.
     """
 
     def __init__(

@@ -9,3 +9,8 @@ Some fusion methods for multi-view learning.
   early
   kernel_fusion
   late
+
+See also
+--------
+
+- :doc:`../base/index`

@@ -9,11 +9,16 @@ from polyview.base import BaseMultiViewClusterer
 
 
 class MultiViewNMF(BaseMultiViewClusterer):
-    """Multi-view Non-negative Matrix Factorisation clustering.
+    r"""Multi-view Non-negative Matrix Factorisation clustering.
 
     Finds a shared non-negative coefficient matrix H (the consensus
     representation) and per-view basis matrices W(v) by jointly
     minimising weighted Frobenius reconstruction error across all views.
+
+    .. math::
+
+       \min_{H} \sum_{v=1}^{M} \lambda_v \left\|X^{(v)} - H W^{(v)}\right\|_F^2
+       \quad \text{s.t.} \quad H \ge 0
 
     The row argmax of H gives cluster labels.  H itself is a soft
     assignment matrix useful as a low-dimensional embedding.
@@ -77,9 +82,10 @@ class MultiViewNMF(BaseMultiViewClusterer):
 
     References
     ----------
+
     - Gao, J., He, L., Zhang, X., Zhou, J., & Wu, D. (2013).
-        Multi-view clustering via joint nonnegative matrix factorization.
-        In Proceedings of the 2013 SIAM International Conference on Data Mining (SDM).
+      Multi-view clustering via joint nonnegative matrix factorization.
+      In Proceedings of the 2013 SIAM International Conference on Data Mining (SDM).
     """
 
     def __init__(
@@ -110,9 +116,11 @@ class MultiViewNMF(BaseMultiViewClusterer):
         W: List[np.ndarray],
         lam: np.ndarray,
     ) -> float:
-        """Weighted sum of Frobenius reconstruction errors.
+        r"""Weighted sum of Frobenius reconstruction errors.
 
-        sum_v  lambda(v) * ||X(v) - H W(v)||^2_F
+        .. math::
+
+           \sum_{v=1}^{M} \lambda_v \left\|X^{(v)} - H W^{(v)}\right\|_F^2
         """
         obj = 0.0
         for X, Wv, lv in zip(views, W, lam):
@@ -134,9 +142,12 @@ class MultiViewNMF(BaseMultiViewClusterer):
         return errs
 
     def _update_weights(self, errs: np.ndarray) -> np.ndarray:
-        """Adaptive view weights from reconstruction quality.
+        r"""Adaptive view weights from reconstruction quality.
 
-        lambda(v) proportional to (err(v))^{1/(1-gamma)}.
+        .. math::
+
+           \lambda_v \propto \mathrm{err}_v^{\frac{1}{1-\gamma}}
+
         Lower error -> higher weight.
         Falls back to equal weights when gamma is near 1 or errs are zero.
         """
@@ -158,12 +169,16 @@ class MultiViewNMF(BaseMultiViewClusterer):
         W: List[np.ndarray],
         lam: np.ndarray,
     ) -> np.ndarray:
-        """Update H via multiplicative rule.
+        r"""Update H via multiplicative rule.
 
-        H <- H * numerator / denominator   (element-wise)
+        .. math::
 
-        numerator   = sum_v lam(v) * X(v) W(v)^T       shape (n, k)
-        denominator = sum_v lam(v) * H W(v) W(v)^T     shape (n, k)
+           H \leftarrow H \odot \frac{\sum_{v=1}^{M} \lambda_v X^{(v)} {W^{(v)}}^\top}
+           {\sum_{v=1}^{M} \lambda_v H W^{(v)} {W^{(v)}}^\top + \varepsilon}
+
+        where :math:`\odot` is the element-wise product.
+
+        Numerator and denominator both have shape ``(n_samples, n_components)``.
         """
         numer = np.zeros_like(H)
         denom = np.zeros_like(H)
@@ -178,11 +193,13 @@ class MultiViewNMF(BaseMultiViewClusterer):
         H: np.ndarray,
         Wv: np.ndarray,
     ) -> np.ndarray:
-        """Update W(v) via multiplicative rule.
+        r"""Update W(v) via multiplicative rule.
 
-        W(v) <- W(v) * (H^T X(v)) / (H^T H W(v))   (element-wise)
+        .. math::
 
-        shape: (k, d_v)
+           W^{(v)} \leftarrow W^{(v)} \odot \frac{H^\top X^{(v)}}{H^\top H W^{(v)} + \varepsilon}
+
+        shape: ``(n_components, n_features_v)``.
         """
         HtX = H.T @ X  # (k, d_v)
         HtHW = (H.T @ H) @ Wv  # (k, d_v)
@@ -321,14 +338,10 @@ class MultiViewNMF(BaseMultiViewClusterer):
         return self
 
     def transform(self, views: List) -> np.ndarray:
-        """Project new samples into the shared H space.
+        r"""Project new samples into the shared H space.
 
-        Solves the NNLS problem for H given fixed W(v):
-
-            min_H  sum_v lambda(v) * ||X(v) - H W(v)||^2_F   s.t. H >= 0
-
-        via the same multiplicative update rule, starting from a
-        uniform initialisation, with W(v) held fixed.
+        Solves the NNLS problem for H given fixed W(v) via the same multiplicative update rule,
+        starting from a uniform initialisation, with W(v) held fixed.
 
         Parameters
         ----------
