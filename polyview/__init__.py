@@ -37,6 +37,7 @@ from .fusion.kernel_fusion import (
 )
 from .pipeline.polypipeline import PolyPipeline
 from .augmentation.random_projections import RandomProjectionViews, random_projection
+from .augmentation.random_subspace import RandomSubspaceViews, random_subspace
 from .augmentation.multi_kernels import MultiKernel, multi_kernels
 from .embed.gcca import GCCA
 from .embed.mcca import MCCA
@@ -75,6 +76,8 @@ __all__ = [
     "PolyPipeline",
     "random_projection",
     "RandomProjectionViews",
+    "random_subspace",
+    "RandomSubspaceViews",
     "MultiKernel",
     "multi_kernels",
     "make_multiview_gaussian",
