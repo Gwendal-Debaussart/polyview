@@ -4,7 +4,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-from polyview.embedd.gcca import GCCA
+from polyview.embed.gcca import GCCA
 from polyview.fusion.early import ConcatFusion
 from polyview.pipeline.polypipeline import PolyPipeline
 

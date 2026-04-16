@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import warnings
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import Iterable, List, Optional
 
 import numpy as np
 from sklearn.base import BaseEstimator, clone
@@ -293,3 +293,20 @@ class BaseMultiViewEmbedder(BaseMultiView, MultiViewEmbedderMixin):
     Subclasses must implement :meth:`fit` and :meth:`transform`.
     Store the embedding in ``self.embedding_`` after fitting.
     """
+
+
+class BaseLateFusion(BaseEstimator):
+    """Base class for late-fusion estimators over per-view predictions.
+
+    Late-fusion estimators consume one 1-D prediction vector per view and
+    return one fused 1-D prediction vector.
+    """
+
+    def fit(self, preds_by_view: List[Iterable], y=None):
+        raise NotImplementedError
+
+    def predict(self, preds_by_view: List[Iterable]) -> np.ndarray:
+        raise NotImplementedError
+
+    def fit_predict(self, preds_by_view: List[Iterable], y=None) -> np.ndarray:
+        return self.fit(preds_by_view, y).predict(preds_by_view)

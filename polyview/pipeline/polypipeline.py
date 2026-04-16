@@ -6,12 +6,7 @@ import numpy as np
 from sklearn.base import BaseEstimator, clone
 from sklearn.utils.validation import check_is_fitted
 
-from polyview.base import BaseMultiView
-
-try:
-    from polyview.fusion.late import BaseLateFusion
-except Exception:  # pragma: no cover - optional import safety
-    BaseLateFusion = None  # type: ignore[assignment]
+from polyview.base import BaseLateFusion, BaseMultiView
 
 
 DataMode = Literal["mv", "sv", "lf"]
@@ -187,6 +182,7 @@ class PolyPipeline(BaseEstimator):
     Allowed transitions are:
     - mv -> mv
     - mv -> sv
+    - sv -> mv
     - sv -> sv
 
     A reverse transition (sv -> mv) is rejected.
@@ -204,6 +200,8 @@ class PolyPipeline(BaseEstimator):
 
     @staticmethod
     def _is_mv_data(X: Any) -> bool:
+        if hasattr(X, "_views"):
+            return True
         if not isinstance(X, (list, tuple)) or len(X) == 0:
             return False
         return all(np.asarray(v).ndim == 2 for v in X)
@@ -231,7 +229,9 @@ class PolyPipeline(BaseEstimator):
         )
 
     @staticmethod
-    def _as_mv(X: Union[List[Any], Tuple[Any, ...]]) -> List[np.ndarray]:
+    def _as_mv(X: Any) -> List[np.ndarray]:
+        if hasattr(X, "_views"):
+            return [np.asarray(v, dtype=float) for v in X._views]
         return [np.asarray(v, dtype=float) for v in X]
 
     @staticmethod
@@ -331,6 +331,8 @@ class PolyPipeline(BaseEstimator):
             return True
         if previous == "mv" and current in ("sv", "lf"):
             return True
+        if previous == "sv" and current == "mv":
+            return True
         if previous == "lf" and current == "sv":
             return True
         return False
@@ -425,9 +427,7 @@ class PolyPipeline(BaseEstimator):
 
             est = clone(step)
             next_step = None if is_last else steps[i + 1][1]
-            next_is_late_fusion = bool(
-                BaseLateFusion is not None and isinstance(next_step, BaseLateFusion)
-            )
+            next_is_late_fusion = bool(isinstance(next_step, BaseLateFusion))
             est = self._adapt_step_for_mode(
                 name,
                 est,
@@ -447,7 +447,7 @@ class PolyPipeline(BaseEstimator):
             new_mode = self._infer_mode(Xt)
             if not self._mode_transition_ok(current_mode, new_mode):
                 raise ValueError(
-                    f"Unsupported mode transition after step '{name}': {current_mode} -> {new_mode}. Only mv->sv is allowed."
+                    f"Unsupported mode transition after step '{name}': {current_mode} -> {new_mode}."
                 )
             current_mode = new_mode
             Xt = self._prepare_input(Xt, current_mode)
@@ -472,6 +472,171 @@ class PolyPipeline(BaseEstimator):
 
     def fit_transform(self, X: Any, y: Any = None) -> Any:
         return self.fit(X, y).transform(X)
+
+    @staticmethod
+    def _is_random_projection_step(step: Any) -> bool:
+        cls_name = type(step).__name__.lower()
+        mod_name = type(step).__module__.lower()
+        return (
+            "randomprojection" in cls_name
+            or "random_projections" in mod_name
+            or "augmentation" in mod_name
+        )
+
+    @staticmethod
+    def _base_mv_step_output_mode(step: Any) -> DataMode:
+        out = getattr(step, "output", None)
+        if isinstance(out, str):
+            if out == "list":
+                return "mv"
+            if out in ("concat", "mean"):
+                return "sv"
+        return "mv"
+
+    def _simulate_step_mode(
+        self,
+        mode_in: DataMode,
+        step: Any,
+        is_last: bool,
+        next_step: Any,
+        *,
+        fitted: bool,
+    ) -> DataMode:
+        if step == "passthrough":
+            return mode_in
+
+        # Terminal predictive/cluster steps produce label-like 1-D outputs,
+        # represented here as single-view mode for diagram readability.
+        if is_last:
+            if isinstance(step, _PerViewEstimator):
+                return "lf"
+            if hasattr(step, "labels_") or hasattr(step, "predict") or hasattr(step, "fit_predict"):
+                return "sv"
+
+        if fitted:
+            if isinstance(step, _PerViewTransformer):
+                return "mv"
+            if isinstance(step, _PerViewEstimator):
+                return "lf"
+
+        if mode_in == "sv":
+            if self._is_random_projection_step(step):
+                return "mv"
+            if isinstance(step, BaseMultiView):
+                return self._base_mv_step_output_mode(step)
+            return "sv"
+
+        if mode_in == "mv":
+            if isinstance(step, BaseMultiView):
+                return self._base_mv_step_output_mode(step)
+            next_is_late_fusion = bool(
+                isinstance(next_step, BaseLateFusion)
+            )
+            if next_is_late_fusion:
+                return "lf"
+            if is_last:
+                return "sv"
+            return "mv"
+
+        # late-fusion mode
+        if mode_in == "lf":
+            if isinstance(step, BaseLateFusion):
+                return "sv"
+            return "lf"
+
+        return mode_in
+
+    @staticmethod
+    def _transition_behavior(mode_in: DataMode, mode_out: DataMode) -> str:
+        if mode_in == "sv" and mode_out == "mv":
+            return "split 1 -> 3 branches"
+        if mode_in == "mv" and mode_out == "mv":
+            return "3 parallel branches"
+        if mode_in == "mv" and mode_out == "sv":
+            return "merge 3 -> 1"
+        if mode_in == "mv" and mode_out == "lf":
+            return "per-view predictions (3x 1-D)"
+        if mode_in == "lf" and mode_out == "sv":
+            return "late-fusion (many -> 1)"
+        if mode_in == mode_out:
+            return "no branch change"
+        return f"{mode_in} -> {mode_out}"
+
+    @staticmethod
+    def _step_label(name: str, step: Any) -> str:
+        if step == "passthrough":
+            return f"{name}: passthrough"
+        if isinstance(step, _PerViewTransformer):
+            return f"{name}: {type(step.estimator).__name__}"
+        if isinstance(step, _PerViewEstimator):
+            return f"{name}: {type(step.estimator).__name__}"
+        return f"{name}: {type(step).__name__}"
+
+    def draw_diagram(
+        self,
+        start_mode: Optional[Literal["mv", "sv"]] = None,
+    ) -> str:
+        """Render a readable text diagram of pipeline flow.
+
+        Parameters
+        ----------
+        start_mode : {"mv", "sv"} or None, default=None
+            Optional starting mode for preview. Useful before fitting.
+            - ``None``: use fitted input mode if available.
+            - ``"mv"``/``"sv"``: simulate flow from that start mode.
+
+        Returns
+        -------
+        str
+            Multi-line diagram string (also printed).
+        """
+        fitted = hasattr(self, "steps_")
+        steps = list(self.steps_ if fitted else self._validate_steps())
+
+        if start_mode is None:
+            if fitted:
+                mode: DataMode = cast(DataMode, self.input_mode_)
+            else:
+                lines = [
+                    "PolyPipeline Diagram [unfitted]",
+                    "Provide start_mode='mv' or start_mode='sv' for a full preview.",
+                    "Configured steps:",
+                ]
+                for name, step in steps:
+                    lines.append(f"  - {self._step_label(name, step)}")
+                diagram = "\n".join(lines)
+                print(diagram)
+                return diagram
+        else:
+            mode = cast(DataMode, start_mode)
+
+        lines = [
+            f"PolyPipeline Diagram [{'fitted' if fitted else 'preview'}]",
+            f"Start: {mode}",
+            "",
+        ]
+
+        for i, (name, step) in enumerate(steps, start=1):
+            is_last = i == len(steps)
+            next_step = None if is_last else steps[i][1]
+            mode_out = self._simulate_step_mode(
+                mode_in=mode,
+                step=step,
+                is_last=is_last,
+                next_step=next_step,
+                fitted=fitted,
+            )
+            behavior = self._transition_behavior(mode, mode_out)
+            lines.append(
+                f"{i:02d}. [{mode}] -- {self._step_label(name, step)} -- [{mode_out}]"
+            )
+            lines.append(f"    behavior: {behavior}")
+            mode = mode_out
+
+        lines.extend(["", f"End: {mode}"])
+        diagram = "\n".join(lines)
+        print(diagram)
+        return diagram
 
     def predict(self, X: Any) -> Any:
         Xt = self._apply_transforms(X, include_final=False)

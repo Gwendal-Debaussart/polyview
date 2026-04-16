@@ -50,7 +50,7 @@ class MultiViewNMF(BaseMultiViewClusterer):
         Final per-view reconstruction weights lambda(v).
         Equal to 1/M when learn_weights=False.
     labels_ : ndarray of shape (n_samples,)
-        Hard cluster labels = argmax(H_, axis=1).
+        Hard cluster labels = argmax(``H_``, axis=1).
     reconstruction_errors_ : ndarray of shape (n_views,)
         Per-view Frobenius reconstruction error at convergence.
     objective_ : float
@@ -66,12 +66,12 @@ class MultiViewNMF(BaseMultiViewClusterer):
     >>> model.H_.shape
     (n_samples, 3)
 
-    Use H_ as a soft embedding downstream:
+    Use ``H_`` as a soft embedding downstream:
 
     >>> from sklearn.cluster import KMeans
     >>> labels = KMeans(n_clusters=3).fit_predict(model.H_)
 
-    Or use H_ as cluster probabilities for soft clustering:
+    Or use ``H_`` as cluster probabilities for soft clustering:
 
     >>> labels = np.argmax(model.H_, axis=1)
 
@@ -361,7 +361,7 @@ class MultiViewNMF(BaseMultiViewClusterer):
         return H
 
     def fit_transform(self, views: List, y=None) -> np.ndarray:
-        """Fit and return H_ directly (no re-projection needed)."""
+        """Fit and return ``H_`` directly (no re-projection needed)."""
         self.fit(views, y)
         return self.H_
 

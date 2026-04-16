@@ -7,5 +7,6 @@ Some unsupervised multi-view clustering algorithms.
   :maxdepth: 1
 
   mv_kmeans
+  mv_nmf
   mv_cotrain_sc
   mv_coreg_sc

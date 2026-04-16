@@ -10,8 +10,9 @@ package root to support a concise import style:
 
 from importlib.metadata import PackageNotFoundError, version
 
-from . import cluster, dataset, fusion
+from . import augmentation, cluster, dataset, fusion
 from .base import (
+    BaseLateFusion,
     BaseMultiView,
     BaseMultiViewClusterer,
     BaseMultiViewEmbedder,
@@ -25,6 +26,7 @@ from .cluster.mv_coreg_sc import (
 )
 from .cluster.mv_nmf import MultiViewNMF
 from .dataset.multiviewdataset import MultiViewDataset
+from .dataset.make_multiview_gaussian import make_multiview_gaussian
 from .fusion.early import ConcatFusion, NormalizedFusion, WeightedFusion
 from .fusion.kernel_fusion import (
     KernelFusion,
@@ -34,6 +36,9 @@ from .fusion.kernel_fusion import (
     normalize_kernel,
 )
 from .pipeline.polypipeline import PolyPipeline
+from .augmentation.random_projections import RandomProjectionViews, random_projection
+from .augmentation.multi_kernels import MultiKernel, multi_kernels
+from .embed.gcca import GCCA
 
 # Backward-compatible alias matching the README namespace.
 datasets = dataset
@@ -49,7 +54,9 @@ __all__ = [
     "dataset",
     "datasets",
     "fusion",
+    "augmentation",
     "BaseMultiView",
+    "BaseLateFusion",
     "BaseMultiViewTransformer",
     "BaseMultiViewClusterer",
     "BaseMultiViewEmbedder",
@@ -65,6 +72,10 @@ __all__ = [
     "normalize_kernel",
     "is_valid_kernel",
     "PolyPipeline",
+    "random_projection",
+    "RandomProjectionViews",
+    "MultiKernel",
+    "multi_kernels",
     "make_multiview_gaussian",
     "GCCA",
 ]

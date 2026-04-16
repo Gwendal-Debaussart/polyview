@@ -5,21 +5,9 @@ from __future__ import annotations
 from typing import Iterable, List, Literal, Optional, Sequence
 
 import numpy as np
-from sklearn.base import BaseEstimator
 from sklearn.utils.validation import check_is_fitted
 
-
-class BaseLateFusion(BaseEstimator):
-    """Base class for late-fusion estimators over per-view predictions."""
-
-    def fit(self, preds_by_view: List[Iterable], y=None):
-        raise NotImplementedError
-
-    def predict(self, preds_by_view: List[Iterable]) -> np.ndarray:
-        raise NotImplementedError
-
-    def fit_predict(self, preds_by_view: List[Iterable], y=None) -> np.ndarray:
-        return self.fit(preds_by_view, y).predict(preds_by_view)
+from polyview.base import BaseLateFusion
 
 
 class MajorityVote(BaseLateFusion):
