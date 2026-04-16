@@ -589,7 +589,7 @@ class PolyPipeline(BaseEstimator):
         self,
         start_mode: Optional[Literal["mv", "sv"]] = None,
     ) -> str:
-        """Render a readable text diagram of pipeline flow.
+        """Render a readable ASCII diagram of pipeline flow.
 
         Parameters
         ----------
@@ -602,6 +602,24 @@ class PolyPipeline(BaseEstimator):
         -------
         str
             Multi-line diagram string (also printed).
+
+        Examples
+        --------
+        >>> pipe = PolyPipeline([
+        ...     ("rp", RandomProjectionViews(n_views=3)),
+        ...     ("scale", StandardScaler()),
+        ...     ("cluster", MultiViewKMeans(n_clusters=3, random_state=0))
+        ... ])
+        >>> print(pipe.draw_diagram(start_mode='sv'))
+        input
+          ↓ (1 view)
+        [RandomProjectionViews]
+          ↓ ↓ ↓ (3 views)
+        [StandardScaler]
+          ↓ ↓ ↓ (3 views)
+        [MultiViewKMeans]
+          ↓ (1 output)
+        output
         """
         fitted = hasattr(self, "steps_")
         steps = list(self.steps_ if fitted else self._validate_steps())
@@ -611,23 +629,16 @@ class PolyPipeline(BaseEstimator):
                 mode: DataMode = cast(DataMode, self.input_mode_)
             else:
                 lines = [
-                    "PolyPipeline Diagram [unfitted]",
-                    "Provide start_mode='mv' or start_mode='sv' for a full preview.",
-                    "Configured steps:",
+                    "PolyPipeline diagram (unfitted)",
+                    "Pass start_mode='mv' or start_mode='sv' to simulate flow.",
                 ]
-                for name, step in steps:
-                    lines.append(f"  - {self._step_label(name, step)}")
                 diagram = "\n".join(lines)
                 print(diagram)
                 return diagram
         else:
             mode = cast(DataMode, start_mode)
 
-        lines = [
-            f"PolyPipeline Diagram [{'fitted' if fitted else 'preview'}]",
-            f"Start: {mode}",
-            "",
-        ]
+        lines = ["input"]
 
         for i, (name, step) in enumerate(steps, start=1):
             is_last = i == len(steps)
@@ -639,14 +650,30 @@ class PolyPipeline(BaseEstimator):
                 next_step=next_step,
                 fitted=fitted,
             )
-            behavior = self._transition_behavior(mode, mode_out)
-            lines.append(
-                f"{i:02d}. [{mode}] -- {self._step_label(name, step)} -- [{mode_out}]"
-            )
-            lines.append(f"    behavior: {behavior}")
+
+            # Connector with mode description
+            if mode == "mv":
+                lines.append("  ↓ ↓ ↓ (multiview)")
+            elif mode == "lf":
+                lines.append("  ↓ ↓ ↓ (late-fusion predictions)")
+            else:
+                lines.append("  ↓ (single)")
+
+            # Step name
+            step_label = self._step_label(name, step)
+            lines.append(f"[{step_label}]")
+
             mode = mode_out
 
-        lines.extend(["", f"End: {mode}"])
+        # Final connector
+        if mode == "mv":
+            lines.append("  ↓ ↓ ↓ (multiview)")
+        elif mode == "lf":
+            lines.append("  ↓ ↓ ↓ (late-fusion predictions)")
+        else:
+            lines.append("  ↓ (single)")
+
+        lines.append("output")
         diagram = "\n".join(lines)
         print(diagram)
         return diagram
