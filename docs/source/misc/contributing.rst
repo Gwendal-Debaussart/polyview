@@ -21,7 +21,7 @@ Coding guidelines
 ^^^^^^^^^^^^^^^^^
 
 - **Follow the existing code style** as closely as possible. This includes naming conventions, formatting, and documentation style. We use `ruff` for code formatting and `numpy` style for docstrings.
-- **Format docstrings** properly, as they are used for documentation generation by Sphinx. Make sure to include descriptions of parameters, return values, and any relevant reference.
+- **Format docstrings** properly, as they are used for documentation generation by Sphinx. Make sure to include descriptions of parameters, return values, and any relevant reference. References should be included in a "References" section at the end of the docstring, following the format of existing references, and examples should be included in an "Examples" section.
 
 API of polyview objects
 ^^^^^^^^^^^^^^^^^^^^^^^^
