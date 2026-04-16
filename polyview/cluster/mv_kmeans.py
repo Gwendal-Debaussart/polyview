@@ -67,9 +67,11 @@ class MultiViewKMeans(BaseMultiViewClusterer):
     >>> labels.shape
     (100,)
 
-    Reference
-    ---------
-    Cai, X. et al. (2013). Multi-view K-means Clustering on Big Data. IEEE Transactions on Knowledge and Data Engineering.
+    References
+    ----------
+    - Cai, X., Nie, F., Huang, H., & Kamangar, F. (2013).
+      Multi-view K-means clustering on big data.
+      IEEE Transactions on Knowledge and Data Engineering, 25(12), 2429-2441.
     """
 
     def __init__(

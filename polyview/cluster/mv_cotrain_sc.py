@@ -37,9 +37,8 @@ class MultiViewCoTrainSpectralClustering(BaseMultiViewClusterer):
 
     References
     ----------
-    Kumar A. and Daumé H. (2011). A Co-training Approach for Multi-view Spectral Clustering. In Proceedings of the 28th International Conference on Machine Learning (ICML-11).
-
-
+    - Kumar, A., & Daumé, H. (2011). A co-training approach for multi-view spectral clustering.
+      In Proceedings of the 28th International Conference on Machine Learning (ICML 2011).
     """
 
     def __init__(

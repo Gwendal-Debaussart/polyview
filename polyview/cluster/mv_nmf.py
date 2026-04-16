@@ -77,7 +77,9 @@ class MultiViewNMF(BaseMultiViewClusterer):
 
     References
     ----------
-    Gao, Jing et al. “Multi-View Clustering via Joint Nonnegative Matrix Factorization.” SDM (2013).
+    - Gao, J., He, L., Zhang, X., Zhou, J., & Wu, D. (2013).
+        Multi-view clustering via joint nonnegative matrix factorization.
+        In Proceedings of the 2013 SIAM International Conference on Data Mining (SDM).
     """
 
     def __init__(
