@@ -11,9 +11,7 @@
 
 **polyview** is a Python library for multi-view learning, providing a consistent API for multi-view clustering, embedding, and fusion methods. It allows you to easily build pipelines that combine native multi-view estimators with single-view sklearn tools, while keeping track of per-view data and predictions.
 
-
-
-Documentation: [https://gwendal-debaussart.github.io/polyview/index.html/](https://gwendal-debaussart.github.io/polyview/index.html/)
+Documentation is available at: [https://gwendal-debaussart.github.io/polyview/index.html/](https://gwendal-debaussart.github.io/polyview/index.html/)
 
 ## Installation
 
@@ -23,17 +21,6 @@ Install from PyPI:
 pip install polyview
 ```
 
-Project page: https://pypi.org/project/polyview/
-
-For development:
-
-```bash
-git clone https://github.com/gwendal-debaussart/polyview
-cd polyview
-pip install -e ".[dev]"
-```
-
----
 
 ## Quick start
 
@@ -85,68 +72,12 @@ late_labels = late.fit_predict(labels_by_view)
 print("Late-fused labels:", late_labels.shape)
 ```
 
----
-
-## More possibilities
-
-You can also build hybrid pipelines that transition from multi-view to
-single-view representations before classification.
-
-```python
-import polyview as pv
-from polyview.dataset.make_multiview_gaussian import make_multiview_gaussian
-from polyview.embed.gcca import GCCA
-from sklearn.svm import SVC
-from sklearn.preprocessing import StandardScaler
-
-mvd = make_multiview_gaussian(n_samples=300, n_features=15, n_views=2, random_state=42)
-
-# MV -> SV transition inside one pipeline:
-# scale each view independently -> GCCA shared embedding -> SVM classifier
-clf = pv.PolyPipeline(
-    steps=[
-        ("scale", StandardScaler()),
-        ("gcca", GCCA(n_components=6, output="concat", regularisation=1e-3)),
-        ("svm", SVC(kernel="rbf", C=1.0, random_state=42)),
-    ]
-)
-clf.fit(mvd.views, mvd.labels)
-y_hat = clf.predict(mvd.views)
-print("Training accuracy:", (y_hat == mvd.labels).mean())
-```
-
----
-
-## Why this is useful
-
-- Stay in true multi-view mode when your method supports it (`MultiViewKMeans`, co-regularized spectral clustering).
-- Transition to single-view only when needed (`ConcatFusion`, `NormalizedFusion`, `GCCA(output="concat")`).
-- Reuse sklearn estimators per view with `PolyPipeline`, then combine predictions with late fusion.
-- Mix native polyview estimators and sklearn tools in one workflow.
-
----
-
-## What's included
-
-| Module | Contents |
-|---|---|
-| `polyview.dataset` | `MultiViewDataset`, `make_multiview_gaussian` |
-| `polyview.fusion` | `ConcatFusion`, `WeightedFusion`, `NormalizedFusion`, `MajorityVote`, `KernelFusion` |
-| `polyview.cluster` | `MultiViewKMeans`, `MultiViewCoRegSpectralClustering`, `MultiViewCoTrainSpectralClustering` |
-| `polyview.embed` | `GCCA`, ... |
-| `polyview.pipeline` | `PolyPipeline` for multi-view pipelines with per-view steps |
-| `polyview.metrics` | *(coming)* consensus score, view agreement |
-| `polyview.semisupervised` | *(coming)* CoTraining, label propagation |
-| `polyview.viz` | *(coming)* view scatter grids, embedding plots |
-
-All estimators are **sklearn-compatible** and work with tools like
-`GridSearchCV`, `cross_val_score`, `Pipeline`, and `clone`.
-
-Multi-view datasets are handled with `MultiViewDataset`, which provides
-utilities for splitting and subsetting, plus readable per-view naming.
+Additional examples are available in the documentation: [https://gwendal-debaussart.github.io/polyview/examples/](https://gwendal-debaussart.github.io/polyview/examples/)
 
 
----
+## Contributing
+
+Contributions are very welcome! If you plan to contribute, please see the [CONTRIBUTING](CONTRIBUTING.md) guidelines.
 
 ## ⚖️ License
 
