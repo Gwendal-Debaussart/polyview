@@ -6,6 +6,7 @@ from sklearn.cluster import KMeans
 from sklearn.manifold import SpectralEmbedding
 from polyview.base import BaseMultiViewClusterer
 
+
 class MultiViewCoTrainSpectralClustering(BaseMultiViewClusterer):
     """
     Multi-view co-training spectral clustering algorithm.
@@ -40,25 +41,31 @@ class MultiViewCoTrainSpectralClustering(BaseMultiViewClusterer):
 
 
     """
+
     def __init__(
-          self,
-          n_clusters=2,
-          n_init=10,
-          max_iter=50,
-          affinity="rbf",
-          lambda_reg=1.0,
-          random_state=None,
-      ) -> None:
-          super().__init__()
-          self.n_clusters = n_clusters
-          self.n_init = n_init
-          self.max_iter = max_iter
-          self.affinity = affinity
-          self.lambda_reg = lambda_reg
-          self.random_state = random_state
+        self,
+        n_clusters=2,
+        n_init=10,
+        max_iter=50,
+        affinity="rbf",
+        lambda_reg=1.0,
+        random_state=None,
+    ) -> None:
+        super().__init__()
+        self.n_clusters = n_clusters
+        self.n_init = n_init
+        self.max_iter = max_iter
+        self.affinity = affinity
+        self.lambda_reg = lambda_reg
+        self.random_state = random_state
 
     def _update_spectral_embedding(
-        self, laplacians: List[np.ndarray], embeddings: List[np.ndarray], U_consensus: np.ndarray, lambda_reg: float) -> List[np.ndarray]:
+        self,
+        laplacians: List[np.ndarray],
+        embeddings: List[np.ndarray],
+        U_consensus: np.ndarray,
+        lambda_reg: float,
+    ) -> List[np.ndarray]:
         """
         Update spectral embeddings for all views
         """
@@ -71,22 +78,29 @@ class MultiViewCoTrainSpectralClustering(BaseMultiViewClusterer):
         return embeddings, U_consensus
 
     def fit(self, views: List[np.ndarray]) -> None:
-        """
-        """
+        """ """
         embeddings = []
         laplacians = []
         for X in views:
             A = pairwise_kernels(X, metric=self.affinity)
-            embedding = SpectralEmbedding(n_components=self.n_clusters, affinity = "precomputed")
+            embedding = SpectralEmbedding(
+                n_components=self.n_clusters, affinity="precomputed"
+            )
             embeddings.append(embedding.fit_transform(A))
             D = np.diag(A.sum(axis=1))
             laplacians.append(D - A)
         U_consensus = np.mean(embeddings, axis=0)
 
         for it in range(self.max_iter):
-            embeddings, U_consensus = self._update_spectral_embedding(laplacians, embeddings, U_consensus, self.lambda_reg)
+            embeddings, U_consensus = self._update_spectral_embedding(
+                laplacians, embeddings, U_consensus, self.lambda_reg
+            )
 
-        kmeans = KMeans(n_clusters=self.n_clusters, n_init=self.n_init, random_state=self.random_state)
+        kmeans = KMeans(
+            n_clusters=self.n_clusters,
+            n_init=self.n_init,
+            random_state=self.random_state,
+        )
         self.labels_ = kmeans.fit_predict(U_consensus)
         self.embedding_ = U_consensus
         self.objective_ = kmeans.inertia_

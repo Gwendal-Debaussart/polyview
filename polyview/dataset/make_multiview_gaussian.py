@@ -45,7 +45,9 @@ def make_multiview_gaussian(
     z = latent_centers[y] + rng.randn(n_samples, latent_dim)
     views = []
     for v in range(n_views):
-        view_rng = np.random.RandomState(None if random_state is None else random_state + v + 1)
+        view_rng = np.random.RandomState(
+            None if random_state is None else random_state + v + 1
+        )
         A = view_rng.randn(n_features, latent_dim)
         A /= np.linalg.norm(A, axis=0, keepdims=True) + 1e-8
         X = z @ A.T + noise_std * view_rng.randn(n_samples, n_features)

@@ -39,6 +39,7 @@ from .pipeline.polypipeline import PolyPipeline
 from .augmentation.random_projections import RandomProjectionViews, random_projection
 from .augmentation.multi_kernels import MultiKernel, multi_kernels
 from .embed.gcca import GCCA
+from .embed.mcca import MCCA
 
 # Backward-compatible alias matching the README namespace.
 datasets = dataset
@@ -78,4 +79,5 @@ __all__ = [
     "multi_kernels",
     "make_multiview_gaussian",
     "GCCA",
+    "MCCA",
 ]

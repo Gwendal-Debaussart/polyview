@@ -89,8 +89,7 @@ class BaseMultiView(BaseEstimator, ABC):
                 arr = np.asarray(v, dtype=float)
             if arr.ndim != 2:
                 raise ValueError(
-                    f"View {i} must be 2-D (n_samples × n_features), "
-                    f"got shape {arr.shape}."
+                    f"View {i} must be 2-D (n_samples × n_features), got shape {arr.shape}."
                 )
             validated.append(arr)
 
@@ -107,8 +106,7 @@ class BaseMultiView(BaseEstimator, ABC):
 
         if self.n_views is not None and len(validated) != self.n_views:
             raise ValueError(
-                f"This estimator expects {self.n_views} views, "
-                f"but received {len(validated)}."
+                f"This estimator expects {self.n_views} views, but received {len(validated)}."
             )
 
         if reset:
@@ -119,16 +117,12 @@ class BaseMultiView(BaseEstimator, ABC):
             check_is_fitted(self, ["n_views_in_", "n_features_in_"])
             if len(validated) != self.n_views_in_:
                 raise ValueError(
-                    f"Fitted on {self.n_views_in_} views but received "
-                    f"{len(validated)}."
+                    f"Fitted on {self.n_views_in_} views but received {len(validated)}."
                 )
-            for i, (arr, n_feat) in enumerate(
-                zip(validated, self.n_features_in_)
-            ):
+            for i, (arr, n_feat) in enumerate(zip(validated, self.n_features_in_)):
                 if arr.shape[1] != n_feat:
                     raise ValueError(
-                        f"View {i} has {arr.shape[1]} features but was "
-                        f"fitted with {n_feat}."
+                        f"View {i} has {arr.shape[1]} features but was fitted with {n_feat}."
                     )
 
         return validated
@@ -138,6 +132,7 @@ class BaseMultiView(BaseEstimator, ABC):
         """Accept scipy sparse or dense; always return 2-D array."""
         try:
             import scipy.sparse as sp
+
             if sp.issparse(v):
                 return v  # leave sparse as-is; caller must handle
         except ImportError:

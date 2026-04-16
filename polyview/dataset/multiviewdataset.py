@@ -94,8 +94,7 @@ class MultiViewDataset:
             arr = np.asarray(v, dtype=float)
             if arr.ndim != 2:
                 raise ValueError(
-                    f"View {i} must be 2-D (n_samples × n_features), "
-                    f"got shape {arr.shape}."
+                    f"View {i} must be 2-D (n_samples × n_features), got shape {arr.shape}."
                 )
             validated.append(arr)
 
@@ -128,8 +127,7 @@ class MultiViewDataset:
         arr = np.asarray(value)
         if arr.shape[0] != self.n_samples:
             raise ValueError(
-                f"labels has {arr.shape[0]} entries but dataset has "
-                f"{self.n_samples} samples."
+                f"labels has {arr.shape[0]} entries but dataset has {self.n_samples} samples."
             )
         self._labels = arr
 
@@ -143,14 +141,11 @@ class MultiViewDataset:
             self._view_names = [f"view_{i}" for i in range(self.n_views)]
             return
         if not hasattr(value, "__iter__") or isinstance(value, (str, bytes)):
-            raise TypeError(
-                "view_names must be an iterable of strings or None."
-            )
+            raise TypeError("view_names must be an iterable of strings or None.")
         names = list(value)
         if len(names) != self.n_views:
             raise ValueError(
-                f"view_names has {len(names)} entries but there are "
-                f"{self.n_views} views."
+                f"view_names has {len(names)} entries but there are {self.n_views} views."
             )
         if not all(isinstance(name, str) for name in names):
             raise TypeError("Each view name must be a string.")
@@ -247,7 +242,6 @@ class MultiViewDataset:
         new_views = [self._views[i] for i in indices]
         new_names = [self._view_names[i] for i in indices]
         return MultiViewDataset(new_views, labels=self._labels, view_names=new_names)
-
 
     def train_test_split(
         self,

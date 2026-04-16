@@ -97,8 +97,7 @@ class WeightedFusion(BaseMultiViewTransformer):
             w = np.asarray(self.weights, dtype=float)
             if w.ndim != 1 or len(w) != self.n_views_in_:
                 raise ValueError(
-                    f"weights must have one entry per view "
-                    f"({self.n_views_in_}), got {len(w)}."
+                    f"weights must have one entry per view ({self.n_views_in_}), got {len(w)}."
                 )
             self.weights_ = w
 
@@ -157,7 +156,7 @@ class NormalizedFusion(BaseMultiViewTransformer):
         views = self._validate_views(views, reset=True)
 
         self.means_ = [v.mean(axis=0) for v in views]
-        self.stds_  = [np.clip(v.std(axis=0), self.eps, None) for v in views]
+        self.stds_ = [np.clip(v.std(axis=0), self.eps, None) for v in views]
 
         if self.weights is None:
             self.weights_ = np.ones(self.n_views_in_)
@@ -165,8 +164,7 @@ class NormalizedFusion(BaseMultiViewTransformer):
             w = np.asarray(self.weights, dtype=float)
             if len(w) != self.n_views_in_:
                 raise ValueError(
-                    f"weights must have one entry per view "
-                    f"({self.n_views_in_}), got {len(w)}."
+                    f"weights must have one entry per view ({self.n_views_in_}), got {len(w)}."
                 )
             self.weights_ = w
 
@@ -174,10 +172,7 @@ class NormalizedFusion(BaseMultiViewTransformer):
         return self
 
     def _normalize(self, views: List[np.ndarray]) -> List[np.ndarray]:
-        return [
-            (v - mu) / std
-            for v, mu, std in zip(views, self.means_, self.stds_)
-        ]
+        return [(v - mu) / std for v, mu, std in zip(views, self.means_, self.stds_)]
 
     def transform(self, views: List) -> np.ndarray:
         views = self._validate_views(views, reset=False)

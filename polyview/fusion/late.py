@@ -1,5 +1,3 @@
-"""Late fusion strategies for combining per-view predictions."""
-
 from __future__ import annotations
 
 from typing import Iterable, List, Literal, Optional, Sequence
@@ -52,7 +50,9 @@ class MajorityVote(BaseLateFusion):
             ) from exc
         return arr_int
 
-    def _validate_predictions(self, preds_by_view: List[Iterable], *, reset: bool) -> np.ndarray:
+    def _validate_predictions(
+        self, preds_by_view: List[Iterable], *, reset: bool
+    ) -> np.ndarray:
         if not isinstance(preds_by_view, (list, tuple)) or len(preds_by_view) == 0:
             raise TypeError(
                 "preds_by_view must be a non-empty list/tuple of 1-D prediction arrays."

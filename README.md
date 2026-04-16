@@ -1,16 +1,19 @@
 # polyview
 
-**Multi-view clustering and embedding toolkit for Python.**
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/deepcharles/ruptures/graphs/commit-activity)
+[![CI](https://github.com/Gwendal-Debaussart/polyview/actions/workflows/doc.yml/badge.svg)](https://github.com/Gwendal-Debaussart/polyview/actions/workflows/doc.yml/badge.svg)
+[![PyPI version](https://badge.fury.io/py/polyview.svg)](https://badge.fury.io/py/polyview)
+<a href="https://github.com/psf/black"><img alt="Code style: ruff" src="https://img.shields.io/badge/code%20style-ruff-000000.svg"></a>
 
-[PyPI project page](https://pypi.org/project/polyview/) · [Documentation](https://gwendal-debaussart.github.io/polyview/index.html/)
+<p align="center">
+  <img src="docs/source/_static/polyview.svg" alt="polyview Logo" width="250"/>
+</p>
 
-`polyview` provides sklearn-compatible algorithms for datasets where each
-sample is described by multiple independent feature sets (views) — such as
-audio + video, text + images, or multi-sensor readings.
+**polyview** is a Python library for multi-view learning, providing a consistent API for multi-view clustering, embedding, and fusion methods. It allows you to easily build pipelines that combine native multi-view estimators with single-view sklearn tools, while keeping track of per-view data and predictions.
 
-> Actively maintained successor to the dormant `mvlearn` library.
 
----
+
+Documentation: [https://gwendal-debaussart.github.io/polyview/index.html/](https://gwendal-debaussart.github.io/polyview/index.html/)
 
 ## Installation
 

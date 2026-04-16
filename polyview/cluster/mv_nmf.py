@@ -229,7 +229,6 @@ class MultiViewNMF(BaseMultiViewClusterer):
         prev_obj = np.inf
 
         for iteration in range(self.max_iter):
-
             # Update H (shared across all views)
             H = self._update_H(views, H, W, lam)
 

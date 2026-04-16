@@ -1,6 +1,17 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Iterable, List, Literal, Optional, Sequence, Tuple, Union, cast
+from typing import (
+    Any,
+    Dict,
+    Iterable,
+    List,
+    Literal,
+    Optional,
+    Sequence,
+    Tuple,
+    Union,
+    cast,
+)
 
 import numpy as np
 from sklearn.base import BaseEstimator, clone
@@ -510,7 +521,11 @@ class PolyPipeline(BaseEstimator):
         if is_last:
             if isinstance(step, _PerViewEstimator):
                 return "lf"
-            if hasattr(step, "labels_") or hasattr(step, "predict") or hasattr(step, "fit_predict"):
+            if (
+                hasattr(step, "labels_")
+                or hasattr(step, "predict")
+                or hasattr(step, "fit_predict")
+            ):
                 return "sv"
 
         if fitted:
@@ -529,9 +544,7 @@ class PolyPipeline(BaseEstimator):
         if mode_in == "mv":
             if isinstance(step, BaseMultiView):
                 return self._base_mv_step_output_mode(step)
-            next_is_late_fusion = bool(
-                isinstance(next_step, BaseLateFusion)
-            )
+            next_is_late_fusion = bool(isinstance(next_step, BaseLateFusion))
             if next_is_late_fusion:
                 return "lf"
             if is_last:

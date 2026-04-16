@@ -13,7 +13,12 @@ from typing import List, Optional, Union
 import numpy as np
 
 from polyview.base import BaseMultiViewTransformer
-from polyview.utils.kernels import KernelSpec, center_kernel, is_valid_kernel, normalize_kernel
+from polyview.utils.kernels import (
+    KernelSpec,
+    center_kernel,
+    is_valid_kernel,
+    normalize_kernel,
+)
 
 
 class KernelFusion(BaseMultiViewTransformer):
@@ -75,7 +80,7 @@ class KernelFusion(BaseMultiViewTransformer):
         specs = list(self.specs)
         if len(specs) != n_views:
             raise ValueError(
-                f"Expected {n_views} KernelSpecs (one per view), " f"got {len(specs)}."
+                f"Expected {n_views} KernelSpecs (one per view), got {len(specs)}."
             )
         return specs
 

@@ -6,6 +6,7 @@ import numpy as np
 from polyview.base import BaseMultiViewClusterer
 from sklearn.metrics.pairwise import pairwise_kernels
 
+
 class MultiViewCoRegSpectralClustering(BaseMultiViewClusterer):
     """
     Multi-view co-regularized spectral clustering algorithm.
@@ -102,7 +103,6 @@ class MultiViewCoRegSpectralClustering(BaseMultiViewClusterer):
                     )
         return obj
 
-
     def _update_spectral_embedding(
         self, laplacians: List[np.ndarray], embeddings: List[np.ndarray]
     ) -> List[np.ndarray]:
@@ -136,7 +136,9 @@ class MultiViewCoRegSpectralClustering(BaseMultiViewClusterer):
         laplacians = []
         for X in views:
             A = pairwise_kernels(X, metric=self.affinity)
-            embedding = SpectralEmbedding(n_components=self.n_clusters, affinity = "precomputed")
+            embedding = SpectralEmbedding(
+                n_components=self.n_clusters, affinity="precomputed"
+            )
             embeddings.append(embedding.fit_transform(A))
             D = np.diag(A.sum(axis=1))
             laplacians.append(D - A)

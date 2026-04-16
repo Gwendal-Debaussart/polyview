@@ -23,9 +23,13 @@ def _build_projector(
     random_state: Optional[int],
 ):
     if method == "gaussian":
-        return GaussianRandomProjection(n_components=n_components, random_state=random_state)
+        return GaussianRandomProjection(
+            n_components=n_components, random_state=random_state
+        )
     if method == "sparse":
-        return SparseRandomProjection(n_components=n_components, random_state=random_state)
+        return SparseRandomProjection(
+            n_components=n_components, random_state=random_state
+        )
     raise ValueError(f"Unknown projection method: {method!r}.")
 
 
@@ -91,7 +95,9 @@ class RandomProjectionViews(BaseEstimator):
             projector = _build_projector(
                 method=method,
                 n_components=target_components,
-                random_state=None if self.random_state is None else self.random_state + view_idx,
+                random_state=None
+                if self.random_state is None
+                else self.random_state + view_idx,
             )
             projector.fit(X)
             self.projectors_.append(projector)
@@ -110,7 +116,10 @@ class RandomProjectionViews(BaseEstimator):
                 f"X has {X.shape[1]} features but the transformer was fitted with {self.n_features_in_}."
             )
 
-        views = [np.asarray(projector.transform(X), dtype=float) for projector in self.projectors_]
+        views = [
+            np.asarray(projector.transform(X), dtype=float)
+            for projector in self.projectors_
+        ]
         return MultiViewDataset(views=views, view_names=self.view_names_)
 
     def fit_transform(self, X, y=None) -> MultiViewDataset:

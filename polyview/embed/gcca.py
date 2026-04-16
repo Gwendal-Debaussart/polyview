@@ -168,7 +168,6 @@ class GCCA(BaseMultiViewTransformer):
 
         return self
 
-
     def transform(self, views: List) -> Union[np.ndarray, List[np.ndarray]]:
         """Project views into the shared embedding space.
 
@@ -184,8 +183,7 @@ class GCCA(BaseMultiViewTransformer):
         views = self._validate_views(views, reset=False)
 
         projections = [
-            (X - mu) @ W
-            for X, mu, W in zip(views, self.means_, self.weights_)
+            (X - mu) @ W for X, mu, W in zip(views, self.means_, self.weights_)
         ]
         return _make_output(projections, self.output)
 
@@ -195,24 +193,22 @@ class GCCA(BaseMultiViewTransformer):
         Returns
         -------
         ndarray of shape (n_views, n_views, n_components)
-            corrs[v1, v2, :] = per-component correlation between
-            projections of view v1 and view v2.
+          corrs[v1, v2, :] = per-component correlation between
+          projections of view v1 and view v2.
         """
         check_is_fitted(self, "weights_")
-        M  = self.n_views_in_
-        k  = self.n_components
+        M = self.n_views_in_
+        k = self.n_components
         out = np.zeros((M, M, k))
-        Zs  = [
+        Zs = [
             (X - mu) @ W
-            for X, mu, W in zip(
-                self._centred_views_, self.means_, self.weights_
-            )
+            for X, mu, W in zip(self._centred_views_, self.means_, self.weights_)
         ]
         for v1 in range(M):
             for v2 in range(v1 + 1, M):
                 for c in range(k):
                     z1, z2 = Zs[v1][:, c], Zs[v2][:, c]
-                    denom  = (np.std(z1) * np.std(z2)) + 1e-10
-                    r      = float(np.dot(z1, z2) / (len(z1) * denom))
+                    denom = (np.std(z1) * np.std(z2)) + 1e-10
+                    r = float(np.dot(z1, z2) / (len(z1) * denom))
                     out[v1, v2, c] = out[v2, v1, c] = r
         return out

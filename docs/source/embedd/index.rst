@@ -7,3 +7,4 @@ Some multiview embedding methods.
   :maxdepth: 1
 
   gcca
+  mcca
