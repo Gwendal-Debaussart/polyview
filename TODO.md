@@ -7,25 +7,15 @@ This file tracks todos for the project. It is not meant to be backlog of todos b
 - Add a testing suite, using pytest to test the functionality of the codebase.
 - Add tutorials and examples to the documentation.
 
-## cluster
-
-## fusion
-
-- CCA and classical variants of CCA (e.g. kernel CCA, deep CCA) for multi-view embedding
-- Late fustion methods, e.g. ensemble clustering, co-training, etc.
 
 ## embedd
 
-- NMF-based multi-view embedding methods
 - Multi-view MDS
 
 ## metrics
 
 - consensus scores
 
-## Pipelines
-
-- A pipeline that takes in multiple views of data, applies appropriate preprocessing steps (e.g. normalization, dimensionality reduction), and then applies a fusion method to produce a final embedding or clustering result.
 
 ## Partial multiview methods
 
