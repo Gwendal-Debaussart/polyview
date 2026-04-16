@@ -11,7 +11,7 @@
 
 **polyview** is a Python library for multi-view learning, providing a consistent API for multi-view clustering, embedding, and fusion methods. It allows you to easily build pipelines that combine native multi-view estimators with single-view sklearn tools, while keeping track of per-view data and predictions.
 
-Documentation is available at: [https://gwendal-debaussart.github.io/polyview/index.html/](https://gwendal-debaussart.github.io/polyview/index.html/)
+Documentation is available at: [https://gwendal-debaussart.github.io/polyview/](https://gwendal-debaussart.github.io/polyview/)
 
 ## Installation
 
