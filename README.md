@@ -81,7 +81,7 @@ Contributions are very welcome! If you plan to contribute, please see the [CONTR
 
 ## ⚖️ License
 
-MIT License. See [LICENSE](LICENSE) for details.
+GNU General Public License. See [LICENSE](LICENSE) for details.
 
 <!-- ## 📄 Citation
 
