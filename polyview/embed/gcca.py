@@ -87,7 +87,7 @@ class GCCA(BaseMultiViewTransformer):
     .. rubric:: References
 
     - Guo, C., & Wu, D. (2021). Canonical correlation analysis (CCA) based multi-view learning: An overview.
-        arXiv preprint arXiv:1907.01693.
+      arXiv preprint arXiv:1907.01693.
     """
 
     def __init__(
