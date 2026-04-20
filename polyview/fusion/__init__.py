@@ -10,7 +10,7 @@ Early fusion  (combine views before learning)
 
 Kernel fusion  (combine views in kernel space)
     KernelSpec          per-view kernel configuration
-    KernelFusion        weighted sum of per-view kernels
+    KernelFusion        weighted sum/product of per-view kernels
 
 Kernel utilities  (standalone helpers)
     center_kernel       remove mean in RKHS

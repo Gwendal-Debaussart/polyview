@@ -1,15 +1,3 @@
-"""
-Early fusion strategies — combine views *before* any learning.
-
-Classes
--------
-ConcatFusion       horizontal concatenation of all views
-WeightedFusion     per-view weighted concatenation
-NormalizedFusion   z-score each view before concatenating
-WeightedSumFusion  per-view weighted sum of normalized views, after a kernel transformation
-WeightedProductFusion  per-view weighted product of normalized views, after a kernel transformation
-"""
-
 from __future__ import annotations
 from typing import List, Optional
 import numpy as np

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional, Union
+from typing import List, Literal, Optional, Union
 
 import numpy as np
 
@@ -14,12 +14,18 @@ from polyview.utils.kernels import (
 
 
 class KernelFusion(BaseMultiViewTransformer):
-    """Fuse views via a weighted sum of per-view kernel matrices.
+    """Fuse views by combining per-view kernel matrices.
 
-    Each view is mapped to a kernel matrix by its ``KernelSpec``, then:
+    Each view is mapped to a kernel matrix by its ``KernelSpec``, then fused
+    according to ``fusion_mode``:
 
+    - ``fusion_mode='sum'``:
         K_fused = sum_i (w_i * K_i)          normalize_weights=False
         K_fused = sum_i (w_i / W * K_i)      normalize_weights=True
+
+    - ``fusion_mode='product'``:
+        K_fused = prod_i K_i ** w_i          normalize_weights=False
+        K_fused = prod_i K_i ** (w_i / W)    normalize_weights=True
 
     The output is a raw (n_samples, n_samples) kernel matrix for use with
     any kernel method: spectral clustering, kernel SVM, kernel PCA, etc.
@@ -33,6 +39,13 @@ class KernelFusion(BaseMultiViewTransformer):
 
     normalize_weights : bool, default=False
         Divide weights by their sum (convex combination).
+
+    fusion_mode : {"sum", "product"}, default="sum"
+        Fusion operation used to combine per-view kernels.
+
+    product_eps : float, default=1e-12
+        Small positive constant used in ``fusion_mode='product'`` to avoid
+        taking powers of exact zeros.
 
     Attributes
     ----------
@@ -63,11 +76,15 @@ class KernelFusion(BaseMultiViewTransformer):
         self,
         specs: Optional[Union[KernelSpec, List[KernelSpec]]] = None,
         normalize_weights: bool = False,
+        fusion_mode: Literal["sum", "product"] = "sum",
+        product_eps: float = 1e-12,
         n_views: Optional[int] = None,
     ) -> None:
         super().__init__(n_views=n_views)
         self.specs = specs
         self.normalize_weights = normalize_weights
+        self.fusion_mode = fusion_mode
+        self.product_eps = product_eps
 
     def _resolve_specs(self, n_views: int) -> List[KernelSpec]:
         if self.specs is None:
@@ -89,6 +106,34 @@ class KernelFusion(BaseMultiViewTransformer):
                 raise ValueError("All weights are zero — cannot normalize.")
             w = w / total
         return w
+
+    def _fuse(self, kernels: List[np.ndarray], weights: np.ndarray) -> np.ndarray:
+        if self.fusion_mode == "sum":
+            K_fused = np.zeros_like(kernels[0], dtype=float)
+            for w, K in zip(weights, kernels):
+                K_fused += w * K
+            return K_fused
+
+        if self.fusion_mode == "product":
+            if self.product_eps <= 0:
+                raise ValueError("product_eps must be > 0 for product fusion.")
+
+            K_fused = np.ones_like(kernels[0], dtype=float)
+            for i, (w, K) in enumerate(zip(weights, kernels)):
+                if w == 0:
+                    continue
+                if np.min(K) < -self.product_eps:
+                    raise ValueError(
+                        "Product kernel fusion requires non-negative kernel entries. "
+                        f"Kernel {i} has minimum value {float(np.min(K)):.3e}."
+                    )
+                K_safe = np.clip(K, self.product_eps, None)
+                K_fused *= np.power(K_safe, w)
+            return (K_fused + K_fused.T) / 2.0
+
+        raise ValueError(
+            f"fusion_mode must be 'sum' or 'product', got {self.fusion_mode!r}."
+        )
 
     def fit(self, views: List, y=None) -> "KernelFusion":
         """Compute per-view kernels and fuse them.
@@ -118,9 +163,7 @@ class KernelFusion(BaseMultiViewTransformer):
                     f"Kernel {i} has shape {K.shape}, expected ({n}, {n})."
                 )
 
-        self.K_fused_ = np.zeros((n, n), dtype=float)
-        for w, K in zip(self.weights_, self.kernels_):
-            self.K_fused_ += w * K
+        self.K_fused_ = self._fuse(self.kernels_, self.weights_)
         return self
 
     def transform(self, views: List) -> np.ndarray:
@@ -146,10 +189,7 @@ class KernelFusion(BaseMultiViewTransformer):
                     f"View {i} has {v.shape[1]} features, expected {n_feat}."
                 )
         kernels_new = [spec.build(v) for spec, v in zip(self.specs_, views_arr)]
-        K_fused = np.zeros((views_arr[0].shape[0], views_arr[0].shape[0]), dtype=float)
-        for w, K in zip(self.weights_, kernels_new):
-            K_fused += w * K
-        return K_fused
+        return self._fuse(kernels_new, self.weights_)
 
     def kernel_matrix(self) -> np.ndarray:
         """Return a copy of the fused kernel matrix."""
