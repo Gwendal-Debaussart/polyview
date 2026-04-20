@@ -8,6 +8,7 @@ Some multiview embedding methods.
 
   gcca
   mcca
+  multiviewmds
 
 See also
 --------

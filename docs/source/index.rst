@@ -12,6 +12,7 @@ The library provides:
   co-training spectral clustering, co-regularized spectral clustering, and
   multi-view NMF,
 - embedding methods including GCCA and MCCA,
+- embedding methods including GCCA, MCCA, and MvMDS,
 - fusion utilities for early fusion, late fusion, and kernel fusion,
 - data augmentation tools that turn a single matrix into multiple views via
   random projections, random subspaces, or multiple kernels,
