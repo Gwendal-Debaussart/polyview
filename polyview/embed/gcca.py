@@ -10,33 +10,7 @@ from polyview.base import BaseMultiViewTransformer
 from polyview.fusion.kernel_fusion import center_kernel, normalize_kernel
 
 
-OutputMode = Literal["concat", "mean", "list"]
-
-
-def _make_output(
-    projections: List[np.ndarray],
-    mode: OutputMode,
-) -> Union[np.ndarray, List[np.ndarray]]:
-    """Combine per-view projections according to output mode.
-
-    Parameters
-    ----------
-    projections : list of (n, k) arrays
-    mode : "concat" | "mean" | "list"
-
-    Returns
-    -------
-    ndarray of shape (n, M*k) for "concat",
-    ndarray of shape (n, k)   for "mean",
-    list of (n, k) arrays     for "list".
-    """
-    if mode == "concat":
-        return np.concatenate(projections, axis=1)
-    if mode == "mean":
-        return np.mean(projections, axis=0)
-    if mode == "list":
-        return projections
-    raise ValueError(f"output must be 'concat', 'mean', or 'list', got {mode!r}.")
+OutputMode = Literal["concat", "mean", "list", "shared"]
 
 
 def _center_columns(X: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -58,11 +32,12 @@ class GCCA(BaseMultiViewTransformer):
     regularisation : float or list of float, default=1e-4
         Ridge regularisation added to each view's covariance before
         inversion.  A single float applies the same value to all views; a list gives per-view values.  Larger values = stronger regularisation (useful when d_v > n or features are collinear).
-    output : str {"concat", "mean", "list"}, default="concat"
+    output : str {"concat", "mean", "list", "shared"}, default="shared"
         How to combine per-view projections in transform():
         - "concat" : [Z1 | Z2 | ... | ZM]  shape (n, M*k)
         - "mean"   : (Z1 + Z2 + ... + ZM) / M  shape (n, k)
         - "list"   : [Z1, Z2, ..., ZM]  list of (n, k) arrays
+        - "shared" : G_  shape (n, n_components)
     centre : bool, default=True
         Subtract column means from each view before fitting.
 
@@ -94,7 +69,7 @@ class GCCA(BaseMultiViewTransformer):
         self,
         n_components: int = 2,
         regularisation: Union[float, List[float]] = 1e-4,
-        output: OutputMode = "concat",
+        output: OutputMode = "shared",
         centre: bool = True,
         n_views: Optional[int] = None,
     ) -> None:
@@ -118,8 +93,40 @@ class GCCA(BaseMultiViewTransformer):
     def _smoother(self, X: np.ndarray, reg: float) -> np.ndarray:
         """Compute hat matrix S(v) = X (X^T X + r I)^{-1} X^T  shape (n, n)."""
         d = X.shape[1]
-        XtX_reg = X.T @ X + reg * np.eye(d)
-        return X @ np.linalg.solve(XtX_reg, X.T)
+        n = X.shape[0]
+        XtX_reg = X.T @ X /n + reg * np.eye(d)
+        return X @ np.linalg.solve(XtX_reg, X.T / n)
+
+    def _make_output(
+        self,
+        projections: List[np.ndarray],
+        mode: OutputMode,
+    ) -> Union[np.ndarray, List[np.ndarray]]:
+        """Combine per-view projections according to output mode.
+
+        Parameters
+        ----------
+        projections : list of (n, k) arrays
+        mode : "concat" | "mean" | "list" | "shared"
+
+        Returns
+        -------
+        ndarray of shape (n, M*k) for "concat",
+        ndarray of shape (n, k)   for "mean",
+        list of (n, k) arrays     for "list",
+        ndarray of shape (n, k)   for "shared".
+        """
+        if mode == "concat":
+            return np.concatenate(projections, axis=1)
+        if mode == "mean":
+            return np.mean(projections, axis=0)
+        if mode == "shared":
+            return self.G_
+        if mode == "list":
+            return projections
+        raise ValueError(
+            f"output must be 'concat', 'mean', 'shared', or 'list', got {mode!r}."
+        )
 
     def fit(self, views: List[np.ndarray], y=None) -> "GCCA":
         """
@@ -165,8 +172,8 @@ class GCCA(BaseMultiViewTransformer):
         # Per-view projection matrices W(v) = (X^T X + rI)^{-1} X^T G
         self.weights_ = []
         for X, reg in zip(centred, regs):
-            XtX_reg = X.T @ X + reg * np.eye(X.shape[1])
-            W = np.linalg.solve(XtX_reg, X.T @ self.G_)
+            XtX_reg = X.T @ X / n + reg * np.eye(X.shape[1])
+            W = np.linalg.solve(XtX_reg, X.T @ self.G_ / n)
             self.weights_.append(W)
 
         self._centred_views_ = centred
@@ -190,7 +197,7 @@ class GCCA(BaseMultiViewTransformer):
         projections = [
             (X - mu) @ W for X, mu, W in zip(views, self.means_, self.weights_)
         ]
-        return _make_output(projections, self.output)
+        return self._make_output(projections, self.output)
 
     def canonical_correlations(self) -> np.ndarray:
         """Pairwise canonical correlations between all view pairs.
