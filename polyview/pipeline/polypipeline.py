@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib
 from typing import (
     Any,
     Dict,
@@ -197,6 +198,15 @@ class PolyPipeline(BaseEstimator):
     - sv -> sv
 
     A reverse transition (sv -> mv) is rejected.
+
+    Parameters
+    ----------
+    steps : sequence of (str, estimator) tuples
+        List of (name, transform) tuples that are chained in the pipeline order.
+    per_view_step_params : dict or None, default=None
+        Optional per-view hyperparameters for specific steps.
+    name : str or None, default=None
+        Display name for the pipeline, shown in diagrams. If None, defaults to "PolyPipeline flow".
     """
 
     def __init__(
@@ -205,9 +215,11 @@ class PolyPipeline(BaseEstimator):
         per_view_step_params: Optional[
             Dict[str, Union[Dict[str, Any], Sequence[Optional[Dict[str, Any]]]]]
         ] = None,
+        name: Optional[str] = None,
     ) -> None:
         self.steps = steps
         self.per_view_step_params = per_view_step_params
+        self.name = name if name is not None else "PolyPipeline flow"
 
     @staticmethod
     def _is_mv_data(X: Any) -> bool:
@@ -423,6 +435,12 @@ class PolyPipeline(BaseEstimator):
     def fit(self, X: Any, y: Any = None) -> "PolyPipeline":
         steps = self._validate_steps()
         current_mode = self._infer_mode(X)
+
+        if current_mode in ("mv", "lf"):
+            self.n_views_in_ = len(self._as_mv(X))
+        else:
+            self.n_views_in_ = 1
+
         Xt = self._prepare_input(X, current_mode)
 
         fitted_steps: List[StepSpec] = []
@@ -560,17 +578,21 @@ class PolyPipeline(BaseEstimator):
         return mode_in
 
     @staticmethod
-    def _transition_behavior(mode_in: DataMode, mode_out: DataMode) -> str:
+    def _transition_behavior(
+        mode_in: DataMode,
+        mode_out: DataMode,
+        branch_count: int = 3,
+    ) -> str:
         if mode_in == "sv" and mode_out == "mv":
-            return "split 1 -> 3 branches"
+            return f"split 1 -> {branch_count} branches"
         if mode_in == "mv" and mode_out == "mv":
-            return "3 parallel branches"
+            return f"{branch_count} parallel branches"
         if mode_in == "mv" and mode_out == "sv":
-            return "merge 3 -> 1"
+            return f"merge {branch_count} -> 1"
         if mode_in == "mv" and mode_out == "lf":
-            return "per-view predictions (3x 1-D)"
+            return f"per-view labels ({branch_count} -> {branch_count})"
         if mode_in == "lf" and mode_out == "sv":
-            return "late-fusion (many -> 1)"
+            return f"late-fusion ({branch_count} -> 1)"
         if mode_in == mode_out:
             return "no branch change"
         return f"{mode_in} -> {mode_out}"
@@ -584,6 +606,27 @@ class PolyPipeline(BaseEstimator):
         if isinstance(step, _PerViewEstimator):
             return f"{name}: {type(step.estimator).__name__}"
         return f"{name}: {type(step).__name__}"
+
+    @staticmethod
+    def _is_label_producing_step(step: Any) -> bool:
+        """Check if a step produces labels (clustering, classification, or late-fusion)."""
+        if step == "passthrough":
+            return False
+
+        # Unwrap wrapped estimators
+        actual_step = step
+        if isinstance(step, (_PerViewTransformer, _PerViewEstimator)):
+            actual_step = step.estimator
+
+        # Check for BaseLateFusion (late-fusion steps)
+        if isinstance(actual_step, BaseLateFusion):
+            return True
+
+        # Check for labels_ or classes_ attributes (fitted estimators)
+        if hasattr(actual_step, "labels_") or hasattr(actual_step, "classes_"):
+            return True
+
+        return False
 
     def draw_diagram(
         self,
@@ -622,7 +665,13 @@ class PolyPipeline(BaseEstimator):
         output
         """
         fitted = hasattr(self, "steps_")
-        steps = list(self.steps_ if fitted else self._validate_steps())
+        explicit_start_mode = start_mode is not None
+        steps = list(
+            self._validate_steps()
+            if explicit_start_mode
+            else (self.steps_ if fitted else self._validate_steps())
+        )
+        use_fitted_inference = fitted and not explicit_start_mode
 
         if start_mode is None:
             if fitted:
@@ -638,7 +687,8 @@ class PolyPipeline(BaseEstimator):
         else:
             mode = cast(DataMode, start_mode)
 
-        lines = ["input"]
+        branch_count = int(getattr(self, "n_views_in_", 3))
+        lines = [self.name, "input"]
 
         for i, (name, step) in enumerate(steps, start=1):
             is_last = i == len(steps)
@@ -648,16 +698,32 @@ class PolyPipeline(BaseEstimator):
                 step=step,
                 is_last=is_last,
                 next_step=next_step,
-                fitted=fitted,
+                fitted=use_fitted_inference,
             )
 
-            # Connector with mode description
-            if mode == "mv":
-                lines.append("  ↓ ↓ ↓ (multiview)")
-            elif mode == "lf":
-                lines.append("  ↓ ↓ ↓ (late-fusion predictions)")
+            # Compute transition behavior, accounting for label-producing steps
+            produces_labels = self._is_label_producing_step(step)
+            if produces_labels and mode == mode_out:
+                # Label-producing step with no mode change
+                if mode == "sv":
+                    transition_text = "→ labels (1-D)"
+                elif mode == "mv":
+                    transition_text = "→ labels (per-view)"
+                elif mode == "lf":
+                    transition_text = "→ fused labels (1-D)"
+                else:
+                    transition_text = "→ labels"
             else:
-                lines.append("  ↓ (single)")
+                transition_text = self._transition_behavior(
+                    mode,
+                    mode_out,
+                    branch_count=branch_count,
+                )
+
+            if mode in ("mv", "lf"):
+                lines.append(f"  ↓ ↓ ↓ ({transition_text})")
+            else:
+                lines.append(f"  ↓ ({transition_text})")
 
             # Step name
             step_label = self._step_label(name, step)
@@ -667,16 +733,398 @@ class PolyPipeline(BaseEstimator):
 
         # Final connector
         if mode == "mv":
-            lines.append("  ↓ ↓ ↓ (multiview)")
+            lines.append("  ↓ ↓ ↓ (output - multiview)")
         elif mode == "lf":
-            lines.append("  ↓ ↓ ↓ (late-fusion predictions)")
+            lines.append("  ↓ ↓ ↓ (output - late-fusion)")
         else:
-            lines.append("  ↓ (single)")
+            lines.append("  ↓ (output)")
 
         lines.append("output")
         diagram = "\n".join(lines)
         print(diagram)
         return diagram
+
+    def draw_diagram_nx(
+        self,
+        start_mode: Optional[Literal["mv", "sv"]] = None,
+        *,
+        ax: Any = None,
+        show: bool = True,
+        node_size: int = 2300,
+        mode_colors: Optional[Dict[str, str]] = None,
+        title: Optional[str] = None,
+        node_text_color: str = "white",
+        node_border_color: str = "#1A1A1A",
+        edge_color: str = "#333333",
+        transition_text_color: str = "#222222",
+        show_legend: bool = True,
+        show_title: bool = True,
+    ) -> Any:
+        """Draw a mode-aware pipeline diagram using NetworkX.
+
+        Parameters
+        ----------
+        start_mode : {"mv", "sv"} or None, default=None
+            Optional starting mode for preview. Useful before fitting.
+            - ``None``: use fitted input mode if available.
+            - ``"mv"``/``"sv"``: simulate flow from that start mode.
+        ax : matplotlib.axes.Axes or None, default=None
+            Matplotlib axis to draw onto. If None, a new figure is created.
+        show : bool, default=True
+            Whether to call ``matplotlib.pyplot.show()`` after drawing.
+        node_size : int, default=2300
+            Minimum size hint for node rectangles.
+        mode_colors : dict or None, default=None
+            Optional color overrides for node modes and types. Supported keys are
+            ``"mv"``, ``"sv"``, ``"lf"``, ``"labels"`` (clustering/classification steps),
+            ``"output"``, and ``"default"``.
+        title : str or None, default=None
+            Plot title. If None, uses the pipeline's name attribute.
+        node_text_color : str, default="white"
+            Color of node labels.
+        node_border_color : str, default="#1A1A1A"
+            Stroke color for node borders.
+        edge_color : str, default="#333333"
+            Arrow color.
+        transition_text_color : str, default="#222222"
+            Color of edge transition labels.
+        show_legend : bool, default=True
+            Whether to display a legend showing color meanings (MV/SV/LF modes and label output).
+        show_title : bool, default=True
+            Whether to display the plot title.
+
+        Returns
+        -------
+        networkx.DiGraph
+            Directed graph with mode and transition metadata.
+        """
+
+        # Check for required libraries without hard dependency
+        try:
+            nx = importlib.import_module("networkx")
+        except ImportError as exc:
+            raise ImportError(
+                "draw_diagram_nx requires networkx. Install with `pip install networkx`."
+            ) from exc
+
+        try:
+            plt = importlib.import_module("matplotlib.pyplot")
+        except ImportError as exc:
+            raise ImportError(
+                "draw_diagram_nx requires matplotlib. Install with `pip install matplotlib`."
+            ) from exc
+
+        fitted = hasattr(self, "steps_")
+        explicit_start_mode = start_mode is not None
+        steps = list(
+            self._validate_steps()
+            if explicit_start_mode
+            else (self.steps_ if fitted else self._validate_steps())
+        )
+        use_fitted_inference = fitted and not explicit_start_mode
+
+        if start_mode is None:
+            if fitted:
+                mode: DataMode = cast(DataMode, self.input_mode_)
+            else:
+                raise ValueError(
+                    "Unfitted pipeline: pass start_mode='mv' or start_mode='sv' to simulate flow."
+                )
+        else:
+            mode = cast(DataMode, start_mode)
+
+        if title is None:
+            title = self.name
+
+        graph = nx.DiGraph(name="PolyPipeline")
+        graph.add_node("input", label="input", mode=mode)
+        step_behaviors: List[str] = []
+        branch_count = int(getattr(self, "n_views_in_", 3))
+
+        previous_node = "input"
+        for i, (name, step) in enumerate(steps, start=1):
+            is_last = i == len(steps)
+            next_step = None if is_last else steps[i][1]
+            mode_out = self._simulate_step_mode(
+                mode_in=mode,
+                step=step,
+                is_last=is_last,
+                next_step=next_step,
+                fitted=use_fitted_inference,
+            )
+
+            node_id = f"step_{i}"
+            produces_labels = self._is_label_producing_step(step)
+            graph.add_node(
+                node_id,
+                label=self._step_label(name, step),
+                mode=mode_out,
+                mode_in=mode,
+                produces_labels=produces_labels,
+            )
+            graph.add_edge(previous_node, node_id, transition="")
+
+            # Compute transition behavior, accounting for label-producing steps
+            if produces_labels and mode == mode_out:
+                if mode == "sv":
+                    behavior = "→ labels (1-D)"
+                elif mode == "mv":
+                    behavior = "→ labels (per-view)"
+                elif mode == "lf":
+                    behavior = "→ fused labels (1-D)"
+                else:
+                    behavior = "→ labels"
+            else:
+                behavior = self._transition_behavior(
+                    mode,
+                    mode_out,
+                    branch_count=branch_count,
+                )
+
+            step_behaviors.append(behavior)
+
+            previous_node = node_id
+            mode = mode_out
+
+        graph.add_node("output", label="output", mode=mode)
+        graph.add_edge(previous_node, "output", transition="")
+
+        # Show each step's mode-transition annotation on its outgoing edge.
+        if len(steps) > 0:
+            for i in range(1, len(steps) + 1):
+                source = f"step_{i}"
+                target = "output" if i == len(steps) else f"step_{i + 1}"
+                graph.edges[source, target]["transition"] = step_behaviors[i - 1]
+
+
+        ordered_nodes = (
+            ["input"] + [f"step_{i}" for i in range(1, len(steps) + 1)] + ["output"]
+        )
+
+        # Color priority:
+        # 1. Output node
+        # 2. Label-producing step with 1D output (purple)
+        # 3. All others -> mode color (LF for multiple per-view labels, MV for multi-view data)
+
+        palette = {
+            "mv": "#072AC8",
+            "sv": "#FF8200",
+            "lf": "#54A24B",
+            "labels": "#7C3AED",
+            "output": "#9E9E9E",
+            "default": "#CCCCCC",
+        }
+        if mode_colors:
+            palette.update(mode_colors)
+
+        # Determine node colors based on mode and label status
+        node_colors = []
+        for node in ordered_nodes:
+            if node == "output":
+                node_colors.append(palette.get("output", "#9E9E9E"))
+            else:
+                node_data = graph.nodes[node]
+                produces_labels = node_data.get("produces_labels", False)
+                node_mode = node_data.get("mode", "sv")
+
+                if produces_labels:
+                    node_colors.append(palette.get("labels", "#7C3AED"))
+                else:
+                    node_colors.append(palette.get(node_mode, palette.get("default", "#CCCCCC")))
+
+        # Draw the diagram of operations with NetworkX and Matplotlib
+        try:
+            from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+        except ImportError:
+            FancyBboxPatch = None
+            FancyArrowPatch = None
+
+        if ax is None:
+            fig, ax = plt.subplots(figsize=(8, max(10, len(ordered_nodes) * 1.5)))
+        else:
+            fig = ax.get_figure()
+
+        # Layout: vertical top-to-bottom
+        n_nodes = len(ordered_nodes)
+        y_spacing = 1.0
+        positions = {node: (0, -i * y_spacing) for i, node in enumerate(ordered_nodes)}
+
+        # Draw edges first (so they appear behind nodes)
+        for i, source_node in enumerate(ordered_nodes[:-1]):
+            target_node = ordered_nodes[i + 1]
+            x1, y1 = positions[source_node]
+            x2, y2 = positions[target_node]
+
+            # Draw arrow
+            if FancyArrowPatch is not None:
+                arrow = FancyArrowPatch(
+                    (x1, y1 - 0.25), (x2, y2 + 0.25),
+                    arrowstyle='-|>', mutation_scale=18, lw=1.5,
+                    color=edge_color, zorder=1
+                )
+                ax.add_patch(arrow)
+
+            # Add transition label on edge (to the right of arrow)
+            transition_label = graph.edges[source_node, target_node].get("transition", "")
+            if transition_label:
+                mid_y = (y1 + y2) / 2
+                ax.text(0.15, mid_y, transition_label, ha='left', va='center',
+                       fontsize=10, color=transition_text_color, zorder=2,
+                       bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='none', alpha=0.8))
+
+        # Draw nodes
+        for node_idx, node in enumerate(ordered_nodes):
+            x, y = positions[node]
+            label = graph.nodes[node]["label"]
+            color = node_colors[node_idx]
+
+            # Wrap text if too long: split on word boundaries, max 2 lines
+            max_width_chars = 20
+            if len(label) > max_width_chars:
+                # Try to split on spaces or underscores
+                words = label.replace('_', ' ').split()
+                lines = []
+                current_line = []
+                for word in words:
+                    test_line = ' '.join(current_line + [word])
+                    if len(test_line) <= max_width_chars:
+                        current_line.append(word)
+                    else:
+                        if current_line:
+                            lines.append(' '.join(current_line))
+                        current_line = [word]
+                if current_line:
+                    lines.append(' '.join(current_line))
+
+                # Limit to 2 lines max: if 3+ lines, try to reflow into 2
+                if len(lines) > 2:
+                    lines = lines[:2]
+
+                wrapped_label = '\n'.join(lines)
+            else:
+                wrapped_label = label
+
+            # Create temporary text to measure size
+            temp_text = ax.text(x, y, wrapped_label, fontsize=10, ha='center', va='center',
+                               visible=False, weight='bold')
+            fig.canvas.draw()
+
+            # Get text bbox in data coordinates
+            bbox = temp_text.get_window_extent(renderer=fig.canvas.get_renderer())
+            bbox_data = ax.transData.inverted().transform(bbox)
+            text_width = bbox_data[1, 0] - bbox_data[0, 0]
+            text_height = bbox_data[1, 1] - bbox_data[0, 1]
+            temp_text.remove()
+
+            # Box with padding - tight around text
+            pad_x, pad_y = 0.03, 0.08
+            box_width = max(text_width + 2 * pad_x, 0.5)
+            box_height = max(text_height + 2 * pad_y, 0.35)
+            box_x = x - box_width / 2
+            box_y = y - box_height / 2
+
+            # Draw box
+            if FancyBboxPatch is not None:
+                box = FancyBboxPatch(
+                    (box_x, box_y), box_width, box_height,
+                    boxstyle="round,pad=0.03", edgecolor=node_border_color,
+                    facecolor=color, linewidth=1.5, zorder=3
+                )
+                ax.add_patch(box)
+
+            # Draw label
+            ax.text(x, y, wrapped_label, fontsize=10, ha='center', va='center',
+                   color=node_text_color, weight='bold', zorder=4)
+
+        # Set axis limits with minimal padding
+        margin = 0.25
+        ax.set_xlim(-0.5, 0.5)
+        ax.set_ylim(-(n_nodes - 1) * y_spacing - margin, margin)
+        ax.axis('off')
+
+        if show_legend:
+            modes_in_graph = set()
+            has_labels = False
+
+            try:
+                from matplotlib.patches import Patch
+            except ImportError:
+                Patch = None
+
+            for node in graph.nodes():
+                node_mode = cast(str, graph.nodes[node].get("mode", "sv"))
+                if node != "output":  # Don't count output node's mode for mode legend
+                    modes_in_graph.add(node_mode)
+                produces_labels = cast(
+                    bool, graph.nodes[node].get("produces_labels", False)
+                )
+
+                if produces_labels:
+                    has_labels = True
+
+            # Build legend with only the modes present in this pipeline
+            legend_elements = []
+
+            if Patch is not None:
+                if "mv" in modes_in_graph:
+                    legend_elements.append(
+                        Patch(
+                            facecolor=palette.get("mv", "#072AC8"),
+                            edgecolor=node_border_color,
+                            label="Multi-view (MV)",
+                        )
+                    )
+                if "sv" in modes_in_graph:
+                    legend_elements.append(
+                        Patch(
+                            facecolor=palette.get("sv", "#9E9E9E"),
+                            edgecolor=node_border_color,
+                            label="Single-view (SV)",
+                        )
+                    )
+
+                if "lf" in modes_in_graph:
+                    legend_elements.append(
+                        Patch(
+                            facecolor=palette.get("lf", "#54A24B"),
+                            edgecolor=node_border_color,
+                            label="Multi-Labels",
+                        )
+                    )
+
+                if has_labels:
+                    legend_elements.append(
+                        Patch(
+                            facecolor=palette.get("labels", "#7C3AED"),
+                            edgecolor=node_border_color,
+                            label="Labels",
+                        )
+                    )
+
+                legend_elements.append(
+                    Patch(
+                        facecolor=palette.get("output", "#9E9E9E"),
+                        edgecolor=node_border_color,
+                        label="Output node",
+                    )
+                )
+
+            if legend_elements:
+                ax.legend(
+                    handles=legend_elements,
+                    loc="lower center",
+                    bbox_to_anchor=(0.5, -0.15),
+                    ncol=3,
+                    frameon=True,
+                )
+
+        if show_title:
+            ax.set_title(title)
+
+        if show:
+            plt.show()
+
+        return graph
 
     def predict(self, X: Any) -> Any:
         Xt = self._apply_transforms(X, include_final=False)

@@ -136,9 +136,17 @@ Pipeline diagram introspection
 -------------------------------
 
 `draw_diagram()` prints a branch-aware text diagram of step flow.
+`draw_diagram_nx()` renders the same flow as a directed NetworkX graph
+with mode-aware node coloring and transition labels.
 
 .. code-block:: python
 
    pipe.draw_diagram()           # before fit
    _ = pipe.fit_predict(mvd.views)
    pipe.draw_diagram()           # after fit
+
+.. code-block:: python
+
+    # Optional visual graph (requires networkx + matplotlib)
+    graph = pipe.draw_diagram_nx(show=False)
+    print(graph.nodes(data=True))

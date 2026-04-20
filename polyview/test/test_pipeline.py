@@ -95,3 +95,72 @@ def test_per_view_step_params_override_by_step_name():
     # View 1: scaled but not centered.
     assert np.allclose(out[1].std(axis=0), 1.0, atol=1e-8)
     assert not np.allclose(out[1].mean(axis=0), 0.0, atol=1e-3)
+
+
+def test_draw_diagram_nx_requires_start_mode_when_unfitted():
+    pipe = PolyPipeline(steps=[("scale", StandardScaler())])
+    with pytest.raises(ValueError, match="Unfitted pipeline"):
+        pipe.draw_diagram_nx()
+
+
+def test_draw_diagram_nx_returns_graph_when_dependencies_available():
+    nx = pytest.importorskip("networkx")
+    pytest.importorskip("matplotlib")
+
+    views = _make_views(n_samples=40, seed=11)
+    pipe = PolyPipeline(steps=[("scale", StandardScaler())])
+
+    graph = pipe.draw_diagram_nx(start_mode="mv", show=False)
+
+    assert isinstance(graph, nx.DiGraph)
+    assert "input" in graph.nodes
+    assert "output" in graph.nodes
+    assert graph.has_edge("input", "step_1")
+    assert graph.has_edge("step_1", "output")
+
+
+def test_draw_diagram_nx_accepts_custom_style_arguments():
+    nx = pytest.importorskip("networkx")
+    plt = pytest.importorskip("matplotlib.pyplot")
+
+    pipe = PolyPipeline(steps=[("scale", StandardScaler())])
+    fig, ax = plt.subplots(figsize=(4, 6))
+    graph = pipe.draw_diagram_nx(
+        start_mode="mv",
+        ax=ax,
+        show=False,
+        mode_colors={
+            "mv": "#1f77b4",
+            "sv": "#ff7f0e",
+            "lf": "#2ca02c",
+            "default": "#cccccc",
+        },
+        title="Custom Pipeline",
+        node_text_color="#ffffff",
+        node_border_color="#000000",
+        edge_color="#111111",
+        transition_text_color="#222222",
+    )
+
+    assert isinstance(graph, nx.DiGraph)
+    assert ax.get_title() == "Custom Pipeline"
+
+
+def test_draw_diagram_nx_explicit_start_mode_ignores_fitted_wrappers():
+    nx = pytest.importorskip("networkx")
+    pytest.importorskip("matplotlib")
+
+    views = _make_views(n_samples=40, seed=19)
+    pipe = PolyPipeline(
+        steps=[
+            ("scale", StandardScaler()),
+            ("kmeans", KMeans(n_clusters=3, random_state=0, n_init=5)),
+        ]
+    )
+
+    pipe.fit(views)
+    graph = pipe.draw_diagram_nx(start_mode="sv", show=False)
+
+    assert isinstance(graph, nx.DiGraph)
+    assert graph.nodes["step_1"]["mode"] == "sv"
+    assert graph.nodes["step_2"]["mode"] == "sv"
