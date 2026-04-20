@@ -1,10 +1,10 @@
 from __future__ import annotations
 from typing import List, Optional
 import numpy as np
-from polyview.base import BaseMultiViewTransformer
+from polyview.base import BaseFusion
 
 
-class ConcatFusion(BaseMultiViewTransformer):
+class ConcatFusion(BaseFusion):
     """Fuse views by horizontal concatenation.
 
     Output shape is
@@ -43,7 +43,7 @@ class ConcatFusion(BaseMultiViewTransformer):
         return np.concatenate(views, axis=1)
 
 
-class WeightedFusion(BaseMultiViewTransformer):
+class WeightedFusion(BaseFusion):
     """Fuse views by weighted concatenation.
 
     Each view is scaled by a scalar weight before concatenation.
@@ -98,7 +98,7 @@ class WeightedFusion(BaseMultiViewTransformer):
         return np.concatenate(scaled, axis=1)
 
 
-class NormalizedFusion(BaseMultiViewTransformer):
+class NormalizedFusion(BaseFusion):
     """Fuse views after per-view z-score normalization.
 
     Each view is standardized (zero mean, unit variance per feature)

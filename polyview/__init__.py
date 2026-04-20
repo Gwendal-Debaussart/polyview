@@ -12,6 +12,7 @@ from importlib.metadata import PackageNotFoundError, version
 
 from . import augmentation, cluster, dataset, fusion
 from .base import (
+    BaseFusion,
     BaseLateFusion,
     BaseMultiView,
     BaseMultiViewClusterer,
@@ -58,12 +59,14 @@ __all__ = [
     "fusion",
     "augmentation",
     "BaseMultiView",
+    "BaseFusion",
     "BaseLateFusion",
     "BaseMultiViewTransformer",
     "BaseMultiViewClusterer",
     "BaseMultiViewEmbedder",
     "MultiViewDataset",
     "MultiViewKMeans",
+    "MultiViewNMF",
     "MultiViewCoRegSpectralClustering",
     "ConcatFusion",
     "WeightedFusion",

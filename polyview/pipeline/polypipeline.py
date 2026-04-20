@@ -18,7 +18,7 @@ import numpy as np
 from sklearn.base import BaseEstimator, clone
 from sklearn.utils.validation import check_is_fitted
 
-from polyview.base import BaseLateFusion, BaseMultiView
+from polyview.base import BaseFusion, BaseLateFusion, BaseMultiView
 
 
 DataMode = Literal["mv", "sv", "lf"]
@@ -514,6 +514,10 @@ class PolyPipeline(BaseEstimator):
 
     @staticmethod
     def _base_mv_step_output_mode(step: Any) -> DataMode:
+        # Check if this is an early-fusion step (fuses multi-view → single-view)
+        if isinstance(step, BaseFusion):
+            return "sv"
+
         out = getattr(step, "output", None)
         if isinstance(out, str):
             if out == "list":
@@ -534,23 +538,49 @@ class PolyPipeline(BaseEstimator):
         if step == "passthrough":
             return mode_in
 
-        # Terminal predictive/cluster steps produce label-like 1-D outputs,
-        # represented here as single-view mode for diagram readability.
-        if is_last:
+        # Per-view wrappers always return their expected mode regardless of is_last.
+        # _PerViewTransformer returns multi-view (list of arrays).
+        # _PerViewEstimator also returns multi-view (list of predictions/labels, one per view).
+        if fitted:
+            if isinstance(step, _PerViewTransformer):
+                return "mv"
             if isinstance(step, _PerViewEstimator):
-                return "lf"
+                return "mv"
+
+        # When simulating (unfitted), predict if the step will be wrapped in multi-view mode.
+        # This replicates the logic from _adapt_step_for_mode().
+        if mode_in == "mv" and not isinstance(step, BaseMultiView):
+            # Check if this step will be wrapped
+            will_wrap_as_per_view_estimator = is_last and (
+                hasattr(step, "predict")
+                or hasattr(step, "fit_predict")
+                or hasattr(step, "score")
+            )
+            force_predict = bool(isinstance(next_step, BaseLateFusion))
+            will_wrap_as_per_view_estimator |= force_predict and (
+                hasattr(step, "predict")
+                or hasattr(step, "fit_predict")
+                or hasattr(step, "score")
+            )
+            will_wrap_as_per_view_transformer = (
+                not will_wrap_as_per_view_estimator and hasattr(step, "transform")
+            )
+
+            if will_wrap_as_per_view_estimator:
+                return "mv"
+            if will_wrap_as_per_view_transformer:
+                return "mv"
+
+        # Terminal predictive/cluster steps produce label-like outputs.
+        if is_last:
+            if isinstance(step, BaseLateFusion):
+                return "sv"
             if (
                 hasattr(step, "labels_")
                 or hasattr(step, "predict")
                 or hasattr(step, "fit_predict")
             ):
                 return "sv"
-
-        if fitted:
-            if isinstance(step, _PerViewTransformer):
-                return "mv"
-            if isinstance(step, _PerViewEstimator):
-                return "lf"
 
         if mode_in == "sv":
             if self._is_random_projection_step(step):
@@ -958,7 +988,7 @@ class PolyPipeline(BaseEstimator):
             # Draw arrow
             if FancyArrowPatch is not None:
                 arrow = FancyArrowPatch(
-                    (x1, y1 - 0.25), (x2, y2 + 0.25),
+                    (x1, y1 - 0.15), (x2, y2 + 0.15),
                     arrowstyle='-|>', mutation_scale=18, lw=1.5,
                     color=edge_color, zorder=1
                 )
@@ -969,7 +999,7 @@ class PolyPipeline(BaseEstimator):
             if transition_label:
                 mid_y = (y1 + y2) / 2
                 ax.text(0.15, mid_y, transition_label, ha='left', va='center',
-                       fontsize=10, color=transition_text_color, zorder=2,
+                       fontsize=12, color=transition_text_color, zorder=2,
                        bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='none', alpha=0.8))
 
         # Draw nodes
@@ -1005,7 +1035,7 @@ class PolyPipeline(BaseEstimator):
                 wrapped_label = label
 
             # Create temporary text to measure size
-            temp_text = ax.text(x, y, wrapped_label, fontsize=10, ha='center', va='center',
+            temp_text = ax.text(x, y, wrapped_label, fontsize=12, ha='center', va='center',
                                visible=False, weight='bold')
             fig.canvas.draw()
 
@@ -1033,7 +1063,7 @@ class PolyPipeline(BaseEstimator):
                 ax.add_patch(box)
 
             # Draw label
-            ax.text(x, y, wrapped_label, fontsize=10, ha='center', va='center',
+            ax.text(x, y, wrapped_label, fontsize=12, ha='center', va='center',
                    color=node_text_color, weight='bold', zorder=4)
 
         # Set axis limits with minimal padding

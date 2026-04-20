@@ -290,6 +290,36 @@ class BaseMultiViewTransformer(BaseMultiView, MultiViewTransformerMixin):
     """
 
 
+class BaseFusion(BaseMultiViewTransformer):
+    """Ready-to-subclass base for multi-view fusion methods.
+
+    Fusion methods combine multiple views into a single fused representation
+    before downstream processing (clustering, classification, etc.).
+
+    This base is used for:
+
+    - **Early fusion**: Combining views before any feature extraction
+    - **Intermediate fusion**: Combining views after per-view processing
+
+    All fusion methods produce single-view output from multi-view input.
+
+    Semantically signals to consumers (e.g., ``PolyPipeline``) that this
+    estimator combines multiple input streams into one output stream.
+
+    Subclasses must implement :meth:`fit` and :meth:`transform`.
+
+    Example
+    -------
+    >>> class MyConcatFusion(BaseFusion):
+    ...     def fit(self, views, y=None):
+    ...         self._validate_views(views)
+    ...         return self
+    ...     def transform(self, views):
+    ...         validated = self._validate_views(views, reset=False)
+    ...         return np.concatenate(validated, axis=1)
+    """
+
+
 class BaseMultiViewClusterer(BaseMultiView, MultiViewClusterMixin):
     """Ready-to-subclass base for multi-view clustering algorithms.
 
@@ -329,7 +359,7 @@ class BaseMultiViewEmbedder(BaseMultiView, MultiViewEmbedderMixin):
     """
 
 
-class BaseLateFusion(BaseEstimator):
+class BaseLateFusion(BaseEstimator, ABC):
     """Base class for late-fusion estimators over per-view predictions.
 
     Late-fusion estimators consume one 1-D prediction vector per view and
@@ -348,11 +378,48 @@ class BaseLateFusion(BaseEstimator):
     array([0, 1, 0])
     """
 
-    def fit(self, preds_by_view: List[Iterable], y=None):
-        raise NotImplementedError
+    @abstractmethod
+    def fit(self, preds_by_view: List[Iterable], y=None) -> "BaseLateFusion":
+        """Fit the late-fusion model from per-view predictions.
 
+        Parameters
+        ----------
+        preds_by_view : list of array-like
+            One 1-D prediction vector per view.
+        y : ignored
+
+        Returns
+        -------
+        self
+        """
+
+    @abstractmethod
     def predict(self, preds_by_view: List[Iterable]) -> np.ndarray:
-        raise NotImplementedError
+        """Fuse per-view predictions into a single prediction.
+
+        Parameters
+        ----------
+        preds_by_view : list of array-like
+            One 1-D prediction vector per view.
+
+        Returns
+        -------
+        ndarray of shape (n_samples,)
+            Fused prediction vector.
+        """
 
     def fit_predict(self, preds_by_view: List[Iterable], y=None) -> np.ndarray:
+        """Fit and immediately fuse predictions.
+
+        Parameters
+        ----------
+        preds_by_view : list of array-like
+            One 1-D prediction vector per view.
+        y : ignored
+
+        Returns
+        -------
+        ndarray of shape (n_samples,)
+            Fused prediction vector.
+        """
         return self.fit(preds_by_view, y).predict(preds_by_view)

@@ -4,7 +4,7 @@ from typing import List, Literal, Optional, Union
 
 import numpy as np
 
-from polyview.base import BaseMultiViewTransformer
+from polyview.base import BaseFusion
 from polyview.utils.kernels import (
     KernelSpec,
     center_kernel,
@@ -13,7 +13,7 @@ from polyview.utils.kernels import (
 )
 
 
-class KernelFusion(BaseMultiViewTransformer):
+class KernelFusion(BaseFusion):
     """Fuse views by combining per-view kernel matrices.
 
     Each view is mapped to a kernel matrix by its ``KernelSpec``, then fused
