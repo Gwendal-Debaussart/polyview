@@ -97,20 +97,20 @@ def test_per_view_step_params_override_by_step_name():
     assert not np.allclose(out[1].mean(axis=0), 0.0, atol=1e-3)
 
 
-def test_draw_diagram_nx_requires_start_mode_when_unfitted():
+def test_draw_requires_start_mode_when_unfitted():
     pipe = PolyPipeline(steps=[("scale", StandardScaler())])
     with pytest.raises(ValueError, match="Unfitted pipeline"):
-        pipe.draw_diagram_nx()
+        pipe.draw()
 
 
-def test_draw_diagram_nx_returns_graph_when_dependencies_available():
+def test_draw_returns_graph_when_dependencies_available():
     nx = pytest.importorskip("networkx")
     pytest.importorskip("matplotlib")
 
     views = _make_views(n_samples=40, seed=11)
     pipe = PolyPipeline(steps=[("scale", StandardScaler())])
 
-    graph = pipe.draw_diagram_nx(start_mode="mv", show=False)
+    graph = pipe.draw(start_mode="mv", show=False)
 
     assert isinstance(graph, nx.DiGraph)
     assert "input" in graph.nodes
@@ -119,13 +119,13 @@ def test_draw_diagram_nx_returns_graph_when_dependencies_available():
     assert graph.has_edge("step_1", "output")
 
 
-def test_draw_diagram_nx_accepts_custom_style_arguments():
+def test_draw_accepts_custom_style_arguments():
     nx = pytest.importorskip("networkx")
     plt = pytest.importorskip("matplotlib.pyplot")
 
     pipe = PolyPipeline(steps=[("scale", StandardScaler())])
     fig, ax = plt.subplots(figsize=(4, 6))
-    graph = pipe.draw_diagram_nx(
+    graph = pipe.draw(
         start_mode="mv",
         ax=ax,
         show=False,
@@ -146,7 +146,7 @@ def test_draw_diagram_nx_accepts_custom_style_arguments():
     assert ax.get_title() == "Custom Pipeline"
 
 
-def test_draw_diagram_nx_explicit_start_mode_ignores_fitted_wrappers():
+def test_draw_explicit_start_mode_ignores_fitted_wrappers():
     nx = pytest.importorskip("networkx")
     pytest.importorskip("matplotlib")
 
@@ -159,7 +159,7 @@ def test_draw_diagram_nx_explicit_start_mode_ignores_fitted_wrappers():
     )
 
     pipe.fit(views)
-    graph = pipe.draw_diagram_nx(start_mode="sv", show=False)
+    graph = pipe.draw(start_mode="sv", show=False)
 
     assert isinstance(graph, nx.DiGraph)
     assert graph.nodes["step_1"]["mode"] == "sv"

@@ -522,7 +522,7 @@ class PolyPipeline(BaseEstimator):
         if isinstance(out, str):
             if out == "list":
                 return "mv"
-            if out in ("concat", "mean"):
+            if out in ("concat", "mean", "shared"):
                 return "sv"
         return "mv"
 
@@ -540,12 +540,18 @@ class PolyPipeline(BaseEstimator):
 
         # Per-view wrappers always return their expected mode regardless of is_last.
         # _PerViewTransformer returns multi-view (list of arrays).
-        # _PerViewEstimator also returns multi-view (list of predictions/labels, one per view).
+        # _PerViewEstimator returns late-fusion style data (list of 1-D predictions/labels) or Single-view data if fed-in single-view data.
         if fitted:
             if isinstance(step, _PerViewTransformer):
                 return "mv"
             if isinstance(step, _PerViewEstimator):
-                return "mv"
+                if mode_in == "mv":
+                    return "lf"
+                if mode_in == "sv":
+                    return "sv"
+                if mode_in == "lf":
+                    # A priori, this should not occur.
+                    return "lf"
 
         # When simulating (unfitted), predict if the step will be wrapped in multi-view mode.
         # This replicates the logic from _adapt_step_for_mode().
@@ -567,7 +573,7 @@ class PolyPipeline(BaseEstimator):
             )
 
             if will_wrap_as_per_view_estimator:
-                return "mv"
+                return "lf"
             if will_wrap_as_per_view_transformer:
                 return "mv"
 
@@ -628,6 +634,15 @@ class PolyPipeline(BaseEstimator):
         return f"{mode_in} -> {mode_out}"
 
     @staticmethod
+    def _step_branch_count(step: Any, fallback: int) -> int:
+        """Infer how many branches a step produces when it expands MV output."""
+        for attr in ("n_views", "n_views_in_", "n_outputs", "n_components"):
+            value = getattr(step, attr, None)
+            if isinstance(value, int) and value > 0:
+                return value
+        return fallback
+
+    @staticmethod
     def _step_label(name: str, step: Any) -> str:
         if step == "passthrough":
             return f"{name}: passthrough"
@@ -643,9 +658,13 @@ class PolyPipeline(BaseEstimator):
         if step == "passthrough":
             return False
 
-        # Unwrap wrapped estimators
+        # If it's a _PerViewEstimator wrapper, it produces labels
+        if isinstance(step, _PerViewEstimator):
+            return True
+
+        # Unwrap to check underlying estimator
         actual_step = step
-        if isinstance(step, (_PerViewTransformer, _PerViewEstimator)):
+        if isinstance(step, _PerViewTransformer):
             actual_step = step.estimator
 
         # Check for BaseLateFusion (late-fusion steps)
@@ -656,9 +675,16 @@ class PolyPipeline(BaseEstimator):
         if hasattr(actual_step, "labels_") or hasattr(actual_step, "classes_"):
             return True
 
+        # Check if it's an estimator that produces labels (has fit_predict or predict)
+        # but not a transformer (doesn't require transform to be usable as final step)
+        if hasattr(actual_step, "fit_predict") or (
+            hasattr(actual_step, "predict") and not hasattr(actual_step, "transform")
+        ):
+            return True
+
         return False
 
-    def draw_diagram(
+    def print(
         self,
         start_mode: Optional[Literal["mv", "sv"]] = None,
     ) -> str:
@@ -683,7 +709,7 @@ class PolyPipeline(BaseEstimator):
         ...     ("scale", StandardScaler()),
         ...     ("cluster", MultiViewKMeans(n_clusters=3, random_state=0))
         ... ])
-        >>> print(pipe.draw_diagram(start_mode='sv'))
+        >>> print(pipe.print(start_mode='sv'))
         input
           ↓ (1 view)
         [RandomProjectionViews]
@@ -730,6 +756,7 @@ class PolyPipeline(BaseEstimator):
                 next_step=next_step,
                 fitted=use_fitted_inference,
             )
+            step_branch_count = self._step_branch_count(step, branch_count)
 
             # Compute transition behavior, accounting for label-producing steps
             produces_labels = self._is_label_producing_step(step)
@@ -747,7 +774,7 @@ class PolyPipeline(BaseEstimator):
                 transition_text = self._transition_behavior(
                     mode,
                     mode_out,
-                    branch_count=branch_count,
+                    branch_count=step_branch_count,
                 )
 
             if mode in ("mv", "lf"):
@@ -774,13 +801,12 @@ class PolyPipeline(BaseEstimator):
         print(diagram)
         return diagram
 
-    def draw_diagram_nx(
+    def draw(
         self,
         start_mode: Optional[Literal["mv", "sv"]] = None,
         *,
         ax: Any = None,
         show: bool = True,
-        node_size: int = 2300,
         mode_colors: Optional[Dict[str, str]] = None,
         title: Optional[str] = None,
         node_text_color: str = "white",
@@ -834,14 +860,14 @@ class PolyPipeline(BaseEstimator):
             nx = importlib.import_module("networkx")
         except ImportError as exc:
             raise ImportError(
-                "draw_diagram_nx requires networkx. Install with `pip install networkx`."
+                "draw requires networkx. Install with `pip install networkx`."
             ) from exc
 
         try:
             plt = importlib.import_module("matplotlib.pyplot")
         except ImportError as exc:
             raise ImportError(
-                "draw_diagram_nx requires matplotlib. Install with `pip install matplotlib`."
+                "draw requires matplotlib. Install with `pip install matplotlib`."
             ) from exc
 
         fitted = hasattr(self, "steps_")
@@ -882,6 +908,7 @@ class PolyPipeline(BaseEstimator):
                 next_step=next_step,
                 fitted=use_fitted_inference,
             )
+            step_branch_count = self._step_branch_count(step, branch_count)
 
             node_id = f"step_{i}"
             produces_labels = self._is_label_producing_step(step)
@@ -908,7 +935,7 @@ class PolyPipeline(BaseEstimator):
                 behavior = self._transition_behavior(
                     mode,
                     mode_out,
-                    branch_count=branch_count,
+                    branch_count=step_branch_count,
                 )
 
             step_behaviors.append(behavior)
@@ -947,20 +974,37 @@ class PolyPipeline(BaseEstimator):
         if mode_colors:
             palette.update(mode_colors)
 
-        # Determine node colors based on mode and label status
+        # Determine node colors based on mode and label status.
+        # Track which visual categories are actually drawn so legend only shows used entries.
         node_colors = []
+        plotted_categories = set()
         for node in ordered_nodes:
             if node == "output":
                 node_colors.append(palette.get("output", "#9E9E9E"))
+                plotted_categories.add("output")
             else:
                 node_data = graph.nodes[node]
                 produces_labels = node_data.get("produces_labels", False)
                 node_mode = node_data.get("mode", "sv")
 
                 if produces_labels:
-                    node_colors.append(palette.get("labels", "#7C3AED"))
+                    # Per-view labels (late-fusion input) use "lf" color (green)
+                    if node_mode == "lf":
+                        node_colors.append(palette.get("lf", "#54A24B"))
+                        plotted_categories.add("lf")
+                    else:
+                        # Single-view labels use "labels" color (purple)
+                        node_colors.append(palette.get("labels", "#7C3AED"))
+                        plotted_categories.add("labels")
                 else:
-                    node_colors.append(palette.get(node_mode, palette.get("default", "#CCCCCC")))
+                    if node_mode in palette:
+                        node_colors.append(
+                            palette.get(node_mode, palette.get("default", "#CCCCCC"))
+                        )
+                        plotted_categories.add(node_mode)
+                    else:
+                        node_colors.append(palette.get("default", "#CCCCCC"))
+                        plotted_categories.add("default")
 
         # Draw the diagram of operations with NetworkX and Matplotlib
         try:
@@ -988,7 +1032,7 @@ class PolyPipeline(BaseEstimator):
             # Draw arrow
             if FancyArrowPatch is not None:
                 arrow = FancyArrowPatch(
-                    (x1, y1 - 0.15), (x2, y2 + 0.15),
+                    (x1, y1 - 0.2), (x2, y2 + 0.2),
                     arrowstyle='-|>', mutation_scale=18, lw=1.5,
                     color=edge_color, zorder=1
                 )
@@ -999,7 +1043,7 @@ class PolyPipeline(BaseEstimator):
             if transition_label:
                 mid_y = (y1 + y2) / 2
                 ax.text(0.15, mid_y, transition_label, ha='left', va='center',
-                       fontsize=12, color=transition_text_color, zorder=2,
+                       fontsize=14, color=transition_text_color, zorder=2,
                        bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='none', alpha=0.8))
 
         # Draw nodes
@@ -1035,7 +1079,7 @@ class PolyPipeline(BaseEstimator):
                 wrapped_label = label
 
             # Create temporary text to measure size
-            temp_text = ax.text(x, y, wrapped_label, fontsize=12, ha='center', va='center',
+            temp_text = ax.text(x, y, wrapped_label, fontsize=14, ha='center', va='center',
                                visible=False, weight='bold')
             fig.canvas.draw()
 
@@ -1063,7 +1107,7 @@ class PolyPipeline(BaseEstimator):
                 ax.add_patch(box)
 
             # Draw label
-            ax.text(x, y, wrapped_label, fontsize=12, ha='center', va='center',
+            ax.text(x, y, wrapped_label, fontsize=14, ha='center', va='center',
                    color=node_text_color, weight='bold', zorder=4)
 
         # Set axis limits with minimal padding
@@ -1073,30 +1117,17 @@ class PolyPipeline(BaseEstimator):
         ax.axis('off')
 
         if show_legend:
-            modes_in_graph = set()
-            has_labels = False
 
             try:
                 from matplotlib.patches import Patch
             except ImportError:
                 Patch = None
 
-            for node in graph.nodes():
-                node_mode = cast(str, graph.nodes[node].get("mode", "sv"))
-                if node != "output":  # Don't count output node's mode for mode legend
-                    modes_in_graph.add(node_mode)
-                produces_labels = cast(
-                    bool, graph.nodes[node].get("produces_labels", False)
-                )
-
-                if produces_labels:
-                    has_labels = True
-
             # Build legend with only the modes present in this pipeline
             legend_elements = []
 
             if Patch is not None:
-                if "mv" in modes_in_graph:
+                if "mv" in plotted_categories:
                     legend_elements.append(
                         Patch(
                             facecolor=palette.get("mv", "#072AC8"),
@@ -1104,7 +1135,7 @@ class PolyPipeline(BaseEstimator):
                             label="Multi-view (MV)",
                         )
                     )
-                if "sv" in modes_in_graph:
+                if "sv" in plotted_categories:
                     legend_elements.append(
                         Patch(
                             facecolor=palette.get("sv", "#9E9E9E"),
@@ -1113,7 +1144,7 @@ class PolyPipeline(BaseEstimator):
                         )
                     )
 
-                if "lf" in modes_in_graph:
+                if "lf" in plotted_categories:
                     legend_elements.append(
                         Patch(
                             facecolor=palette.get("lf", "#54A24B"),
@@ -1122,7 +1153,7 @@ class PolyPipeline(BaseEstimator):
                         )
                     )
 
-                if has_labels:
+                if "labels" in plotted_categories:
                     legend_elements.append(
                         Patch(
                             facecolor=palette.get("labels", "#7C3AED"),
@@ -1131,13 +1162,14 @@ class PolyPipeline(BaseEstimator):
                         )
                     )
 
-                legend_elements.append(
-                    Patch(
-                        facecolor=palette.get("output", "#9E9E9E"),
-                        edgecolor=node_border_color,
-                        label="Output node",
+                if "output" in plotted_categories:
+                    legend_elements.append(
+                        Patch(
+                            facecolor=palette.get("output", "#9E9E9E"),
+                            edgecolor=node_border_color,
+                            label="Output node",
+                        )
                     )
-                )
 
             if legend_elements:
                 ax.legend(
@@ -1145,6 +1177,7 @@ class PolyPipeline(BaseEstimator):
                     loc="lower center",
                     bbox_to_anchor=(0.5, -0.15),
                     ncol=3,
+                    fontsize=12,
                     frameon=True,
                 )
 

@@ -130,23 +130,23 @@ Start from one feature matrix, generate multiple projected views, then continue 
 
    labels = pipe.fit_predict(X)
    print(labels.shape)  # (100,)
-   pipe.draw_diagram()
+    pipe.print()
 
 Pipeline diagram introspection
 -------------------------------
 
-`draw_diagram()` prints a branch-aware text diagram of step flow.
-`draw_diagram_nx()` renders the same flow as a directed NetworkX graph
+`print()` prints a branch-aware text diagram of step flow.
+`draw()` renders the same flow as a directed NetworkX graph
 with mode-aware node coloring and transition labels.
 
 .. code-block:: python
 
-   pipe.draw_diagram()           # before fit
+    pipe.print()           # before fit
    _ = pipe.fit_predict(mvd.views)
-   pipe.draw_diagram()           # after fit
+    pipe.print()           # after fit
 
 .. code-block:: python
 
     # Optional visual graph (requires networkx + matplotlib)
-    graph = pipe.draw_diagram_nx(show=False)
+    graph = pipe.draw(show=False)
     print(graph.nodes(data=True))
