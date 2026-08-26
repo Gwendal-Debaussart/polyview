@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import warnings
 from abc import ABC, abstractmethod
 from typing import Iterable, List, Optional
 
 import numpy as np
-from sklearn.base import BaseEstimator, clone
+from sklearn.base import BaseEstimator
 from sklearn.utils.validation import check_is_fitted
 
 
@@ -68,8 +67,8 @@ class BaseMultiView(BaseEstimator, ABC):
         -------
         list of ndarray
         """
-        if hasattr(views, "_views"):
-            views = views._views
+        if hasattr(views, "views"):
+            views = views.views
 
         if not isinstance(views, (list, tuple)):
             raise TypeError(

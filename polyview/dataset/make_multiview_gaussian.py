@@ -1,4 +1,3 @@
-from sklearn.datasets import make_blobs
 from polyview.dataset.multiviewdataset import MultiViewDataset
 import numpy as np
 

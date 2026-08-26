@@ -1,4 +1,4 @@
-from typing import Optional, Sequence, Union, cast
+from typing import Optional, Sequence, Union
 import numpy as np
 from sklearn.base import BaseEstimator
 from polyview.dataset.multiviewdataset import MultiViewDataset

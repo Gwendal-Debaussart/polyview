@@ -5,7 +5,7 @@ Core data container for multi-view datasets.
 from __future__ import annotations
 
 import numpy as np
-from typing import Iterable, List, Optional, Union
+from typing import List, Optional, Union
 
 
 class MultiViewDataset:

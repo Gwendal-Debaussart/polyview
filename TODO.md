@@ -4,13 +4,13 @@ This file tracks todos for the project. It is not meant to be backlog of todos b
 
 ## general
 
-- Add a testing suite, using pytest to test the functionality of the codebase.
+[x] Add a testing suite, using pytest to test the functionality of the codebase.
 - Add tutorials and examples to the documentation.
 
 
 ## embedd
 
-- Multi-view MDS
+[x] Multi-view MDS
 
 ## metrics
 

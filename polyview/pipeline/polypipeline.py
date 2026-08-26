@@ -223,7 +223,7 @@ class PolyPipeline(BaseEstimator):
 
     @staticmethod
     def _is_mv_data(X: Any) -> bool:
-        if hasattr(X, "_views"):
+        if hasattr(X, "views"):
             return True
         if not isinstance(X, (list, tuple)) or len(X) == 0:
             return False
@@ -253,8 +253,8 @@ class PolyPipeline(BaseEstimator):
 
     @staticmethod
     def _as_mv(X: Any) -> List[np.ndarray]:
-        if hasattr(X, "_views"):
-            return [np.asarray(v, dtype=float) for v in X._views]
+        if hasattr(X, "views"):
+            return [np.asarray(v, dtype=float) for v in X.views]
         return [np.asarray(v, dtype=float) for v in X]
 
     @staticmethod
@@ -503,7 +503,11 @@ class PolyPipeline(BaseEstimator):
         return self.fit(X, y).transform(X)
 
     @staticmethod
-    def _is_random_projection_step(step: Any) -> bool:
+    def _is_view_augmentation_step(step: Any) -> bool:
+        """True for any single-view -> multi-view augmentation step
+
+        (random projections, random subspaces, multi-kernel views, ...).
+        """
         cls_name = type(step).__name__.lower()
         mod_name = type(step).__module__.lower()
         return (
@@ -589,7 +593,7 @@ class PolyPipeline(BaseEstimator):
                 return "sv"
 
         if mode_in == "sv":
-            if self._is_random_projection_step(step):
+            if self._is_view_augmentation_step(step):
                 return "mv"
             if isinstance(step, BaseMultiView):
                 return self._base_mv_step_output_mode(step)
