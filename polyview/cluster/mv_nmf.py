@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional, Union
+from typing import List, Optional
 
 import numpy as np
 from sklearn.utils.validation import check_is_fitted
@@ -39,6 +39,7 @@ class MultiViewNMF(BaseMultiViewClusterer):
     gamma : float, default=2.0
         Controls weight concentration when learn_weights=True.
         Higher gamma -> more uniform weights (approaches equal weighting).
+        gamma -> 1 collapses weight onto the single best (lowest-error) view.
         Only used when learn_weights=True.
     eps : float, default=1e-10
         Small floor added to denominators to prevent division by zero,
@@ -149,10 +150,14 @@ class MultiViewNMF(BaseMultiViewClusterer):
            \lambda_v \propto \mathrm{err}_v^{\frac{1}{1-\gamma}}
 
         Lower error -> higher weight.
-        Falls back to equal weights when gamma is near 1 or errs are zero.
+        As gamma -> 1, weight collapses onto the single best (lowest-error)
+        view. Falls back to equal weights only in the degenerate case where
+        all scores are zero or non-finite.
         """
         if abs(self.gamma - 1.0) < 1e-10:
-            return np.full(len(errs), 1.0 / len(errs))
+            weights = np.zeros(len(errs))
+            weights[np.argmin(errs)] = 1.0
+            return weights
 
         exponent = 1.0 / (1.0 - self.gamma)
         safe_errs = np.maximum(errs, self.eps)

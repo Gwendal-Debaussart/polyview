@@ -1,4 +1,3 @@
-from ast import List
 from typing import List
 import numpy as np
 from sklearn.metrics import pairwise_kernels
@@ -79,6 +78,8 @@ class MultiViewCoTrainSpectralClustering(BaseMultiViewClusterer):
 
     def fit(self, views: List[np.ndarray], y=None) -> None:
         """ """
+        views = self._validate_views(views, reset=True)
+
         embeddings = []
         laplacians = []
         for X in views:

@@ -136,6 +136,7 @@ class MultiViewCoRegSpectralClustering(BaseMultiViewClusterer):
         views : list of np.ndarray
             List of data matrices for each view, where each matrix has shape (n_samples, n_features_v).
         """
+        views = self._validate_views(views, reset=True)
 
         embeddings = []
         laplacians = []

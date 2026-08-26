@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-import warnings
 from typing import List, Optional
 
 import numpy as np
-from sklearn.cluster import KMeans
-from sklearn.exceptions import ConvergenceWarning
 
 from polyview.base import BaseMultiViewClusterer
 
@@ -59,10 +56,10 @@ class MultiViewKMeans(BaseMultiViewClusterer):
     Examples
     --------
     >>> import numpy as np
-    >>> from polyview.cluster.kmeans import MultiviewKMeans
+    >>> from polyview.cluster.mv_kmeans import MultiViewKMeans
     >>> X1 = np.random.rand(100, 4)
     >>> X2 = np.random.rand(100, 6)
-    >>> model = MultiviewKMeans(n_clusters=3, random_state=0)
+    >>> model = MultiViewKMeans(n_clusters=3, random_state=0)
     >>> labels = model.fit_predict([X1, X2])
     >>> labels.shape
     (100,)
@@ -264,7 +261,9 @@ class MultiViewKMeans(BaseMultiViewClusterer):
             H[v] = float(Dv @ row_sq_norms)
 
         if abs(self.gamma - 1.0) < 1e-10:
-            return np.full(self.n_views_in_, 1.0 / self.n_views_in_)
+            alpha = np.zeros(self.n_views_in_)
+            alpha[np.argmin(H)] = 1.0
+            return alpha
 
         exponent = 1.0 / (1.0 - self.gamma)
         H_safe = np.maximum(H, self.eps)
@@ -331,7 +330,7 @@ class MultiViewKMeans(BaseMultiViewClusterer):
         labels = np.argmax(G, axis=1)
         return labels, F, alpha, obj, iteration + 1
 
-    def fit(self, views: List, y=None) -> "RMKMC":
+    def fit(self, views: List, y=None) -> "MultiViewKMeans":
         """
         Fit the multi-view k-means model.
 
