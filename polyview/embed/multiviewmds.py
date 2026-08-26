@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Dict, List, Optional, Sequence
+from typing import Dict, List, Optional
 import numpy as np
 from sklearn.metrics import pairwise_distances
 from sklearn.utils.validation import check_is_fitted

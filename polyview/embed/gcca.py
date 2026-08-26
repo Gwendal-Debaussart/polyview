@@ -3,11 +3,9 @@ from __future__ import annotations
 from typing import List, Literal, Optional, Union
 
 import numpy as np
-from sklearn.metrics.pairwise import rbf_kernel, linear_kernel, polynomial_kernel
 from sklearn.utils.validation import check_is_fitted
 
 from polyview.base import BaseMultiViewTransformer
-from polyview.fusion.kernel_fusion import center_kernel, normalize_kernel
 
 
 OutputMode = Literal["concat", "mean", "list", "shared"]
@@ -54,7 +52,7 @@ class GCCA(BaseMultiViewTransformer):
 
     Examples
     --------
-    >>> from polyview.embed.cca import GCCA
+    >>> from polyview.embed.gcca import GCCA
     >>> gcca = GCCA(n_components=10, output="concat")
     >>> Z_train = gcca.fit_transform([X1, X2, X3])
     >>> Z_test  = gcca.transform([T1, T2, T3])
