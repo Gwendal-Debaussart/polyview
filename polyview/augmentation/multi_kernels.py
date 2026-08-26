@@ -85,6 +85,7 @@ class MultiKernel(BaseEstimator):
         self.n_features_in_ = X.shape[1]
         self.specs_ = self._resolve_specs()
         self.view_names_ = self._resolve_view_names(self.specs_)
+        self.n_views_in_ = len(self.specs_)
         return self
 
     def transform(self, X) -> MultiViewDataset:
