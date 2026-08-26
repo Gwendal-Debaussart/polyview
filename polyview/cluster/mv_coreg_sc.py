@@ -127,7 +127,7 @@ class MultiViewCoRegSpectralClustering(BaseMultiViewClusterer):
             new_embeddings.append(new_U)
         return new_embeddings
 
-    def fit(self, views: list) -> None:
+    def fit(self, views: List[np.ndarray], y=None) -> None:
         """
         Fits the multi-view co-regularized spectral clustering model to the provided views.
 
@@ -165,5 +165,5 @@ class MultiViewCoRegSpectralClustering(BaseMultiViewClusterer):
         self.labels_ = kmeans.fit_predict(self.embedding_)
         return self
 
-    def fit_predict(self, views: List, y=None) -> np.ndarray:
+    def fit_predict(self, views: List[np.ndarray], y=None) -> np.ndarray:
         return super().fit_predict(views, y)

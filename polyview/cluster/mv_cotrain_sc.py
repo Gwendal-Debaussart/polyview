@@ -77,7 +77,7 @@ class MultiViewCoTrainSpectralClustering(BaseMultiViewClusterer):
         U_consensus = np.mean(embeddings, axis=0)
         return embeddings, U_consensus
 
-    def fit(self, views: List[np.ndarray]) -> None:
+    def fit(self, views: List[np.ndarray], y=None) -> None:
         """ """
         embeddings = []
         laplacians = []
