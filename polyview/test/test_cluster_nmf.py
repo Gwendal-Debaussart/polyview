@@ -67,3 +67,18 @@ class TestMultiViewNMF:
         views, _ = _make_nonneg_views(n_samples=40, seed=5)
         model = MultiViewNMF(n_components=2, n_init=1, random_state=5).fit(views)
         assert np.allclose(model.weights_, 0.5)
+
+    def test_gamma_one_collapses_weight_onto_single_best_view(self):
+        rng = np.random.default_rng(1)
+        n = 60
+        y = rng.integers(0, 3, size=n)
+        centers = rng.uniform(1.0, 10.0, size=(3, 5))
+        x_good = np.clip(centers[y] + rng.normal(scale=0.1, size=(n, 5)), 0, None)
+        x_bad = np.clip(rng.uniform(1.0, 10.0, size=(n, 5)), 0, None)  # uninformative
+
+        model = MultiViewNMF(
+            n_components=3, gamma=1.0, learn_weights=True, n_init=5, random_state=1
+        ).fit([x_good, x_bad])
+
+        assert np.count_nonzero(model.weights_) == 1
+        assert model.weights_[0] == 1.0

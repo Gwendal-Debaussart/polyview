@@ -1,12 +1,30 @@
 import numpy as np
 import pytest
+from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
+from polyview.dataset.multiviewdataset import MultiViewDataset
 from polyview.embed.gcca import GCCA
 from polyview.fusion.early import ConcatFusion
 from polyview.pipeline.polypipeline import PolyPipeline
+
+
+class _InPlaceZeroingStep(BaseEstimator, TransformerMixin):
+    """Sklearn-style per-view transformer that mutates its input in place.
+
+    Used to prove that PolyPipeline reads views through the public,
+    copy-returning ``.views`` property rather than the private ``_views``
+    attribute, so a mutating step can't corrupt the caller's dataset.
+    """
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        X[:] = 0.0
+        return X
 
 
 def _make_views(n_samples=120, seed=0):
@@ -164,3 +182,29 @@ def test_draw_explicit_start_mode_ignores_fitted_wrappers():
     assert isinstance(graph, nx.DiGraph)
     assert graph.nodes["step_1"]["mode"] == "sv"
     assert graph.nodes["step_2"]["mode"] == "sv"
+
+
+def test_multiview_dataset_input_is_recognized_as_mv():
+    x1, x2 = _make_views(n_samples=30, seed=20)
+    mvd = MultiViewDataset([x1, x2])
+    pipe = PolyPipeline(steps=[("fuse", ConcatFusion())])
+
+    fused = pipe.fit_transform(mvd)
+    assert fused.shape == (30, x1.shape[1] + x2.shape[1])
+
+
+def test_mutating_step_does_not_corrupt_source_multiview_dataset():
+    # Regression test: PolyPipeline must read views through the public
+    # MultiViewDataset.views property (which returns copies), not the
+    # private _views attribute, or an in-place-mutating step would corrupt
+    # the caller's original dataset.
+    x1, x2 = _make_views(n_samples=10, seed=21)
+    mvd = MultiViewDataset([x1, x2])
+    pipe = PolyPipeline(steps=[("zero", _InPlaceZeroingStep())])
+
+    pipe.fit_transform(mvd)
+
+    assert not np.allclose(mvd[0], 0.0)
+    assert not np.allclose(mvd[1], 0.0)
+    assert np.allclose(mvd[0], x1)
+    assert np.allclose(mvd[1], x2)

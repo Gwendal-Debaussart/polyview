@@ -114,6 +114,11 @@ class TestRandomSubspaceViews:
 
 
 class TestMultiKernel:
+    def test_fit_sets_n_views_in_like_sibling_augmentation_classes(self):
+        X = _make_X(n_samples=25, n_features=6)
+        model = MultiKernel().fit(X)
+        assert model.n_views_in_ == 3
+
     def test_default_specs_produce_three_kernel_views(self):
         X = _make_X(n_samples=25, n_features=6)
         mvd = MultiKernel().fit_transform(X)

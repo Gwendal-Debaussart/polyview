@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 from sklearn.metrics import adjusted_rand_score
 
 from polyview.cluster.mv_coreg_sc import MultiViewCoRegSpectralClustering
@@ -47,6 +48,21 @@ class TestMultiViewCoRegSpectralClustering:
         assert model.labels_.shape == (40,)
         assert set(np.unique(model.labels_)).issubset({0, 1, 2})
 
+    def test_fit_sets_standard_multiview_attributes(self):
+        views, _ = _make_separable_views(n_samples=30, seed=5)
+        model = MultiViewCoRegSpectralClustering(
+            n_clusters=3, max_iter=3, random_state=5
+        ).fit(views)
+        assert model.n_views_in_ == 2
+        assert model.n_samples_ == 30
+        assert model.n_features_in_ == [4, 3]
+
+    def test_mismatched_sample_counts_raise_clear_error(self):
+        x1 = np.random.rand(20, 4)
+        x2 = np.random.rand(19, 3)
+        with pytest.raises(ValueError, match="same number of samples"):
+            MultiViewCoRegSpectralClustering(n_clusters=2, max_iter=2).fit([x1, x2])
+
 
 class TestMultiViewCoTrainSpectralClustering:
     def test_fit_predict_recovers_clusters(self):
@@ -68,3 +84,18 @@ class TestMultiViewCoTrainSpectralClustering:
         assert model.embedding_.shape == (40, 3)
         assert isinstance(model.objective_, float)
         assert model.labels_.shape == (40,)
+
+    def test_fit_sets_standard_multiview_attributes(self):
+        views, _ = _make_separable_views(n_samples=30, seed=6)
+        model = MultiViewCoTrainSpectralClustering(
+            n_clusters=3, max_iter=3, random_state=6
+        ).fit(views)
+        assert model.n_views_in_ == 2
+        assert model.n_samples_ == 30
+        assert model.n_features_in_ == [4, 3]
+
+    def test_mismatched_sample_counts_raise_clear_error(self):
+        x1 = np.random.rand(20, 4)
+        x2 = np.random.rand(19, 3)
+        with pytest.raises(ValueError, match="same number of samples"):
+            MultiViewCoTrainSpectralClustering(n_clusters=2, max_iter=2).fit([x1, x2])

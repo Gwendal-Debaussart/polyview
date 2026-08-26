@@ -63,3 +63,18 @@ class TestMultiViewKMeans:
         single = MultiViewKMeans(n_clusters=3, n_init=1, random_state=4).fit(views)
         multi = MultiViewKMeans(n_clusters=3, n_init=10, random_state=4).fit(views)
         assert multi.objective_ <= single.objective_ + 1e-8
+
+    def test_gamma_one_collapses_weight_onto_single_best_view(self):
+        rng = np.random.default_rng(0)
+        n = 90
+        y = rng.integers(0, 3, size=n)
+        centers = rng.normal(scale=15.0, size=(3, 4))
+        x_good = centers[y] + rng.normal(scale=0.2, size=(n, 4))  # informative
+        x_bad = rng.normal(scale=15.0, size=(n, 4))  # pure noise, uninformative
+
+        model = MultiViewKMeans(
+            n_clusters=3, gamma=1.0, n_init=5, random_state=0
+        ).fit([x_good, x_bad])
+
+        assert np.count_nonzero(model.weights_) == 1
+        assert model.weights_[0] == 1.0
