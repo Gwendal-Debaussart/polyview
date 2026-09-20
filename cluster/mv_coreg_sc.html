@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Multi-View Co-Regularized Spectral Clustering - polyview 0.0.1 documentation</title>
+        <title>Multi-View Co-Regularized Spectral Clustering - polyview 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -163,7 +163,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">polyview 0.0.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">polyview 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,7 +187,7 @@
     <img class="sidebar-logo" src="../_static/polyview.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">polyview 0.0.1 documentation</span>
+  <span class="sidebar-brand-text">polyview 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,12 +204,14 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/multiviewdataset.html">Multi-view dataset container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/mcca.html">MCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedd/multiviewmds.html">MvMDS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
@@ -217,6 +219,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/view_splitter.html">View splitter</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -225,12 +228,25 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../imputation/index.html">Imputation</a><input aria-label="Toggle navigation of Imputation" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/simple.html">Simple imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/knn.html">Nearest-neighbour imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/cross_view.html">Cross-view regression imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/drop.html">Complete-case analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/mask.html">Missingness masks</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/kernels.html">Kernel utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/linalg.html">Linear-algebra utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -281,9 +297,16 @@
 <li><p><strong>n_clusters</strong> (<em>int</em><em>, </em><em>default=2</em>) – The number of clusters to form.</p></li>
 <li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=10</em>) – Number of time the k-means algorithm will be run with different centroid seeds.</p></li>
 <li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=50</em>) – Maximum number of iterations of the alternating optimization.</p></li>
-<li><p><strong>v_lambda</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Regularization parameter for co-regularization terms.</p></li>
+<li><p><strong>v_lambda</strong> (<em>float</em><em>, </em><em>default=0.01</em>) – Weight of the agreement term between the embeddings of different views. Its suitable scale depends on <code class="docutils literal notranslate"><span class="pre">laplacian</span></code>: values around 0.01 suit the normalized Laplacian, whose eigenvalues lie in [0, 2], whereas the unnormalized Laplacian scales with the node degrees.</p></li>
 <li><p><strong>affinity</strong> (<em>str</em><em>, </em><em>default='rbf'</em>) – Kernel to use for computing the affinity matrix. Should be a valid metric for sklearn.metrics.pairwise.pairwise_kernels.</p></li>
+<li><p><strong>eigen_solver</strong> (<em>{'auto'</em><em>, </em><em>'dense'</em><em>, </em><em>'arpack'}</em><em>, </em><em>default='auto'</em>) – Solver for the <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> smallest eigenvectors computed at each iteration. The co-regularized Laplacians are applied matrix-free, without forming the (n, n) co-regularization terms. ‘dense’ materializes them and uses LAPACK restricted to the requested eigenpairs; ‘arpack’ uses an iterative Lanczos solver warm-started from the previous embedding. ‘auto’ picks ‘arpack’ when <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">&gt;</span> <span class="pre">200</span></code>, ‘dense’ otherwise.</p></li>
 <li><p><strong>random_state</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation for centroid initialization. Use an int to make the randomness deterministic.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-6</em>) – Stop when the change of the objective between two iterations is below <code class="docutils literal notranslate"><span class="pre">tol</span></code> times its initial value.</p></li>
+<li><p><strong>laplacian</strong> (<em>{&quot;normalized&quot;</em><em>, </em><em>&quot;unnormalized&quot;}</em><em>, </em><em>default=&quot;normalized&quot;</em>) – Graph Laplacian of each view: the symmetric normalized Laplacian I - D^{-1/2} A D^{-1/2} used by Kumar et al. (2011), or the unnormalized Laplacian D - A. The eigenvectors of the unnormalized Laplacian can concentrate on a few low-degree samples, which degrades the clustering on some datasets.</p></li>
+<li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>'median'</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Kernel coefficient passed to the affinity. <code class="docutils literal notranslate"><span class="pre">None</span></code> uses the sklearn
+default (<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">n_features</span></code> for ‘rbf’). <code class="docutils literal notranslate"><span class="pre">'median'</span></code> uses the median
+heuristic: <code class="docutils literal notranslate"><span class="pre">gamma</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">(2</span> <span class="pre">*</span> <span class="pre">median(||x_i</span> <span class="pre">-</span> <span class="pre">x_j||^2))</span></code> for ‘rbf’
+(<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">median(||x_i</span> <span class="pre">-</span> <span class="pre">x_j||_1)</span></code> for ‘laplacian’).</p></li>
 </ul>
 </dd>
 </dl>
@@ -293,7 +316,18 @@
 <dd><p>The concatenated spectral embeddings from all views after fitting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np.ndarray of shape (n_samples, n_clusters * n_views)</p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">np.ndarray</span> <span class="pre">of</span> <span class="pre">shape</span> <span class="pre">(n_samples,</span> <span class="pre">n_clusters</span> <span class="pre">*</span> <span class="pre">n_views)</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.view_embeddings_">
+<span class="sig-name descname"><span class="pre">view_embeddings_</span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.view_embeddings_" title="Link to this definition">¶</a></dt>
+<dd><p>The orthonormal spectral embedding <code class="docutils literal notranslate"><span class="pre">U_v</span></code> learned for each view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of np.ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>, n_clusters)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -310,18 +344,31 @@
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.n_iter_" title="Link to this definition">¶</a></dt>
+<dd><p>Number of iterations run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.labels_">
 <span class="sig-name descname"><span class="pre">labels_</span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.labels_" title="Link to this definition">¶</a></dt>
 <dd><p>Cluster labels for each sample after fitting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np.ndarray of shape (n_samples,)</p>
+<dd class="field-odd"><p>np.ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <p class="rubric">Notes</p>
-<p>This implementation follows the approach of co-regularized spectral clustering, where spectral embeddings for each view are learned jointly with a regularization term that encourages the embeddings to be similar across views. The algorithm alternates between updating the spectral embeddings for each view and updating the cluster assignments based on the combined embeddings. The objective function includes both the spectral clustering objective for each view and the co-regularization terms that penalize differences between the embeddings of different views.</p>
+<p>Each view v has a spectral embedding U_v with orthonormal columns. Following the pairwise co-regularization of Kumar et al. (2011), the method minimizes</p>
+<p>J = sum_v tr(U_v^T L_v U_v) - v_lambda * sum_{v&lt;w} tr(U_v U_v^T U_w U_w^T),</p>
+<p>i.e. the spectral clustering objective of each view minus the agreement between the embeddings of each pair of views, which is maximal when they span the same subspace. The views are updated one at a time: given the other embeddings, the optimal U_v is formed by the eigenvectors of L_v - v_lambda * sum_{w != v} U_w U_w^T with the smallest eigenvalues, so that J never increases. The final clusters are obtained by k-means on the row-normalized concatenation of the embeddings. By default, L_v = I - D_v^{-1/2} A_v D_v^{-1/2} is the symmetric normalized Laplacian of the affinity matrix A_v of view v, as in Kumar et al.; the unnormalized Laplacian D_v - A_v is available with <code class="docutils literal notranslate"><span class="pre">laplacian=&quot;unnormalized&quot;</span></code>.</p>
 <p class="rubric">References</p>
 <ul class="simple">
 <li><p>Kumar, A. et al. (2011). Co-regularized Multi-view Spectral Clustering.
@@ -329,7 +376,7 @@ Advances in Neural Information Processing Systems 24.</p></li>
 </ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit" title="Link to this definition">¶</a></dt>
 <dd><p>Fits the multi-view co-regularized spectral clustering model to the provided views.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -340,7 +387,7 @@ Advances in Neural Information Processing Systems 24.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit_predict">
-<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit_predict" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit_predict" title="Link to this definition">¶</a></dt>
 <dd><p>Fit and return cluster labels.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -353,7 +400,7 @@ Advances in Neural Information Processing Systems 24.</p></li>
 <dd class="field-even"><p><strong>labels</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+<dd class="field-odd"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -420,7 +467,9 @@ Advances in Neural Information Processing Systems 24.</p></li>
 <li><a class="reference internal" href="#">Multi-View Co-Regularized Spectral Clustering</a><ul>
 <li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering</span></code></a><ul>
 <li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.embedding_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.embedding_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.view_embeddings_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.view_embeddings_</span></code></a></li>
 <li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.objective_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.objective_</span></code></a></li>
+<li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.n_iter_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.n_iter_</span></code></a></li>
 <li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.labels_"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.labels_</span></code></a></li>
 <li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.fit()</span></code></a></li>
 <li><a class="reference internal" href="#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering.fit_predict"><code class="docutils literal notranslate"><span class="pre">MultiViewCoRegSpectralClustering.fit_predict()</span></code></a></li>
@@ -437,7 +486,7 @@ Advances in Neural Information Processing Systems 24.</p></li>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=d45e8c67"></script>
+</div><script src="../_static/documentation_options.js?v=01f34227"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

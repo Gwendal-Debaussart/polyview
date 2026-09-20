@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Early Fusion - polyview 0.0.1 documentation</title>
+        <title>Early Fusion - polyview 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -163,7 +163,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">polyview 0.0.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">polyview 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,7 +187,7 @@
     <img class="sidebar-logo" src="../_static/polyview.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">polyview 0.0.1 documentation</span>
+  <span class="sidebar-brand-text">polyview 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,12 +204,14 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/multiviewdataset.html">Multi-view dataset container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/mcca.html">MCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedd/multiviewmds.html">MvMDS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
@@ -217,6 +219,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/view_splitter.html">View splitter</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
@@ -225,12 +228,25 @@
 <li class="toctree-l2"><a class="reference internal" href="late.html">Late Fusion</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../imputation/index.html">Imputation</a><input aria-label="Toggle navigation of Imputation" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/simple.html">Simple imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/knn.html">Nearest-neighbour imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/cross_view.html">Cross-view regression imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/drop.html">Complete-case analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/mask.html">Missingness masks</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/kernels.html">Kernel utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/linalg.html">Linear-algebra utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -271,19 +287,10 @@
           <section id="early-fusion">
 <h1>Early Fusion<a class="headerlink" href="#early-fusion" title="Link to this heading">¶</a></h1>
 <p>Early fusion is a method of combining multiple data sources at the feature level. In this approach, features from different modalities (e.g., text, images, audio) are concatenated or merged together before being fed into a machine learning model. This allows the model to learn from the combined feature space, potentially capturing interactions between different modalities.</p>
-<p id="module-polyview.fusion.early">Early fusion strategies — combine views <em>before</em> any learning.</p>
-<section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
-<p>ConcatFusion       horizontal concatenation of all views
-WeightedFusion     per-view weighted concatenation
-NormalizedFusion   z-score each view before concatenating
-WeightedSumFusion  per-view weighted sum of normalized views, after a kernel transformation
-WeightedProductFusion  per-view weighted product of normalized views, after a kernel transformation</p>
-</section>
-<dl class="py class">
+<dl class="py class" id="module-polyview.fusion.early">
 <dt class="sig sig-object py" id="polyview.fusion.early.ConcatFusion">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.fusion.early.</span></span><span class="sig-name descname"><span class="pre">ConcatFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.fusion.early.ConcatFusion" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseMultiViewTransformer" title="polyview.base.BaseMultiViewTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseFusion" title="polyview.base.BaseFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFusion</span></code></a></p>
 <p>Fuse views by horizontal concatenation.</p>
 <p>Output shape is
 <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">sum(n_features_i))</span></code>.</p>
@@ -340,7 +347,7 @@ WeightedProductFusion  per-view weighted product of normalized views, after a ke
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples"><em>n_samples</em></a><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
 <li><p><strong>y</strong> (<em>ignored for unsupervised methods</em>)</p></li>
 </ul>
 </dd>
@@ -359,7 +366,7 @@ WeightedProductFusion  per-view weighted product of normalized views, after a ke
 <dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray of shape (n_samples, n_components)</p>
+<dd class="field-even"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>, n_components)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -369,7 +376,7 @@ WeightedProductFusion  per-view weighted product of normalized views, after a ke
 <dl class="py class">
 <dt class="sig sig-object py" id="polyview.fusion.early.NormalizedFusion">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.fusion.early.</span></span><span class="sig-name descname"><span class="pre">NormalizedFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.fusion.early.NormalizedFusion" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseMultiViewTransformer" title="polyview.base.BaseMultiViewTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseFusion" title="polyview.base.BaseFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFusion</span></code></a></p>
 <p>Fuse views after per-view z-score normalization.</p>
 <p>Each view is standardized (zero mean, unit variance per feature)
 <em>independently</em> before concatenation.  This prevents views with
@@ -412,15 +419,21 @@ for constant features.</p></li>
 <span class="sig-name descname"><span class="pre">weights_</span></span><a class="headerlink" href="#polyview.fusion.early.NormalizedFusion.weights_" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray of shape (n_views,)</p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">ndarray</span> <span class="pre">of</span> <span class="pre">shape</span> <span class="pre">(n_views,)</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fused</span> <span class="o">=</span> <span class="n">NormalizedFusion</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fused</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>          <span class="c1"># ≈ 0 for every feature</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fused</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>           <span class="c1"># ≈ 1 for every feature</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.fusion.early</span><span class="w"> </span><span class="kn">import</span> <span class="n">NormalizedFusion</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>     <span class="c1"># a view on a much larger scale</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fused</span> <span class="o">=</span> <span class="n">NormalizedFusion</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">fused</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>     <span class="c1"># every feature centred</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">fused</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>      <span class="c1"># every feature unit-scaled</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -430,7 +443,7 @@ for constant features.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples"><em>n_samples</em></a><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
 <li><p><strong>y</strong> (<em>ignored for unsupervised methods</em>)</p></li>
 </ul>
 </dd>
@@ -449,7 +462,7 @@ for constant features.</p></li>
 <dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray of shape (n_samples, n_components)</p>
+<dd class="field-even"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>, n_components)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -459,7 +472,7 @@ for constant features.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="polyview.fusion.early.WeightedFusion">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.fusion.early.</span></span><span class="sig-name descname"><span class="pre">WeightedFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.fusion.early.WeightedFusion" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseMultiViewTransformer" title="polyview.base.BaseMultiViewTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseFusion" title="polyview.base.BaseFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFusion</span></code></a></p>
 <p>Fuse views by weighted concatenation.</p>
 <p>Each view is scaled by a scalar weight before concatenation.
 Useful when you have prior knowledge that some views are more
@@ -480,13 +493,19 @@ are set to 1.0 (equivalent to <code class="docutils literal notranslate"><span c
 <dd><p>The weights actually applied (after length validation).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray of shape (n_views,)</p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">ndarray</span> <span class="pre">of</span> <span class="pre">shape</span> <span class="pre">(n_views,)</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fused</span> <span class="o">=</span> <span class="n">WeightedFusion</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.fusion.early</span><span class="w"> </span><span class="kn">import</span> <span class="n">WeightedFusion</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fused</span> <span class="o">=</span> <span class="n">WeightedFusion</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fused</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(50, 10)</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -496,7 +515,7 @@ are set to 1.0 (equivalent to <code class="docutils literal notranslate"><span c
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples"><em>n_samples</em></a><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
 <li><p><strong>y</strong> (<em>ignored for unsupervised methods</em>)</p></li>
 </ul>
 </dd>
@@ -515,7 +534,7 @@ are set to 1.0 (equivalent to <code class="docutils literal notranslate"><span c
 <dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray of shape (n_samples, n_components)</p>
+<dd class="field-even"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>, n_components)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -580,7 +599,6 @@ are set to 1.0 (equivalent to <code class="docutils literal notranslate"><span c
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Early Fusion</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a></li>
 <li><a class="reference internal" href="#polyview.fusion.early.ConcatFusion"><code class="docutils literal notranslate"><span class="pre">ConcatFusion</span></code></a><ul>
 <li><a class="reference internal" href="#polyview.fusion.early.ConcatFusion.n_views_in_"><code class="docutils literal notranslate"><span class="pre">ConcatFusion.n_views_in_</span></code></a></li>
 <li><a class="reference internal" href="#polyview.fusion.early.ConcatFusion.n_features_in_"><code class="docutils literal notranslate"><span class="pre">ConcatFusion.n_features_in_</span></code></a></li>
@@ -614,7 +632,7 @@ are set to 1.0 (equivalent to <code class="docutils literal notranslate"><span c
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=d45e8c67"></script>
+</div><script src="../_static/documentation_options.js?v=01f34227"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

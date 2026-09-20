@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Base API" href="../base/index.html"><link rel="prev" title="GCCA" href="gcca.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="MvMDS" href="multiviewmds.html"><link rel="prev" title="GCCA" href="gcca.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>MCCA - polyview 0.0.1 documentation</title>
+        <title>MCCA - polyview 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -163,7 +163,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">polyview 0.0.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">polyview 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,7 +187,7 @@
     <img class="sidebar-logo" src="../_static/polyview.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">polyview 0.0.1 documentation</span>
+  <span class="sidebar-brand-text">polyview 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,12 +204,14 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/multiviewdataset.html">Multi-view dataset container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="gcca.html">GCCA</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">MCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiviewmds.html">MvMDS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
@@ -217,6 +219,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/view_splitter.html">View splitter</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -225,12 +228,25 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../imputation/index.html">Imputation</a><input aria-label="Toggle navigation of Imputation" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/simple.html">Simple imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/knn.html">Nearest-neighbour imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/cross_view.html">Cross-view regression imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/drop.html">Complete-case analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/mask.html">Missingness masks</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/kernels.html">Kernel utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/linalg.html">Linear-algebra utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -288,6 +304,7 @@ and MAXVAR criteria, selectable via the <code class="docutils literal notranslat
 <li><p><strong>objective</strong> (<em>{&quot;sumcor&quot;</em><em>, </em><em>&quot;maxvar&quot;}</em><em>, </em><em>default=&quot;sumcor&quot;</em>) – Kettenring objective variant used during fitting.</p></li>
 <li><p><strong>output</strong> (<em>{&quot;concat&quot;</em><em>, </em><em>&quot;mean&quot;</em><em>, </em><em>&quot;list&quot;}</em><em>, </em><em>default=&quot;concat&quot;</em>) – How to combine per-view projections in <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p></li>
 <li><p><strong>centre</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to center columns of each view before fitting.</p></li>
+<li><p><strong>eigen_solver</strong> (<em>{&quot;auto&quot;</em><em>, </em><em>&quot;dense&quot;</em><em>, </em><em>&quot;arpack&quot;}</em><em>, </em><em>default=&quot;auto&quot;</em>) – Solver for the top <code class="docutils literal notranslate"><span class="pre">n_components</span></code> eigenvectors. “dense” uses LAPACK restricted to the requested eigenpairs; “arpack” uses an iterative Lanczos solver (matrix-free for <code class="docutils literal notranslate"><span class="pre">&quot;maxvar&quot;</span></code>, so the (n, n) smoother matrix is never formed). “auto” picks “arpack” when the problem size exceeds 200 and <code class="docutils literal notranslate"><span class="pre">n_components</span> <span class="pre">&lt;</span> <span class="pre">10</span></code> for <code class="docutils literal notranslate"><span class="pre">&quot;sumcor&quot;</span></code>, and, for <code class="docutils literal notranslate"><span class="pre">&quot;maxvar&quot;</span></code>, when <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">&gt;</span> <span class="pre">200</span></code> and the views have fewer features in total than there are samples; “dense” otherwise.</p></li>
 <li><p><strong>n_views</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Expected number of views.</p></li>
 </ul>
 </dd>
@@ -360,7 +377,7 @@ and MAXVAR criteria, selectable via the <code class="docutils literal notranslat
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples"><em>n_samples</em></a><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
 <li><p><strong>y</strong> (<em>ignored for unsupervised methods</em>)</p></li>
 </ul>
 </dd>
@@ -379,7 +396,7 @@ and MAXVAR criteria, selectable via the <code class="docutils literal notranslat
 <dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray of shape (n_samples, n_components)</p>
+<dd class="field-even"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>, n_components)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -393,12 +410,12 @@ and MAXVAR criteria, selectable via the <code class="docutils literal notranslat
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../base/index.html">
+          <a class="next-page" href="multiviewmds.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Base API</div>
+                <div class="title">MvMDS</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -464,7 +481,7 @@ and MAXVAR criteria, selectable via the <code class="docutils literal notranslat
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=d45e8c67"></script>
+</div><script src="../_static/documentation_options.js?v=01f34227"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

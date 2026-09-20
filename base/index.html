@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Augmentation" href="../augmentation/index.html"><link rel="prev" title="MCCA" href="../embedd/mcca.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Augmentation" href="../augmentation/index.html"><link rel="prev" title="MvMDS" href="../embedd/multiviewmds.html">
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Base API - polyview 0.0.1 documentation</title>
+        <title>Base API - polyview 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -163,7 +163,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">polyview 0.0.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">polyview 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,7 +187,7 @@
     <img class="sidebar-logo" src="../_static/polyview.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">polyview 0.0.1 documentation</span>
+  <span class="sidebar-brand-text">polyview 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,12 +204,14 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/multiviewdataset.html">Multi-view dataset container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/mcca.html">MCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedd/multiviewmds.html">MvMDS</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Base API</a></li>
@@ -217,6 +219,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/view_splitter.html">View splitter</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -225,12 +228,25 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../imputation/index.html">Imputation</a><input aria-label="Toggle navigation of Imputation" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/simple.html">Simple imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/knn.html">Nearest-neighbour imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/cross_view.html">Cross-view regression imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/drop.html">Complete-case analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/mask.html">Missingness masks</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/kernels.html">Kernel utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/linalg.html">Linear-algebra utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -270,19 +286,453 @@
         <article role="main" id="furo-main-content">
           <section id="base-api">
 <h1>Base API<a class="headerlink" href="#base-api" title="Link to this heading">¶</a></h1>
-<p>Core base classes shared across polyview modules.</p>
-<section id="design-contract-for-every-subclass">
-<h2>Design contract for every subclass<a class="headerlink" href="#design-contract-for-every-subclass" title="Link to this heading">¶</a></h2>
+<p>Core base classes and mixins for building polyview algorithms.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">polyview.base</span></code> module provides a unified architecture for multi-view learning algorithms.
+All polyview estimators inherit from one of the base classes, which handle:</p>
+<ul class="simple">
+<li><p><strong>Input validation</strong> and normalization of multi-view data</p></li>
+<li><p><strong>Sklearn compatibility</strong> (introspection, parameter validation, cloning)</p></li>
+<li><p><strong>Semantic contracts</strong> to signal algorithm intent to consumers</p></li>
+<li><p><strong>Common workflows</strong> (fit, transform, predict, fit_transform, fit_predict)</p></li>
+</ul>
+<section id="why-multiple-base-classes">
+<h3>Why Multiple Base Classes?<a class="headerlink" href="#why-multiple-base-classes" title="Link to this heading">¶</a></h3>
+<p>The architecture uses multiple specialized base classes rather than a single monolithic base for several important reasons:</p>
+<ol class="arabic">
+<li><p><strong>Semantic clarity</strong>: Each base class signals what the estimator does:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseFusion</span></code> → “This combines views into a single array”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseMultiViewClusterer</span></code> → “This produces cluster labels”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseMultiViewEmbedder</span></code> → “This produces a low-dimensional embedding”</p></li>
+</ul>
+<p>This allows downstream code (like <code class="docutils literal notranslate"><span class="pre">PolyPipeline</span></code>) to make intelligent decisions about visualization, mode transitions, and validation.</p>
+</li>
+<li><p><strong>Enforced contracts</strong>: Each base provides specific interface contracts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code> requires <code class="docutils literal notranslate"><span class="pre">transform()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseMultiViewClusterer</span></code> requires <code class="docutils literal notranslate"><span class="pre">labels_</span></code> attribute after fitting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseLateFusion</span></code> requires <code class="docutils literal notranslate"><span class="pre">predict()</span></code> on per-view predictions</p></li>
+</ul>
+<p>These contracts prevent accidental misuse and enable automated checks.</p>
+</li>
+<li><p><strong>Extensibility</strong>: New specialized bases can be added without breaking existing code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseFusion</span></code> supports both early and intermediate fusion paradigms</p></li>
+<li><p>New bases (e.g., <code class="docutils literal notranslate"><span class="pre">BaseMultiViewRegressor</span></code>) can be added as the library grows</p></li>
+<li><p>Consumers can check <code class="docutils literal notranslate"><span class="pre">isinstance(step,</span> <span class="pre">BaseFusion)</span></code> for specific behavior</p></li>
+</ul>
+</li>
+<li><p><strong>Composition via mixins</strong>: Mixins (<code class="docutils literal notranslate"><span class="pre">MultiViewTransformerMixin</span></code>, <code class="docutils literal notranslate"><span class="pre">MultiViewClusterMixin</span></code>, <code class="docutils literal notranslate"><span class="pre">MultiViewEmbedderMixin</span></code>) separate concerns and can be mixed with different base classes as needed.</p></li>
+</ol>
+<p>This design pattern, borrowed from sklearn and scikit-learn-compatible libraries, provides clarity and flexibility without overwhelming complexity.</p>
+</section>
+<section id="design-contract">
+<h3>Design Contract<a class="headerlink" href="#design-contract" title="Link to this heading">¶</a></h3>
+<p>Every polyview estimator follows these conventions:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">__init__</span></code> stores hyperparameters only — no data, no fitting.</p></li>
 <li><p>Every hyperparameter must be a keyword argument with a default.</p></li>
 <li><p>Learned attributes are written as <code class="docutils literal notranslate"><span class="pre">attr_</span></code> (trailing underscore), following sklearn convention, so <code class="docutils literal notranslate"><span class="pre">check_is_fitted</span></code> works.</p></li>
 <li><p>Views are always passed as <code class="docutils literal notranslate"><span class="pre">list[np.ndarray]</span></code> (or a <code class="docutils literal notranslate"><span class="pre">MultiViewDataset</span></code>), <em>never</em> as a single array.</p></li>
 </ul>
-<dl class="py class" id="module-polyview.base">
+</section>
+<section id="inheritance-hierarchy">
+<h3>Inheritance Hierarchy<a class="headerlink" href="#inheritance-hierarchy" title="Link to this heading">¶</a></h3>
+<p>The base classes form a hierarchy:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>BaseMultiView (ABC)
+├── BaseMultiViewTransformer (+ MultiViewTransformerMixin)
+│   ├── BaseFusion
+│   │   └── Used by: Fusion methods (ConcatFusion, KernelFusion, etc.)
+│   └── Used by: Canonical correlation and other general transformers
+├── BaseMultiViewClusterer (+ MultiViewClusterMixin)
+│   └── Used by: Co-training, spectral clustering, NMF methods
+└── BaseMultiViewEmbedder (+ MultiViewEmbedderMixin)
+    └── Used by: MultiViewMDS, and other embedding-specific algorithms
+
+BaseEstimator (ABC)
+└── BaseLateFusion
+    └── Used by: Late fusion voting and prediction aggregation
+</pre></div>
+</div>
+</section>
+</section>
+<section id="multiviewdataset">
+<h2>MultiViewDataset<a class="headerlink" href="#multiviewdataset" title="Link to this heading">¶</a></h2>
+<p><strong>Purpose</strong>: Unified container for multi-view datasets.</p>
+<p>While all estimators accept lists of views (<code class="docutils literal notranslate"><span class="pre">list[np.ndarray]</span></code>), the <code class="docutils literal notranslate"><span class="pre">MultiViewDataset</span></code> class provides a richer container that:</p>
+<ul class="simple">
+<li><p><strong>Stores views</strong> as an ordered, immutable collection</p></li>
+<li><p><strong>Attaches metadata</strong> (view names, sample labels) to the data</p></li>
+<li><p><strong>Enables convenient access</strong> via indexing (e.g., <code class="docutils literal notranslate"><span class="pre">mvd[&quot;audio&quot;]</span></code>) or iteration</p></li>
+<li><p><strong>Provides utilities</strong> like <code class="docutils literal notranslate"><span class="pre">train_test_split()</span></code> for common workflows</p></li>
+<li><p><strong>Simplifies pipelines</strong> by bundling data and metadata together</p></li>
+</ul>
+<p><strong>When to use</strong>:</p>
+<ul class="simple">
+<li><p>Building complete multi-view datasets with labels and names</p></li>
+<li><p>Organizing complex experiments with many views</p></li>
+<li><p>Creating reproducible data loaders for benchmarking</p></li>
+<li><p>Passing data through pipelines that track view identity</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polyview</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiViewDataset</span>
+
+<span class="c1"># Create multi-view dataset with names and labels</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>   <span class="c1"># acoustic features</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>   <span class="c1"># visual features</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># class labels</span>
+
+<span class="n">mvd</span> <span class="o">=</span> <span class="n">MultiViewDataset</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">],</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+    <span class="n">view_names</span><span class="o">=</span><span class="p">[</span><span class="s2">"audio"</span><span class="p">,</span> <span class="s2">"video"</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Access by view name or index</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mvd</span><span class="p">[</span><span class="s2">"audio"</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>        <span class="c1"># (100, 10)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mvd</span><span class="o">.</span><span class="n">views</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>        <span class="c1"># (100, 20)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mvd</span><span class="o">.</span><span class="n">n_views</span><span class="p">)</span>               <span class="c1"># 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mvd</span><span class="o">.</span><span class="n">n_samples</span><span class="p">)</span>             <span class="c1"># 100</span>
+
+<span class="c1"># Convenient data splitting</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">mvd</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Key attributes</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">views</span></code> — List of numpy arrays (one per view)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">labels</span></code> — Sample labels (if provided)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">view_names</span></code> — Human-readable names for each view</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_views</span></code> — Number of views</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_samples</span></code> — Number of samples (shared across views)</p></li>
+</ul>
+<p><strong>Note</strong>: While <code class="docutils literal notranslate"><span class="pre">MultiViewDataset</span></code> provides convenience, all polyview estimators accept plain lists of arrays. Use <code class="docutils literal notranslate"><span class="pre">MultiViewDataset</span></code> when you need the additional metadata and utilities.</p>
+</section>
+<section id="base-classes-mixins">
+<h2>Base Classes &amp; Mixins<a class="headerlink" href="#base-classes-mixins" title="Link to this heading">¶</a></h2>
+<section id="basemultiview">
+<h3>BaseMultiView<a class="headerlink" href="#basemultiview" title="Link to this heading">¶</a></h3>
+<p><strong>Role</strong>: Foundation for all polyview algorithms.</p>
+<p><strong>Responsibilities</strong>:</p>
+<ul class="simple">
+<li><p>Validates and normalizes list-of-views input</p></li>
+<li><p>Stores view dimensions (<code class="docutils literal notranslate"><span class="pre">n_views_in_</span></code>, <code class="docutils literal notranslate"><span class="pre">n_features_in_</span></code>, <code class="docutils literal notranslate"><span class="pre">n_samples_</span></code>)</p></li>
+<li><p>Supports sklearn utilities (<code class="docutils literal notranslate"><span class="pre">get_params()</span></code>, <code class="docutils literal notranslate"><span class="pre">set_params()</span></code>, <code class="docutils literal notranslate"><span class="pre">clone()</span></code>)</p></li>
+<li><p>Enforces view consistency across <code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">transform</span></code></p></li>
+</ul>
+<p><strong>Key methods</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_validate_views(views,</span> <span class="pre">*,</span> <span class="pre">accept_sparse=False,</span> <span class="pre">reset=True)</span></code> — Validates and coerces multi-view input</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit(views,</span> <span class="pre">y=None)</span></code> — Abstract; subclasses must implement</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyAlgorithm</span><span class="p">(</span><span class="n">BaseMultiView</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted_</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+</div>
+</section>
+<section id="multiviewtransformermixin">
+<h3>MultiViewTransformerMixin<a class="headerlink" href="#multiviewtransformermixin" title="Link to this heading">¶</a></h3>
+<p><strong>Role</strong>: Signals that an algorithm produces a <em>combined</em> output from multiple views.</p>
+<p><strong>Responsibilities</strong>:</p>
+<ul class="simple">
+<li><p>Enforces <code class="docutils literal notranslate"><span class="pre">transform(views)</span></code> interface</p></li>
+<li><p>Provides default <code class="docutils literal notranslate"><span class="pre">fit_transform()</span></code> that chains <code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">transform</span></code></p></li>
+<li><p>Output is typically a single array (fused representation)</p></li>
+</ul>
+<p><strong>Key methods</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">transform(views)</span></code> — Abstract; must return <code class="docutils literal notranslate"><span class="pre">ndarray</span> <span class="pre">of</span> <span class="pre">shape</span> <span class="pre">(n_samples,</span> <span class="pre">n_components)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_transform(views,</span> <span class="pre">y=None)</span></code> — Default implementation calls <code class="docutils literal notranslate"><span class="pre">fit</span></code> then <code class="docutils literal notranslate"><span class="pre">transform</span></code></p></li>
+</ul>
+<p><strong>Used by</strong>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../fusion/early.html#polyview.fusion.early.ConcatFusion" title="polyview.fusion.early.ConcatFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.fusion.early.ConcatFusion</span></code></a> — concatenates views feature-wise</p></li>
+<li><p><a class="reference internal" href="../fusion/early.html#polyview.fusion.early.WeightedFusion" title="polyview.fusion.early.WeightedFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.fusion.early.WeightedFusion</span></code></a> — weighted sum of views</p></li>
+<li><p><a class="reference internal" href="../fusion/early.html#polyview.fusion.early.NormalizedFusion" title="polyview.fusion.early.NormalizedFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.fusion.early.NormalizedFusion</span></code></a> — normalized view fusion</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.fusion.KernelFusion</span></code> — kernel-based fusion</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.embed.GCCA</span></code> — generalized canonical correlation analysis</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.embed.MCCA</span></code> — multiview canonical correlation analysis</p></li>
+</ul>
+</section>
+<section id="multiviewclustermixin">
+<h3>MultiViewClusterMixin<a class="headerlink" href="#multiviewclustermixin" title="Link to this heading">¶</a></h3>
+<p><strong>Role</strong>: Signals that an algorithm produces cluster labels.</p>
+<p><strong>Responsibilities</strong>:</p>
+<ul class="simple">
+<li><p>Enforces <code class="docutils literal notranslate"><span class="pre">fit()</span></code> to store <code class="docutils literal notranslate"><span class="pre">labels_</span></code> attribute</p></li>
+<li><p>Provides <code class="docutils literal notranslate"><span class="pre">fit_predict()</span></code> convenience method</p></li>
+<li><p>Output is a 1-D integer label array</p></li>
+</ul>
+<p><strong>Key methods</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_predict(views,</span> <span class="pre">y=None)</span></code> — Calls <code class="docutils literal notranslate"><span class="pre">fit</span></code> then returns <code class="docutils literal notranslate"><span class="pre">labels_</span></code></p></li>
+</ul>
+<p><strong>Used by</strong>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../cluster/mv_kmeans.html#polyview.cluster.mv_kmeans.MultiViewKMeans" title="polyview.cluster.mv_kmeans.MultiViewKMeans"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.cluster.mv_kmeans.MultiViewKMeans</span></code></a> — multi-view k-means clustering</p></li>
+<li><p><a class="reference internal" href="../cluster/mv_coreg_sc.html#polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering" title="polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.cluster.mv_coreg_sc.MultiViewCoRegSpectralClustering</span></code></a> — co-regularized spectral clustering</p></li>
+<li><p><a class="reference internal" href="../cluster/mv_cotrain_sc.html#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering" title="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering</span></code></a> — co-training spectral clustering</p></li>
+<li><p><a class="reference internal" href="../cluster/mv_nmf.html#polyview.cluster.mv_nmf.MultiViewNMF" title="polyview.cluster.mv_nmf.MultiViewNMF"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.cluster.mv_nmf.MultiViewNMF</span></code></a> — multi-view non-negative matrix factorization</p></li>
+</ul>
+</section>
+<section id="multiviewembeddermixin">
+<h3>MultiViewEmbedderMixin<a class="headerlink" href="#multiviewembeddermixin" title="Link to this heading">¶</a></h3>
+<p><strong>Role</strong>: Signals that an algorithm produces a <em>low-dimensional embedding</em>.</p>
+<p><strong>Responsibilities</strong>:</p>
+<ul class="simple">
+<li><p>Extends <code class="docutils literal notranslate"><span class="pre">MultiViewTransformerMixin</span></code> (inherits <code class="docutils literal notranslate"><span class="pre">transform</span></code> and <code class="docutils literal notranslate"><span class="pre">fit_transform</span></code>)</p></li>
+<li><p>Provides <code class="docutils literal notranslate"><span class="pre">embedding_</span></code> property (with getter/setter) that stores the learned embedding</p></li>
+<li><p>Semantically signals that output is an embedding, not just a feature transformation</p></li>
+</ul>
+<p><strong>Key properties</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">embedding_</span></code> — The learned low-dimensional representation (<code class="docutils literal notranslate"><span class="pre">ndarray</span> <span class="pre">of</span> <span class="pre">shape</span> <span class="pre">(n_samples,</span> <span class="pre">n_components)</span></code>)</p></li>
+</ul>
+<p><strong>Used by</strong>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../embedd/multiviewmds.html#polyview.embed.multiviewmds.MultiViewMDS" title="polyview.embed.multiviewmds.MultiViewMDS"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.embed.multiviewmds.MultiViewMDS</span></code></a> — multi-view multidimensional scaling with adaptive weighting</p></li>
+</ul>
+</section>
+</section>
+<section id="concrete-base-classes">
+<h2>Concrete Base Classes<a class="headerlink" href="#concrete-base-classes" title="Link to this heading">¶</a></h2>
+<section id="basemultiviewtransformer">
+<h3>BaseMultiViewTransformer<a class="headerlink" href="#basemultiviewtransformer" title="Link to this heading">¶</a></h3>
+<p><strong>Role</strong>: Ready-to-subclass base for building multi-view <em>transformation</em> algorithms (both fusion and embedding preparation).</p>
+<p><strong>Combines</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseMultiView</span></code> — Input validation, sklearn compatibility</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MultiViewTransformerMixin</span></code> — <code class="docutils literal notranslate"><span class="pre">transform()</span></code> and <code class="docutils literal notranslate"><span class="pre">fit_transform()</span></code> interface</p></li>
+</ul>
+<p><strong>Subclasses must implement</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit(views,</span> <span class="pre">y=None)</span></code> — Learn parameters from multi-view data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transform(views)</span></code> — Apply transformation and return a single fused array</p></li>
+</ul>
+<p><strong>Subclassed by</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseFusion</span></code> — For methods that combine views (early, intermediate, or other fusion paradigms)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseMultiViewEmbedder</span></code> — For methods that produce embeddings</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyTransformer</span><span class="p">(</span><span class="n">BaseMultiViewTransformer</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">views</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># Learn from views</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">):</span>
+        <span class="n">views</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Combine views into single output</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="basefusion">
+<h3>BaseFusion<a class="headerlink" href="#basefusion" title="Link to this heading">¶</a></h3>
+<p><strong>Role</strong>: Ready-to-subclass base for <em>fusion</em> methods that combine views into a single fused representation.</p>
+<p>Supports multiple fusion paradigms:</p>
+<ul class="simple">
+<li><p><strong>Early fusion</strong>: Combines views before any feature extraction</p></li>
+<li><p><strong>Intermediate fusion</strong>: Combines views after per-view processing (future capability)</p></li>
+</ul>
+<p><strong>Combines</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code> — Full transformer interface and multi-view handling</p></li>
+<li><p>Semantic signal to consumers (e.g., <code class="docutils literal notranslate"><span class="pre">PolyPipeline</span></code>) that output is single-view</p></li>
+</ul>
+<p><strong>Subclasses must implement</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit(views,</span> <span class="pre">y=None)</span></code> — Learn fusion parameters from multi-view data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transform(views)</span></code> — Fuse views and return a single array</p></li>
+</ul>
+<p><strong>Current implementations (early fusion)</strong>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../fusion/early.html#polyview.fusion.early.ConcatFusion" title="polyview.fusion.early.ConcatFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.fusion.early.ConcatFusion</span></code></a> — horizontal concatenation</p></li>
+<li><p><a class="reference internal" href="../fusion/early.html#polyview.fusion.early.WeightedFusion" title="polyview.fusion.early.WeightedFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.fusion.early.WeightedFusion</span></code></a> — weighted concatenation</p></li>
+<li><p><a class="reference internal" href="../fusion/early.html#polyview.fusion.early.NormalizedFusion" title="polyview.fusion.early.NormalizedFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.fusion.early.NormalizedFusion</span></code></a> — normalized concatenation</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.fusion.KernelFusion</span></code> — kernel-based fusion</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyConcatFusion</span><span class="p">(</span><span class="n">BaseFusion</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">views</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_features_out_</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">views</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">):</span>
+        <span class="n">views</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note</strong>: All fusion methods are automatically recognized in <code class="docutils literal notranslate"><span class="pre">PolyPipeline</span></code> as producing single-view output, enabling correct diagram coloring and mode transitions.</p>
+</section>
+<section id="basemultiviewclusterer">
+<h3>BaseMultiViewClusterer<a class="headerlink" href="#basemultiviewclusterer" title="Link to this heading">¶</a></h3>
+<p><strong>Role</strong>: Ready-to-subclass base for building <em>multi-view clustering</em> algorithms.</p>
+<p><strong>Combines</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseMultiView</span></code> — Input validation, sklearn compatibility</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MultiViewClusterMixin</span></code> — <code class="docutils literal notranslate"><span class="pre">fit_predict()</span></code> convenience method</p></li>
+</ul>
+<p><strong>Subclasses must implement</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit(views,</span> <span class="pre">y=None)</span></code> — Learn clustering model, store labels in <code class="docutils literal notranslate"><span class="pre">labels_</span></code> attribute</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyClusterer</span><span class="p">(</span><span class="n">BaseMultiViewClusterer</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">n_clusters</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">views</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># Clustering algorithm logic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+</div>
+</section>
+<section id="basemultiviewembedder">
+<h3>BaseMultiViewEmbedder<a class="headerlink" href="#basemultiviewembedder" title="Link to this heading">¶</a></h3>
+<p><strong>Role</strong>: Ready-to-subclass base for building <em>multi-view embedding</em> algorithms.</p>
+<p><strong>Combines</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseMultiView</span></code> — Input validation, sklearn compatibility</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MultiViewEmbedderMixin</span></code> — <code class="docutils literal notranslate"><span class="pre">transform()</span></code> and <code class="docutils literal notranslate"><span class="pre">embedding_</span></code> property</p></li>
+</ul>
+<p><strong>Subclasses must implement</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit(views,</span> <span class="pre">y=None)</span></code> — Learn embedding parameters, store in <code class="docutils literal notranslate"><span class="pre">embedding_</span></code> attribute</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">transform(views)</span></code> — Return the embedding (typically non-parametric, returns stored <code class="docutils literal notranslate"><span class="pre">embedding_</span></code>)</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyEmbedder</span><span class="p">(</span><span class="n">BaseMultiViewEmbedder</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">views</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># Compute embedding</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_</span>  <span class="c1"># Return learned embedding</span>
+</pre></div>
+</div>
+</section>
+<section id="baselatefusion">
+<h3>BaseLateFusion<a class="headerlink" href="#baselatefusion" title="Link to this heading">¶</a></h3>
+<p><strong>Role</strong>: Abstract base for <em>late-fusion</em> aggregation methods that combine per-view predictions.</p>
+<p><strong>Inheritance</strong>:</p>
+<ul class="simple">
+<li><p>Inherits from <code class="docutils literal notranslate"><span class="pre">BaseEstimator</span></code> and <code class="docutils literal notranslate"><span class="pre">ABC</span></code></p></li>
+<li><p>Uses <code class="docutils literal notranslate"><span class="pre">&#64;abstractmethod</span></code> decorator to enforce implementation (early detection of incomplete subclasses)</p></li>
+</ul>
+<p><strong>Contract</strong>:</p>
+<ul class="simple">
+<li><p>Takes <strong>list of 1-D prediction vectors</strong> (one per view), not multi-view feature matrices</p></li>
+<li><p>Returns a single <strong>aggregated 1-D prediction</strong> vector</p></li>
+<li><p>Used in <code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.pipeline.PolyPipeline</span></code> to aggregate per-view classifier outputs</p></li>
+</ul>
+<p><strong>Abstract methods</strong> (subclasses must implement):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit(preds_by_view,</span> <span class="pre">y=None)</span></code> — Learn aggregation parameters from view-specific predictions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">predict(preds_by_view)</span></code> — Aggregate predictions and return combined output</p></li>
+</ul>
+<p><strong>Concrete methods</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_predict(preds_by_view,</span> <span class="pre">y=None)</span></code> — Convenience method that calls <code class="docutils literal notranslate"><span class="pre">fit</span></code> then <code class="docutils literal notranslate"><span class="pre">predict</span></code></p></li>
+</ul>
+<p><strong>Used by</strong>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../fusion/late.html#polyview.fusion.late.MajorityVote" title="polyview.fusion.late.MajorityVote"><code class="xref py py-class docutils literal notranslate"><span class="pre">polyview.fusion.late.MajorityVote</span></code></a> — aggregates predictions via majority voting</p></li>
+<li><p>Custom voting or averaging schemes in pipelines</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyLateFusion</span><span class="p">(</span><span class="n">BaseLateFusion</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds_by_view</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Learn aggregation parameters</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds_by_view</span><span class="p">):</span>
+        <span class="c1"># Average predictions across views</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">preds_by_view</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">P</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage-patterns">
+<h2>Usage Patterns<a class="headerlink" href="#usage-patterns" title="Link to this heading">¶</a></h2>
+<p><strong>Choosing the Right Base</strong>:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Goal</p></th>
+<th class="head"><p>Base Class</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fuse views into single representation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BaseFusion</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Generic multi-view transformation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Learn low-dimensional embedding</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BaseMultiViewEmbedder</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Perform multi-view clustering</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BaseMultiViewClusterer</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Aggregate per-view predictions</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BaseLateFusion</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-polyview.base">
+<span id="api-reference"></span><h2>API Reference<a class="headerlink" href="#module-polyview.base" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="polyview.base.BaseFusion">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.base.</span></span><span class="sig-name descname"><span class="pre">BaseFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.base.BaseFusion" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#polyview.base.BaseMultiViewTransformer" title="polyview.base.BaseMultiViewTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewTransformer</span></code></a></p>
+<p>Ready-to-subclass base for multi-view fusion methods.</p>
+<p>Fusion methods combine multiple views into a single fused representation
+before downstream processing (clustering, classification, etc.).</p>
+<p>This base is used for:</p>
+<ul class="simple">
+<li><p><strong>Early fusion</strong>: Combining views before any feature extraction</p></li>
+<li><p><strong>Intermediate fusion</strong>: Combining views after per-view processing</p></li>
+</ul>
+<p>All fusion methods produce single-view output from multi-view input.</p>
+<p>Semantically signals to consumers (e.g., <code class="docutils literal notranslate"><span class="pre">PolyPipeline</span></code>) that this
+estimator combines multiple input streams into one output stream.</p>
+<p>Subclasses must implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">transform()</span></code>.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">MyConcatFusion</span><span class="p">(</span><span class="n">BaseFusion</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">validated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_views</span><span class="p">(</span><span class="n">views</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">validated</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="polyview.base.BaseLateFusion">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.base.</span></span><span class="sig-name descname"><span class="pre">BaseLateFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.base.BaseLateFusion" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Base class for late-fusion estimators over per-view predictions.</p>
 <p>Late-fusion estimators consume one 1-D prediction vector per view and
 return one fused 1-D prediction vector.</p>
@@ -300,18 +750,57 @@ return one fused 1-D prediction vector.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.base.BaseLateFusion.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds_by_view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.base.BaseLateFusion.fit" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds_by_view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#polyview.base.BaseLateFusion" title="polyview.base.BaseLateFusion"><span class="pre">BaseLateFusion</span></a></span></span><a class="headerlink" href="#polyview.base.BaseLateFusion.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Fit the late-fusion model from per-view predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preds_by_view</strong> (<em>list</em><em> of </em><em>array-like</em>) – One 1-D prediction vector per view.</p></li>
+<li><p><strong>y</strong> (<em>ignored</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.base.BaseLateFusion.fit_predict">
 <span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds_by_view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.base.BaseLateFusion.fit_predict" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Fit and immediately fuse predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preds_by_view</strong> (<em>list</em><em> of </em><em>array-like</em>) – One 1-D prediction vector per view.</p></li>
+<li><p><strong>y</strong> (<em>ignored</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Fused prediction vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.base.BaseLateFusion.predict">
-<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds_by_view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.base.BaseLateFusion.predict" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preds_by_view</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#polyview.base.BaseLateFusion.predict" title="Link to this definition">¶</a></dt>
+<dd><p>Fuse per-view predictions into a single prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>preds_by_view</strong> (<em>list</em><em> of </em><em>array-like</em>) – One 1-D prediction vector per view.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Fused prediction vector.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>,)</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -353,7 +842,7 @@ raises if the data has a different count.  <code class="docutils literal notrans
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples"><em>n_samples</em></a><em>, </em><em>n_features_i</em><em>)</em>)</p></li>
 <li><p><strong>y</strong> (<em>ignored for unsupervised methods</em>)</p></li>
 </ul>
 </dd>
@@ -432,7 +921,7 @@ Store the embedding in <code class="docutils literal notranslate"><span class="p
 <p>Provides <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code> and enforces that <code class="docutils literal notranslate"><span class="pre">fit</span></code> stores
 <code class="docutils literal notranslate"><span class="pre">labels_</span></code> as a fitted attribute.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">ToyClusterer</span><span class="p">(</span><span class="n">MultiViewClusterMixin</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">ToyClusterer</span><span class="p">(</span><span class="n">BaseMultiView</span><span class="p">,</span> <span class="n">MultiViewClusterMixin</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">labels_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">views</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
@@ -455,7 +944,7 @@ Store the embedding in <code class="docutils literal notranslate"><span class="p
 <dd class="field-even"><p><strong>labels</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+<dd class="field-odd"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -473,7 +962,7 @@ so callers can make different downstream choices (e.g. skip PCA
 post-processing).</p>
 <p>Subclasses should store the final embedding in <code class="docutils literal notranslate"><span class="pre">embedding_</span></code>.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">ToyEmbedder</span><span class="p">(</span><span class="n">MultiViewEmbedderMixin</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">ToyEmbedder</span><span class="p">(</span><span class="n">BaseMultiView</span><span class="p">,</span> <span class="n">MultiViewEmbedderMixin</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">views</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">views</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span>
@@ -536,7 +1025,7 @@ overridden for efficiency (e.g. CCA can reuse intermediate results).</p>
 <dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray of shape (n_samples, n_components)</p>
+<dd class="field-even"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>, n_components)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -560,14 +1049,14 @@ overridden for efficiency (e.g. CCA can reuse intermediate results).</p>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../embedd/mcca.html">
+          <a class="prev-page" href="../embedd/multiviewmds.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">MCCA</div>
+                <div class="title">MvMDS</div>
                 
               </div>
             </a>
@@ -602,7 +1091,31 @@ overridden for efficiency (e.g. CCA can reuse intermediate results).</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Base API</a><ul>
-<li><a class="reference internal" href="#design-contract-for-every-subclass">Design contract for every subclass</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#why-multiple-base-classes">Why Multiple Base Classes?</a></li>
+<li><a class="reference internal" href="#design-contract">Design Contract</a></li>
+<li><a class="reference internal" href="#inheritance-hierarchy">Inheritance Hierarchy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multiviewdataset">MultiViewDataset</a></li>
+<li><a class="reference internal" href="#base-classes-mixins">Base Classes &amp; Mixins</a><ul>
+<li><a class="reference internal" href="#basemultiview">BaseMultiView</a></li>
+<li><a class="reference internal" href="#multiviewtransformermixin">MultiViewTransformerMixin</a></li>
+<li><a class="reference internal" href="#multiviewclustermixin">MultiViewClusterMixin</a></li>
+<li><a class="reference internal" href="#multiviewembeddermixin">MultiViewEmbedderMixin</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#concrete-base-classes">Concrete Base Classes</a><ul>
+<li><a class="reference internal" href="#basemultiviewtransformer">BaseMultiViewTransformer</a></li>
+<li><a class="reference internal" href="#basefusion">BaseFusion</a></li>
+<li><a class="reference internal" href="#basemultiviewclusterer">BaseMultiViewClusterer</a></li>
+<li><a class="reference internal" href="#basemultiviewembedder">BaseMultiViewEmbedder</a></li>
+<li><a class="reference internal" href="#baselatefusion">BaseLateFusion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage-patterns">Usage Patterns</a></li>
+<li><a class="reference internal" href="#module-polyview.base">API Reference</a><ul>
+<li><a class="reference internal" href="#polyview.base.BaseFusion"><code class="docutils literal notranslate"><span class="pre">BaseFusion</span></code></a></li>
 <li><a class="reference internal" href="#polyview.base.BaseLateFusion"><code class="docutils literal notranslate"><span class="pre">BaseLateFusion</span></code></a><ul>
 <li><a class="reference internal" href="#polyview.base.BaseLateFusion.fit"><code class="docutils literal notranslate"><span class="pre">BaseLateFusion.fit()</span></code></a></li>
 <li><a class="reference internal" href="#polyview.base.BaseLateFusion.fit_predict"><code class="docutils literal notranslate"><span class="pre">BaseLateFusion.fit_predict()</span></code></a></li>
@@ -642,7 +1155,7 @@ overridden for efficiency (e.g. CCA can reuse intermediate results).</p>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=d45e8c67"></script>
+</div><script src="../_static/documentation_options.js?v=01f34227"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

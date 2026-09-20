@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Multi-View Co-Training Spectral Clustering - polyview 0.0.1 documentation</title>
+        <title>Multi-View Co-Training Spectral Clustering - polyview 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -163,7 +163,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">polyview 0.0.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">polyview 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,7 +187,7 @@
     <img class="sidebar-logo" src="../_static/polyview.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">polyview 0.0.1 documentation</span>
+  <span class="sidebar-brand-text">polyview 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,12 +204,14 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/multiviewdataset.html">Multi-view dataset container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../embedd/index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/gcca.html">GCCA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../embedd/mcca.html">MCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embedd/multiviewmds.html">MvMDS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
@@ -217,6 +219,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/view_splitter.html">View splitter</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -225,12 +228,25 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../imputation/index.html">Imputation</a><input aria-label="Toggle navigation of Imputation" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/simple.html">Simple imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/knn.html">Nearest-neighbour imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/cross_view.html">Cross-view regression imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/drop.html">Complete-case analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/mask.html">Missingness masks</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/kernels.html">Kernel utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/linalg.html">Linear-algebra utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -274,26 +290,51 @@
 <dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">polyview.cluster.mv_cotrain_sc.</span></span><span class="sig-name descname"><span class="pre">MultiViewCoTrainSpectralClustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#polyview.base.BaseMultiViewClusterer" title="polyview.base.BaseMultiViewClusterer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMultiViewClusterer</span></code></a></p>
-<p>Multi-view co-training spectral clustering algorithm.</p>
+<p>Multi-view co-training spectral clustering algorithm (Kumar &amp; Daumé, 2011).</p>
+<p>Each view starts from its own spectral embedding <code class="docutils literal notranslate"><span class="pre">U_v</span></code>: the <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code>
+leading eigenvectors of the normalised similarity <code class="docutils literal notranslate"><span class="pre">D_v^{-1/2}</span> <span class="pre">K_v</span> <span class="pre">D_v^{-1/2}</span></code>.
+At every iteration, the affinity of each view is projected onto the
+eigenspaces found in the other views, which keeps the within-cluster
+similarities the views agree on and removes the rest:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S_v</span> <span class="o">=</span> <span class="n">sym</span><span class="p">((</span><span class="n">sum_</span><span class="p">{</span><span class="n">w</span> <span class="o">!=</span> <span class="n">v</span><span class="p">}</span> <span class="n">U_w</span> <span class="n">U_w</span><span class="o">^</span><span class="n">T</span><span class="p">)</span> <span class="n">K_v</span><span class="p">),</span>   <span class="n">sym</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="n">S</span><span class="o">^</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">U_v</span> <span class="o">&lt;-</span> <span class="n">leading</span> <span class="n">eigenvectors</span> <span class="n">of</span> <span class="n">D_</span><span class="p">{</span><span class="n">S_v</span><span class="p">}</span><span class="o">^</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span> <span class="n">S_v</span> <span class="n">D_</span><span class="p">{</span><span class="n">S_v</span><span class="p">}</span><span class="o">^</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>All views are updated from the previous iteration’s embeddings. The
+row-normalised concatenation of the final <code class="docutils literal notranslate"><span class="pre">U_v</span></code> is clustered with k-means.
+The paper states the algorithm for two views; with more views, the
+projections onto the other views’ eigenspaces are summed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n_clusters</strong> (<em>int</em><em>, </em><em>default=2</em>) – The number of clusters to form.</p></li>
 <li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=10</em>) – Number of time the k-means algorithm will be run with different centroid seeds.</p></li>
-<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=50</em>) – Maximum number of iterations of the alternating optimization.</p></li>
-<li><p><strong>affinity</strong> (<em>str</em><em>, </em><em>default='rbf'</em>) – Kernel to use for computing the affinity matrix. Should be a valid metric for sklearn.metrics.pairwise.pairwise_kernels.</p></li>
-<li><p><strong>lambda_reg</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Regularization parameter for co-training terms.</p></li>
-<li><p><strong>random_state</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation for centroid initialization. Use an int to make the randomness deterministic.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=50</em>) – Number of co-training iterations. <code class="docutils literal notranslate"><span class="pre">0</span></code> gives the concatenation of the
+per-view spectral embeddings.</p></li>
+<li><p><strong>affinity</strong> (<em>str</em><em> or </em><em>callable</em><em>, </em><em>default='rbf'</em>) – Kernel to use for computing the affinity matrix. Should be a valid metric
+for sklearn.metrics.pairwise.pairwise_kernels, and must produce
+non-negative similarities.</p></li>
+<li><p><strong>lambda_reg</strong> (<em>deprecated</em>) – Has no effect. Kumar &amp; Daumé’s co-training has no regularisation
+parameter; it is kept only so that existing code keeps running and
+will be removed in a future release.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation for the eigensolver start vector and
+the k-means centroid initialization. Use an int to make the randomness
+deterministic.</p></li>
+<li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>'median'</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Kernel coefficient passed to the affinity. <code class="docutils literal notranslate"><span class="pre">None</span></code> uses the sklearn
+default (<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">n_features</span></code> for ‘rbf’). <code class="docutils literal notranslate"><span class="pre">'median'</span></code> uses the median
+heuristic: <code class="docutils literal notranslate"><span class="pre">gamma</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">(2</span> <span class="pre">*</span> <span class="pre">median(||x_i</span> <span class="pre">-</span> <span class="pre">x_j||^2))</span></code> for ‘rbf’
+(<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">median(||x_i</span> <span class="pre">-</span> <span class="pre">x_j||_1)</span></code> for ‘laplacian’).</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.embedding_">
 <span class="sig-name descname"><span class="pre">embedding_</span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.embedding_" title="Link to this definition">¶</a></dt>
-<dd><p>The concatenated spectral embeddings from all views after fitting.</p>
+<dd><p>Row-normalised concatenation of the co-trained spectral embeddings of all
+views, on which k-means is run.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np.ndarray of shape (n_samples, n_clusters * n_views)</p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">np.ndarray</span> <span class="pre">of</span> <span class="pre">shape</span> <span class="pre">(n_samples,</span> <span class="pre">n_clusters</span> <span class="pre">*</span> <span class="pre">n_views)</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -301,7 +342,11 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.objective_">
 <span class="sig-name descname"><span class="pre">objective_</span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.objective_" title="Link to this definition">¶</a></dt>
-<dd><p>The objective function values at each iteration of the optimization process.</p>
+<dd><p>Co-training does not optimise an explicit objective. This records, after
+each iteration, the mean cross-view agreement
+<code class="docutils literal notranslate"><span class="pre">tr(U_v</span> <span class="pre">U_v^T</span> <span class="pre">U_w</span> <span class="pre">U_w^T)</span> <span class="pre">/</span> <span class="pre">n_clusters</span></code> over all pairs of views, which lies
+in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> (1 means all views span the same eigenspace). It has
+<code class="docutils literal notranslate"><span class="pre">max_iter</span></code> entries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of float</p>
@@ -315,11 +360,15 @@
 <dd><p>Cluster labels for each sample after fitting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np.ndarray of shape (n_samples,)</p>
+<dd class="field-odd"><p>np.ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
 
+<p class="rubric">Notes</p>
+<p><code class="docutils literal notranslate"><span class="pre">S_v</span></code> has rank at most <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">(n_views</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">n_clusters</span></code>, so its leading
+eigenvectors are computed exactly in that low-dimensional subspace, without
+any <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">x</span> <span class="pre">n_samples</span></code> eigendecomposition after the initialisation.</p>
 <p class="rubric">References</p>
 <ul class="simple">
 <li><p>Kumar, A., &amp; Daumé, H. (2011). A co-training approach for multi-view spectral clustering.
@@ -327,8 +376,21 @@ In Proceedings of the 28th International Conference on Machine Learning (ICML).<
 </ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">views</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering" title="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering"><span class="pre">MultiViewCoTrainSpectralClustering</span></a></span></span><a class="headerlink" href="#polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit" title="Link to this definition">¶</a></dt>
+<dd><p>Fit the co-training spectral clustering model to the provided views.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>views</strong> (<em>list</em><em> of </em><em>np.ndarray</em>) – List of data matrices for each view, where each matrix has shape
+(n_samples, n_features_v). At least two views are required.</p></li>
+<li><p><strong>y</strong> (<em>ignored</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.cluster.mv_cotrain_sc.MultiViewCoTrainSpectralClustering.fit_predict">
@@ -345,7 +407,7 @@ In Proceedings of the 28th International Conference on Machine Learning (ICML).<
 <dd class="field-even"><p><strong>labels</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+<dd class="field-odd"><p>ndarray of shape (<a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples">n_samples</a>,)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -429,7 +491,7 @@ In Proceedings of the 28th International Conference on Machine Learning (ICML).<
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=d45e8c67"></script>
+</div><script src="../_static/documentation_options.js?v=01f34227"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

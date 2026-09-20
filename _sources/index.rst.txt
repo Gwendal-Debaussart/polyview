@@ -11,8 +11,10 @@ The library provides:
 - native multi-view clustering algorithms such as multi-view K-means,
   co-training spectral clustering, co-regularized spectral clustering, and
   multi-view NMF,
-- embedding methods including GCCA and MCCA,
+- embedding methods including GCCA, MCCA, and MvMDS,
 - fusion utilities for early fusion, late fusion, and kernel fusion,
+- missing-view handling, with imputation strategies ranging from per-view
+  means to nearest neighbours and cross-view regression,
 - data augmentation tools that turn a single matrix into multiple views via
   random projections, random subspaces, or multiple kernels,
 - a pipeline layer that moves between single-view and multi-view stages in a
@@ -34,6 +36,8 @@ This library is inspired by `mvlearn <https://mvlearn.github.io/>`_, which has n
   base/index
   augmentation/index
   fusion/index
+  imputation/index
   pipeline/index
+  utils/index
   examples/index
   misc/index

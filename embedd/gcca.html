@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/polyview.svg" as="image">
 
     <link rel="shortcut icon" href="../_static/polyview.svg"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>GCCA - polyview 0.0.1 documentation</title>
+        <title>GCCA - polyview 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -163,7 +163,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">polyview 0.0.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">polyview 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,7 +187,7 @@
     <img class="sidebar-logo" src="../_static/polyview.svg" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">polyview 0.0.1 documentation</span>
+  <span class="sidebar-brand-text">polyview 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -204,12 +204,14 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../datasets/index.html">Datasets</a><input aria-label="Toggle navigation of Datasets" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/multiviewdataset.html">Multi-view dataset container</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../datasets/multiview_latent_gaussian.html">Multi-view latent Gaussian dataset</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Embedd</a><input aria-label="Toggle navigation of Embedd" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">GCCA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mcca.html">MCCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiviewmds.html">MvMDS</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../base/index.html">Base API</a></li>
@@ -217,6 +219,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_projections.html">Random Projections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/random_subspace.html">Random Subspace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../augmentation/multi_kernels.html">Multi Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../augmentation/view_splitter.html">View splitter</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../fusion/index.html">Fusion methods</a><input aria-label="Toggle navigation of Fusion methods" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -225,12 +228,25 @@
 <li class="toctree-l2"><a class="reference internal" href="../fusion/late.html">Late Fusion</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../imputation/index.html">Imputation</a><input aria-label="Toggle navigation of Imputation" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/simple.html">Simple imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/knn.html">Nearest-neighbour imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/cross_view.html">Cross-view regression imputation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/drop.html">Complete-case analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../imputation/mask.html">Missingness masks</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">PolyPipeline</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utilities</a><input aria-label="Toggle navigation of Utilities" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/kernels.html">Kernel utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/linalg.html">Linear-algebra utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input aria-label="Toggle navigation of Examples" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/pipeline_workflows.html">Pipeline Workflows</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../misc/index.html">Miscellaneous</a><input aria-label="Toggle navigation of Miscellaneous" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../misc/contributing.html">Contributing to polyview</a></li>
 </ul>
 </li>
@@ -283,11 +299,16 @@
 <li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=2</em>) – Number of shared dimensions k.</p></li>
 <li><p><strong>regularisation</strong> (<em>float</em><em> or </em><em>list</em><em> of </em><em>float</em><em>, </em><em>default=1e-4</em>) – Ridge regularisation added to each view’s covariance before
 inversion.  A single float applies the same value to all views; a list gives per-view values.  Larger values = stronger regularisation (useful when d_v &gt; n or features are collinear).</p></li>
-<li><p><strong>output</strong> (<em>str {&quot;concat&quot;</em><em>, </em><em>&quot;mean&quot;</em><em>, </em><em>&quot;list&quot;}</em><em>, </em><em>default=&quot;concat&quot;</em>) – How to combine per-view projections in transform():
+<li><p><strong>output</strong> (<em>str {&quot;concat&quot;</em><em>, </em><em>&quot;mean&quot;</em><em>, </em><em>&quot;list&quot;</em><em>, </em><em>&quot;shared&quot;}</em><em>, </em><em>default=&quot;shared&quot;</em>) – How to combine per-view projections in transform():
 - “concat” : [Z1 | Z2 | … | ZM]  shape (n, M*k)
 - “mean”   : (Z1 + Z2 + … + ZM) / M  shape (n, k)
-- “list”   : [Z1, Z2, …, ZM]  list of (n, k) arrays</p></li>
+- “list”   : [Z1, Z2, …, ZM]  list of (n, k) arrays
+- “shared” : <code class="docutils literal notranslate"><span class="pre">G_</span></code>  shape (n, n_components)</p></li>
 <li><p><strong>centre</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Subtract column means from each view before fitting.</p></li>
+<li><p><strong>eigen_solver</strong> (<em>{&quot;auto&quot;</em><em>, </em><em>&quot;dense&quot;</em><em>, </em><em>&quot;arpack&quot;}</em><em>, </em><em>default=&quot;auto&quot;</em>) – Solver for the top <code class="docutils literal notranslate"><span class="pre">n_components</span></code> eigenvectors of the aggregated smoother matrix.
+- “dense”  : LAPACK, restricted to the requested eigenpairs.
+- “arpack” : iterative Lanczos solver applied matrix-free, so the (n, n) smoother matrix is never formed. Much faster and lighter in memory for large <code class="docutils literal notranslate"><span class="pre">n_samples</span></code>.
+- “auto”   : “arpack” when <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">&gt;</span> <span class="pre">200</span></code> and the views have fewer features in total than there are samples, “dense” otherwise (the leading eigenvalues then cluster and Lanczos converges slowly).</p></li>
 </ul>
 </dd>
 </dl>
@@ -336,19 +357,23 @@ inversion.  A single float applies the same value to all views; a list gives per
 </dd></dl>
 
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.embed.cca</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCCA</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcca</span> <span class="o">=</span> <span class="n">GCCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;concat&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">polyview.embed.gcca</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCCA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">X3</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcca</span> <span class="o">=</span> <span class="n">GCCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">"concat"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Z_train</span> <span class="o">=</span> <span class="n">gcca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">,</span> <span class="n">X3</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Z_test</span>  <span class="o">=</span> <span class="n">gcca</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z_train</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 30)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z_test</span> <span class="o">=</span> <span class="n">gcca</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z_test</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(20, 30)</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt>Guo, C., &amp; Wu, D. (2021). Canonical correlation analysis (CCA) based multi-view learning: An overview.</dt><dd><p>arXiv preprint arXiv:1907.01693.</p>
-</dd>
-</dl>
-</li>
+<li><p>Guo, C., &amp; Wu, D. (2021). Canonical correlation analysis (CCA) based multi-view learning: An overview.
+arXiv preprint arXiv:1907.01693.</p></li>
 </ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="polyview.embed.gcca.GCCA.canonical_correlations">
@@ -360,7 +385,7 @@ inversion.  A single float applies the same value to all views; a list gives per
 projections of view v1 and view v2.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray of shape (n_views, n_views, n_components)</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">ndarray</span> <span class="pre">of</span> <span class="pre">shape</span> <span class="pre">(n_views,</span> <span class="pre">n_views,</span> <span class="pre">n_components)</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -391,7 +416,7 @@ projections of view v1 and view v2.</p>
 <dd><p>Project views into the shared embedding space.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features_v</em><em>)</em>)</p>
+<dd class="field-odd"><p><strong>views</strong> (<em>list</em><em> of </em><em>array-like</em><em> of </em><em>shape</em><em> (</em><a class="reference internal" href="../datasets/multiviewdataset.html#polyview.dataset.multiviewdataset.MultiViewDataset.n_samples" title="polyview.dataset.multiviewdataset.MultiViewDataset.n_samples"><em>n_samples</em></a><em>, </em><em>n_features_v</em><em>)</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Depends on <code class="docutils literal notranslate"><span class="pre">output</span></code> parameter — see class docstring.</p>
@@ -480,7 +505,7 @@ projections of view v1 and view v2.</p>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=d45e8c67"></script>
+</div><script src="../_static/documentation_options.js?v=01f34227"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
