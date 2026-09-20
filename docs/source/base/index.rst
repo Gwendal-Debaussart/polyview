@@ -139,7 +139,7 @@ Base Classes & Mixins
 ---------------------
 
 BaseMultiView
-^^^^^^^^^^^^^
+~~~~~~~~~~~~~
 
 **Role**: Foundation for all polyview algorithms.
 
@@ -167,7 +167,7 @@ BaseMultiView
 
 
 MultiViewTransformerMixin
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Role**: Signals that an algorithm produces a *combined* output from multiple views.
 
@@ -193,7 +193,7 @@ MultiViewTransformerMixin
 
 
 MultiViewClusterMixin
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 **Role**: Signals that an algorithm produces cluster labels.
 
@@ -216,7 +216,7 @@ MultiViewClusterMixin
 
 
 MultiViewEmbedderMixin
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 **Role**: Signals that an algorithm produces a *low-dimensional embedding*.
 
@@ -239,7 +239,7 @@ Concrete Base Classes
 ---------------------
 
 BaseMultiViewTransformer
-^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Role**: Ready-to-subclass base for building multi-view *transformation* algorithms (both fusion and embedding preparation).
 
@@ -275,7 +275,7 @@ BaseMultiViewTransformer
 
 
 BaseFusion
-^^^^^^^^^^
+~~~~~~~~~~
 
 **Role**: Ready-to-subclass base for *fusion* methods that combine views into a single fused representation.
 
@@ -319,7 +319,7 @@ Supports multiple fusion paradigms:
 
 
 BaseMultiViewClusterer
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 **Role**: Ready-to-subclass base for building *multi-view clustering* algorithms.
 
@@ -349,7 +349,7 @@ BaseMultiViewClusterer
 
 
 BaseMultiViewEmbedder
-^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~
 
 **Role**: Ready-to-subclass base for building *multi-view embedding* algorithms.
 
@@ -380,7 +380,7 @@ BaseMultiViewEmbedder
 
 
 BaseLateFusion
-^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~
 
 **Role**: Abstract base for *late-fusion* aggregation methods that combine per-view predictions.
 
@@ -432,7 +432,7 @@ Usage Patterns
 +---------------------------------------+---------------------------------------------------+
 | Goal                                  | Base Class                                        |
 +=======================================+===================================================+
-| Fuse views into single representation  | ``BaseFusion``                                    |
+| Fuse views into single representation | ``BaseFusion``                                    |
 +---------------------------------------+---------------------------------------------------+
 | Generic multi-view transformation     | ``BaseMultiViewTransformer``                      |
 +---------------------------------------+---------------------------------------------------+

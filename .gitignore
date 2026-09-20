@@ -9,3 +9,4 @@ polyview/test/personal.ipynb
 
 # dist for Pypi distribution.
 dist/*
+build/*
