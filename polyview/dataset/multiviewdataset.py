@@ -41,7 +41,7 @@ class MultiViewDataset:
     Examples
     --------
     >>> import numpy as np
-    >>> from polyview.datasets import MultiViewDataset
+    >>> from polyview.dataset.multiviewdataset import MultiViewDataset
     >>> X1 = np.random.rand(100, 10)   # acoustic features
     >>> X2 = np.random.rand(100, 20)   # visual features
     >>> mvd = MultiViewDataset([X1, X2], view_names=["audio", "video"])

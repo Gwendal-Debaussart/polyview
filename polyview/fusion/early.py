@@ -60,12 +60,18 @@ class WeightedFusion(BaseFusion):
 
     Attributes
     ----------
-    weights_ : ndarray of shape (n_views,)
+    weights_ : ``ndarray of shape (n_views,)``
         The weights actually applied (after length validation).
 
     Examples
     --------
+    >>> import numpy as np
+    >>> from polyview.fusion.early import WeightedFusion
+    >>> X1 = np.random.rand(50, 4)
+    >>> X2 = np.random.rand(50, 6)
     >>> fused = WeightedFusion(weights=[1.0, 0.5]).fit_transform([X1, X2])
+    >>> fused.shape
+    (50, 10)
     """
 
     def __init__(
@@ -121,13 +127,19 @@ class NormalizedFusion(BaseFusion):
         Per-feature means computed during ``fit``.
     stds_ : list of ndarray of shape (n_features_i,)
         Per-feature standard deviations (clipped to ``eps``).
-    weights_ : ndarray of shape (n_views,)
+    weights_ : ``ndarray of shape (n_views,)``
 
     Examples
     --------
+    >>> import numpy as np
+    >>> from polyview.fusion.early import NormalizedFusion
+    >>> X1 = np.random.rand(50, 4) * 100     # a view on a much larger scale
+    >>> X2 = np.random.rand(50, 6)
     >>> fused = NormalizedFusion().fit_transform([X1, X2])
-    >>> fused.mean(axis=0)          # ≈ 0 for every feature
-    >>> fused.std(axis=0)           # ≈ 1 for every feature
+    >>> bool(np.allclose(fused.mean(axis=0), 0))     # every feature centred
+    True
+    >>> bool(np.allclose(fused.std(axis=0), 1))      # every feature unit-scaled
+    True
     """
 
     def __init__(

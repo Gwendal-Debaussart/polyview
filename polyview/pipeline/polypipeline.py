@@ -16,6 +16,7 @@ from typing import (
 
 import numpy as np
 from sklearn.base import BaseEstimator, clone
+from sklearn.utils.metaestimators import _BaseComposition
 from sklearn.utils.validation import check_is_fitted
 
 from polyview.base import BaseFusion, BaseLateFusion, BaseMultiView
@@ -183,7 +184,7 @@ class _PerViewEstimator(BaseEstimator):
         return np.asarray(scores)
 
 
-class PolyPipeline(BaseEstimator):
+class PolyPipeline(_BaseComposition):
     """
     Pipeline that supports both multiview and single-view flows.
 
@@ -220,6 +221,25 @@ class PolyPipeline(BaseEstimator):
         self.steps = steps
         self.per_view_step_params = per_view_step_params
         self.name = name if name is not None else "PolyPipeline flow"
+
+    def get_params(self, deep: bool = True) -> Dict[str, Any]:
+        """Get parameters, including those of the steps when ``deep=True``.
+
+        Step parameters are exposed as ``<step>__<parameter>``, as in
+        :class:`sklearn.pipeline.Pipeline`, so that the pipeline can be tuned
+        with :class:`~sklearn.model_selection.GridSearchCV`.
+        """
+        return self._get_params("steps", deep=deep)
+
+    def set_params(self, **kwargs: Any) -> "PolyPipeline":
+        """Set parameters, including ``<step>__<parameter>`` and whole steps."""
+        self._set_params("steps", **kwargs)
+        return self
+
+    @property
+    def named_steps(self) -> Dict[str, Any]:
+        """Unfitted steps as a ``{name: estimator}`` dictionary."""
+        return dict(self._validate_steps())
 
     @staticmethod
     def _is_mv_data(X: Any) -> bool:
@@ -708,20 +728,26 @@ class PolyPipeline(BaseEstimator):
 
         Examples
         --------
+        >>> from sklearn.preprocessing import StandardScaler
+        >>> from polyview.augmentation.random_projections import (
+        ...     RandomProjectionViews,
+        ... )
+        >>> from polyview.cluster.mv_kmeans import MultiViewKMeans
         >>> pipe = PolyPipeline([
         ...     ("rp", RandomProjectionViews(n_views=3)),
         ...     ("scale", StandardScaler()),
         ...     ("cluster", MultiViewKMeans(n_clusters=3, random_state=0))
         ... ])
-        >>> print(pipe.print(start_mode='sv'))
+        >>> diagram = pipe.print(start_mode='sv')
+        PolyPipeline flow
         input
-          ↓ (1 view)
-        [RandomProjectionViews]
-          ↓ ↓ ↓ (3 views)
-        [StandardScaler]
-          ↓ ↓ ↓ (3 views)
-        [MultiViewKMeans]
-          ↓ (1 output)
+          ↓ (split 1 -> 3 branches)
+        [rp: RandomProjectionViews]
+          ↓ ↓ ↓ (3 parallel branches)
+        [scale: StandardScaler]
+          ↓ ↓ ↓ (merge 3 -> 1)
+        [cluster: MultiViewKMeans]
+          ↓ (output)
         output
         """
         fitted = hasattr(self, "steps_")
@@ -864,7 +890,8 @@ class PolyPipeline(BaseEstimator):
             nx = importlib.import_module("networkx")
         except ImportError as exc:
             raise ImportError(
-                "draw requires networkx. Install with `pip install networkx`."
+                "draw requires networkx and matplotlib. Install them with "
+                "`pip install polyview[viz]`."
             ) from exc
 
         try:
@@ -957,7 +984,6 @@ class PolyPipeline(BaseEstimator):
                 target = "output" if i == len(steps) else f"step_{i + 1}"
                 graph.edges[source, target]["transition"] = step_behaviors[i - 1]
 
-
         ordered_nodes = (
             ["input"] + [f"step_{i}" for i in range(1, len(steps) + 1)] + ["output"]
         )
@@ -1036,19 +1062,38 @@ class PolyPipeline(BaseEstimator):
             # Draw arrow
             if FancyArrowPatch is not None:
                 arrow = FancyArrowPatch(
-                    (x1, y1 - 0.2), (x2, y2 + 0.2),
-                    arrowstyle='-|>', mutation_scale=18, lw=1.5,
-                    color=edge_color, zorder=1
+                    (x1, y1 - 0.2),
+                    (x2, y2 + 0.2),
+                    arrowstyle="-|>",
+                    mutation_scale=18,
+                    lw=1.5,
+                    color=edge_color,
+                    zorder=1,
                 )
                 ax.add_patch(arrow)
 
             # Add transition label on edge (to the right of arrow)
-            transition_label = graph.edges[source_node, target_node].get("transition", "")
+            transition_label = graph.edges[source_node, target_node].get(
+                "transition", ""
+            )
             if transition_label:
                 mid_y = (y1 + y2) / 2
-                ax.text(0.15, mid_y, transition_label, ha='left', va='center',
-                       fontsize=14, color=transition_text_color, zorder=2,
-                       bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='none', alpha=0.8))
+                ax.text(
+                    0.15,
+                    mid_y,
+                    transition_label,
+                    ha="left",
+                    va="center",
+                    fontsize=14,
+                    color=transition_text_color,
+                    zorder=2,
+                    bbox=dict(
+                        boxstyle="round,pad=0.3",
+                        facecolor="white",
+                        edgecolor="none",
+                        alpha=0.8,
+                    ),
+                )
 
         # Draw nodes
         for node_idx, node in enumerate(ordered_nodes):
@@ -1060,31 +1105,39 @@ class PolyPipeline(BaseEstimator):
             max_width_chars = 20
             if len(label) > max_width_chars:
                 # Try to split on spaces or underscores
-                words = label.replace('_', ' ').split()
+                words = label.replace("_", " ").split()
                 lines = []
                 current_line = []
                 for word in words:
-                    test_line = ' '.join(current_line + [word])
+                    test_line = " ".join(current_line + [word])
                     if len(test_line) <= max_width_chars:
                         current_line.append(word)
                     else:
                         if current_line:
-                            lines.append(' '.join(current_line))
+                            lines.append(" ".join(current_line))
                         current_line = [word]
                 if current_line:
-                    lines.append(' '.join(current_line))
+                    lines.append(" ".join(current_line))
 
                 # Limit to 2 lines max: if 3+ lines, try to reflow into 2
                 if len(lines) > 2:
                     lines = lines[:2]
 
-                wrapped_label = '\n'.join(lines)
+                wrapped_label = "\n".join(lines)
             else:
                 wrapped_label = label
 
             # Create temporary text to measure size
-            temp_text = ax.text(x, y, wrapped_label, fontsize=14, ha='center', va='center',
-                               visible=False, weight='bold')
+            temp_text = ax.text(
+                x,
+                y,
+                wrapped_label,
+                fontsize=14,
+                ha="center",
+                va="center",
+                visible=False,
+                weight="bold",
+            )
             fig.canvas.draw()
 
             # Get text bbox in data coordinates
@@ -1104,24 +1157,37 @@ class PolyPipeline(BaseEstimator):
             # Draw box
             if FancyBboxPatch is not None:
                 box = FancyBboxPatch(
-                    (box_x, box_y), box_width, box_height,
-                    boxstyle="round,pad=0.03", edgecolor=node_border_color,
-                    facecolor=color, linewidth=1.5, zorder=3
+                    (box_x, box_y),
+                    box_width,
+                    box_height,
+                    boxstyle="round,pad=0.03",
+                    edgecolor=node_border_color,
+                    facecolor=color,
+                    linewidth=1.5,
+                    zorder=3,
                 )
                 ax.add_patch(box)
 
             # Draw label
-            ax.text(x, y, wrapped_label, fontsize=14, ha='center', va='center',
-                   color=node_text_color, weight='bold', zorder=4)
+            ax.text(
+                x,
+                y,
+                wrapped_label,
+                fontsize=14,
+                ha="center",
+                va="center",
+                color=node_text_color,
+                weight="bold",
+                zorder=4,
+            )
 
         # Set axis limits with minimal padding
         margin = 0.25
         ax.set_xlim(-0.5, 0.5)
         ax.set_ylim(-(n_nodes - 1) * y_spacing - margin, margin)
-        ax.axis('off')
+        ax.axis("off")
 
         if show_legend:
-
             try:
                 from matplotlib.patches import Patch
             except ImportError:

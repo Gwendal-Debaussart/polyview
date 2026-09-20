@@ -36,7 +36,7 @@ class MultiViewKMeans(BaseMultiViewClusterer):
         Consensus cluster assignment.
     centroids_ : list of ndarray, shape (n_clusters, n_features_v)
         Per-view cluster centroid matrices F(v).
-    weights_ : ndarray of shape (n_views,)
+    weights_ : ``ndarray of shape (n_views,)``
         Learned view importance weights alpha(v). All equal to 1/n_views when learn_weights=False.
     objective_ : float
         Final value of the objective function.
@@ -111,7 +111,7 @@ class MultiViewKMeans(BaseMultiViewClusterer):
             Cluster indicator matrix.
         F : list of (K, d_v)
             List of centroid matrices for each view.
-        alpha : (n_views,)
+        alpha : ``(n_views,)``
             View weights.
 
         Returns
@@ -251,7 +251,7 @@ class MultiViewKMeans(BaseMultiViewClusterer):
 
         Returns
         -------
-        alpha : (n_views,)
+        alpha : ``(n_views,)``
             Updated view weights.
         """
         H = np.zeros(self.n_views_in_)

@@ -214,7 +214,7 @@ class MultiViewClusterMixin:
 
     Example
     -------
-    >>> class ToyClusterer(MultiViewClusterMixin):
+    >>> class ToyClusterer(BaseMultiView, MultiViewClusterMixin):
     ...     def fit(self, views, y=None):
     ...         self.labels_ = np.zeros(len(views[0]), dtype=int)
     ...         return self
@@ -251,7 +251,7 @@ class MultiViewEmbedderMixin(MultiViewTransformerMixin):
 
     Example
     -------
-    >>> class ToyEmbedder(MultiViewEmbedderMixin):
+    >>> class ToyEmbedder(BaseMultiView, MultiViewEmbedderMixin):
     ...     def fit(self, views, y=None):
     ...         self.embedding_ = np.asarray(views[0])
     ...         return self

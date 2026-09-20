@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Iterable, List, Literal, Optional, Sequence
 
 import numpy as np
+from scipy.optimize import linear_sum_assignment
 from sklearn.utils.validation import check_is_fitted
 
 from polyview.base import BaseLateFusion
@@ -22,6 +23,11 @@ class MajorityVote(BaseLateFusion):
         - "random": choose a random tied class (reproducible via random_state).
     random_state : int or None, default=None
         Seed used only when ``tie_break='random'``.
+    align_labels : bool, default=False
+        If True, the labels of each view are first permuted to best match
+        those of the first view (Hungarian algorithm on their contingency
+        table). Use it when the per-view predictions are clusterings, whose
+        label identifiers are arbitrary in each view.
     """
 
     def __init__(
@@ -29,10 +35,28 @@ class MajorityVote(BaseLateFusion):
         weights: Optional[Sequence[float]] = None,
         tie_break: Literal["first", "random"] = "first",
         random_state: Optional[int] = None,
+        align_labels: bool = False,
     ) -> None:
         self.weights = weights
         self.tie_break = tie_break
         self.random_state = random_state
+        self.align_labels = align_labels
+
+    @staticmethod
+    def _align_to_reference(stacked: np.ndarray) -> np.ndarray:
+        """Relabel each row to best match the first row (Hungarian algorithm)."""
+        classes = np.unique(stacked)
+        ref = np.searchsorted(classes, stacked[0])
+        aligned = [stacked[0]]
+        for row in stacked[1:]:
+            codes = np.searchsorted(classes, row)
+            contingency = np.zeros((classes.size, classes.size))
+            np.add.at(contingency, (codes, ref), 1)
+            rows, cols = linear_sum_assignment(-contingency)
+            mapping = np.empty(classes.size, dtype=int)
+            mapping[rows] = cols
+            aligned.append(classes[mapping[codes]])
+        return np.vstack(aligned)
 
     @staticmethod
     def _to_1d_int_array(x: Iterable, idx: int) -> np.ndarray:
@@ -131,6 +155,8 @@ class MajorityVote(BaseLateFusion):
     def predict(self, preds_by_view: List[Iterable]) -> np.ndarray:
         stacked = self._validate_predictions(preds_by_view, reset=False)
         check_is_fitted(self, "weights_")
+        if self.align_labels:
+            stacked = self._align_to_reference(stacked)
         if stacked.shape[0] != self.weights_.shape[0]:
             raise ValueError(
                 f"weights were fitted for {self.weights_.shape[0]} views but got {stacked.shape[0]}."

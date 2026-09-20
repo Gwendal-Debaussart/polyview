@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "polyview"
-version = "0.0.1"
+version = "0.1.0"
 description = "A Python library for multi-view learning: fusion, clustering and embedding."
 readme = "README.md"
 authors = [
@@ -12,8 +12,14 @@ authors = [
 ]
 dependencies = [
     "numpy",
+    "scipy",
     "scikit-learn",
 ]
+
+[project.optional-dependencies]
+# Pipeline diagrams (PolyPipeline.draw)
+viz = ["matplotlib", "networkx"]
+test = ["pytest", "pytest-cov"]
 
 [tool.setuptools.packages.find]
 where = ["."]

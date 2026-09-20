@@ -10,7 +10,7 @@ package root to support a concise import style:
 
 from importlib.metadata import PackageNotFoundError, version
 
-from . import augmentation, cluster, dataset, fusion
+from . import augmentation, cluster, dataset, fusion, imputation
 from .base import (
     BaseFusion,
     BaseLateFusion,
@@ -40,6 +40,19 @@ from .pipeline.polypipeline import PolyPipeline
 from .augmentation.random_projections import RandomProjectionViews, random_projection
 from .augmentation.random_subspace import RandomSubspaceViews, random_subspace
 from .augmentation.multi_kernels import MultiKernel, multi_kernels
+from .augmentation.view_splitter import ViewSplitter
+from .imputation.cross_view import CrossViewRegressionImputer
+from .imputation.drop import DropIncompleteSamples, drop_missing_views
+from .imputation.knn import KNNViewImputer
+from .imputation.mask import (
+    complete_case_mask,
+    mark_missing_views,
+    missing_entry_mask,
+    missing_rate,
+    missing_view_mask,
+    simulate_missing_views,
+)
+from .imputation.simple import SimpleViewImputer
 from .embed.gcca import GCCA
 from .embed.mcca import MCCA
 
@@ -58,6 +71,7 @@ __all__ = [
     "datasets",
     "fusion",
     "augmentation",
+    "imputation",
     "BaseMultiView",
     "BaseFusion",
     "BaseLateFusion",
@@ -83,7 +97,19 @@ __all__ = [
     "RandomSubspaceViews",
     "MultiKernel",
     "multi_kernels",
+    "ViewSplitter",
     "make_multiview_gaussian",
     "GCCA",
     "MCCA",
+    "SimpleViewImputer",
+    "KNNViewImputer",
+    "CrossViewRegressionImputer",
+    "DropIncompleteSamples",
+    "drop_missing_views",
+    "missing_entry_mask",
+    "missing_view_mask",
+    "complete_case_mask",
+    "missing_rate",
+    "mark_missing_views",
+    "simulate_missing_views",
 ]

@@ -24,10 +24,11 @@ pip install polyview
 
 ## Quick start
 
-The snippet below demonstrates three common workflows:
+The snippet below demonstrates four common workflows:
 - native multi-view clustering,
 - early fusion into single-view clustering,
-- per-view sklearn models followed by late fusion.
+- per-view sklearn models followed by late fusion,
+- imputation of missing views.
 
 ```python
 import numpy as np
@@ -70,6 +71,16 @@ labels_by_view = pipe.fit_predict(mvd.views)  # list of label vectors
 late = pv.fusion.MajorityVote(weights=[0.2, 0.5, 0.3], tie_break="first")
 late_labels = late.fit_predict(labels_by_view)
 print("Late-fused labels:", late_labels.shape)
+
+# 4) Missing views
+# Views are incomplete when a modality was never acquired for a sample;
+# missing entries are encoded as NaN.
+incomplete, mask = pv.simulate_missing_views(mvd, missing_rate=0.2, random_state=0)
+print("Missing rate per view:", pv.missing_rate(incomplete))
+
+completed = pv.KNNViewImputer(n_neighbors=5).fit_transform(incomplete)
+imputed_labels = pv.cluster.MultiViewKMeans(n_clusters=4, random_state=0).fit_predict(completed)
+print("Labels from imputed views:", imputed_labels.shape)
 ```
 
 Additional examples are available in the documentation: [https://gwendal-debaussart.github.io/polyview/examples/](https://gwendal-debaussart.github.io/polyview/examples/)

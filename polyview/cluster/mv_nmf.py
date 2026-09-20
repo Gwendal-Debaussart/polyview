@@ -52,12 +52,12 @@ class MultiViewNMF(BaseMultiViewClusterer):
         Shared non-negative coefficient matrix (soft cluster assignments).
     W_ : list of ndarray, shape (n_components, n_features_v)
         Per-view basis matrices.
-    weights_ : ndarray of shape (n_views,)
+    weights_ : ``ndarray of shape (n_views,)``
         Final per-view reconstruction weights lambda(v).
         Equal to 1/M when learn_weights=False.
     labels_ : ndarray of shape (n_samples,)
         Hard cluster labels = argmax(``H_``, axis=1).
-    reconstruction_errors_ : ndarray of shape (n_views,)
+    reconstruction_errors_ : ``ndarray of shape (n_views,)``
         Per-view Frobenius reconstruction error at convergence.
     objective_ : float
         Weighted sum of reconstruction errors at convergence.
@@ -66,16 +66,19 @@ class MultiViewNMF(BaseMultiViewClusterer):
 
     Examples
     --------
+    >>> import numpy as np
     >>> from polyview.cluster.mv_nmf import MultiViewNMF
+    >>> X1 = np.random.rand(60, 8)      # NMF requires non-negative views
+    >>> X2 = np.random.rand(60, 5)
     >>> model = MultiViewNMF(n_components=3, random_state=0)
     >>> labels = model.fit_predict([X1, X2])
     >>> model.H_.shape
-    (n_samples, 3)
+    (60, 3)
 
     Use ``H_`` as a soft embedding downstream:
 
     >>> from sklearn.cluster import KMeans
-    >>> labels = KMeans(n_clusters=3).fit_predict(model.H_)
+    >>> labels = KMeans(n_clusters=3, n_init=10).fit_predict(model.H_)
 
     Or use ``H_`` as cluster probabilities for soft clustering:
 

@@ -59,9 +59,9 @@ class MultiViewMDS(BaseMultiViewEmbedder):
         Learned embedding.
     stress_ : float
         Final objective value :math:`J(X, \alpha)`.
-    view_stress_ : ndarray of shape (n_views,)
+    view_stress_ : ``ndarray of shape (n_views,)``
         Final per-view stress terms :math:`J^{(v)}(X)`.
-    view_weights_ : ndarray of shape (n_views,)
+    view_weights_ : ``ndarray of shape (n_views,)``
         Learned view weights :math:`\alpha`.
     dissimilarities_ : list of ndarray
         Per-view input dissimilarity matrices used in fitting.
@@ -100,7 +100,9 @@ class MultiViewMDS(BaseMultiViewEmbedder):
         self.random_state = random_state
         self.init = init
 
-    def _compute_view_dissimilarities(self, views: List[np.ndarray]) -> List[np.ndarray]:
+    def _compute_view_dissimilarities(
+        self, views: List[np.ndarray]
+    ) -> List[np.ndarray]:
         mode = str(self.dissimilarity).lower()
         if mode not in {"euclidean", "precomputed"}:
             raise ValueError(
@@ -171,6 +173,25 @@ class MultiViewMDS(BaseMultiViewEmbedder):
         B = off
         np.fill_diagonal(B, diag)
         return B
+
+    def _guttman_transform(
+        self,
+        B: np.ndarray,
+        Z: np.ndarray,
+        alpha: np.ndarray,
+    ) -> np.ndarray:
+        """Guttman transform ``X = V^+ B Z`` for the unit weights used in ``fit``.
+
+        With unit off-diagonal weights, ``V = s (n I - 1 1^T)`` with
+        ``s = sum(alpha ** gamma)``, whose pseudo-inverse is
+        ``(I - 1 1^T / n) / (s n)``. This avoids an explicit pseudo-inverse,
+        which costs O(n^3) per iteration and is numerically unstable because
+        ``V`` is singular.
+        """
+        n = Z.shape[0]
+        s = float(np.sum(alpha**self.gamma))
+        X = B @ Z / (s * n)
+        return X - X.mean(axis=0, keepdims=True)
 
     def _stress_per_view(
         self,
@@ -249,9 +270,7 @@ class MultiViewMDS(BaseMultiViewEmbedder):
         for iteration in range(1, self.max_iter + 1):
             Z = X.copy()
             B = self._compute_b_matrix(Z, deltas, weight_mats, alpha)
-            V = self._compute_v_matrix(weight_mats, alpha)
-            X = np.linalg.pinv(V) @ B @ Z
-            X -= X.mean(axis=0, keepdims=True)
+            X = self._guttman_transform(B, Z, alpha)
 
             view_stress = self._stress_per_view(X, deltas, weight_mats)
             alpha = self._update_alpha(view_stress)

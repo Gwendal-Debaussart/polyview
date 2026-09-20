@@ -12,6 +12,16 @@ from polyview.utils.kernels import (
     normalize_kernel,
 )
 
+# The kernel helpers live in polyview.utils.kernels; they are re-exported here
+# so that polyview.fusion stays the single entry point for kernel fusion.
+__all__ = [
+    "KernelFusion",
+    "KernelSpec",
+    "center_kernel",
+    "is_valid_kernel",
+    "normalize_kernel",
+]
+
 
 class KernelFusion(BaseFusion):
     """Fuse views by combining per-view kernel matrices.
@@ -50,7 +60,7 @@ class KernelFusion(BaseFusion):
     Attributes
     ----------
     kernels_ : list of ndarray (n_samples, n_samples)
-    weights_ : ndarray (n_views,)
+    weights_ : ``ndarray (n_views,)``
     K_fused_ : ndarray (n_samples, n_samples)
     specs_   : list of KernelSpec
 
@@ -61,15 +71,22 @@ class KernelFusion(BaseFusion):
 
     Examples
     --------
+    >>> import numpy as np
+    >>> from polyview.fusion.kernel_fusion import KernelFusion, KernelSpec
+    >>> X1 = np.random.rand(50, 4)
+    >>> X2 = np.random.rand(50, 6)
     >>> kf = KernelFusion()
-    >>> K  = kf.fit_transform([X1, X2])        # RBF on each view
+    >>> K = kf.fit_transform([X1, X2])         # RBF on each view
+    >>> K.shape
+    (50, 50)
 
     >>> specs = [KernelSpec("rbf", weight=2.0, gamma=0.1),
     ...          KernelSpec("linear", weight=1.0)]
     >>> K = KernelFusion(specs).fit_transform([X1, X2])
 
+    >>> A1, A2 = X1 @ X1.T, X2 @ X2.T          # A* are n x n kernel matrices
     >>> specs = [KernelSpec("precomputed"), KernelSpec("precomputed")]
-    >>> K = KernelFusion(specs).fit_transform([A1, A2])   # A* are n x n
+    >>> K = KernelFusion(specs).fit_transform([A1, A2])
     """
 
     def __init__(

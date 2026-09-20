@@ -6,8 +6,12 @@ from .kernels import (
     is_valid_kernel,
     normalize_kernel,
 )
+from .linalg import EigenSolver, smoother_sum_operator, truncated_eigh
 
 __all__ = [
+    "EigenSolver",
+    "smoother_sum_operator",
+    "truncated_eigh",
     "KernelFn",
     "KernelName",
     "KernelSpec",

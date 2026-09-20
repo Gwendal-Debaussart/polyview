@@ -3,9 +3,16 @@ from __future__ import annotations
 from typing import List, Literal, Optional, Sequence, Union, cast
 
 import numpy as np
+from scipy.linalg import cho_solve
 from sklearn.utils.validation import check_is_fitted
 
 from polyview.base import BaseMultiViewTransformer
+from polyview.utils.linalg import (
+    EigenSolver,
+    resolve_smoother_solver,
+    smoother_sum_operator,
+    truncated_eigh,
+)
 
 
 OutputMode = Literal["concat", "mean", "list"]
@@ -49,6 +56,8 @@ class MCCA(BaseMultiViewTransformer):
       How to combine per-view projections in ``transform``.
     centre : bool, default=True
       Whether to center columns of each view before fitting.
+    eigen_solver : {"auto", "dense", "arpack"}, default="auto"
+      Solver for the top ``n_components`` eigenvectors. "dense" uses LAPACK restricted to the requested eigenpairs; "arpack" uses an iterative Lanczos solver (matrix-free for ``"maxvar"``, so the (n, n) smoother matrix is never formed). "auto" picks "arpack" when the problem size exceeds 200 and ``n_components < 10`` for ``"sumcor"``, and, for ``"maxvar"``, when ``n_samples > 200`` and the views have fewer features in total than there are samples; "dense" otherwise.
     n_views : int or None, default=None
       Expected number of views.
 
@@ -76,6 +85,7 @@ class MCCA(BaseMultiViewTransformer):
         objective: ObjectiveMode = "sumcor",
         output: OutputMode = "concat",
         centre: bool = True,
+        eigen_solver: EigenSolver = "auto",
         n_views: Optional[int] = None,
     ) -> None:
         super().__init__(n_views=n_views)
@@ -84,6 +94,7 @@ class MCCA(BaseMultiViewTransformer):
         self.objective = objective
         self.output = output
         self.centre = centre
+        self.eigen_solver = eigen_solver
 
     def _resolve_regularisation(self, n_views: int) -> List[float]:
         r = self.regularisation
@@ -109,12 +120,6 @@ class MCCA(BaseMultiViewTransformer):
             )
         return k
 
-    @staticmethod
-    def _smoother(X: np.ndarray, reg: float) -> np.ndarray:
-        d = X.shape[1]
-        XtX_reg = X.T @ X + reg * np.eye(d)
-        return X @ np.linalg.solve(XtX_reg, X.T)
-
     def _fit_sumcor(
         self,
         centred: List[np.ndarray],
@@ -128,25 +133,21 @@ class MCCA(BaseMultiViewTransformer):
         Xcat = np.concatenate(centred, axis=1)
         C = (Xcat.T @ Xcat) / max(1, n - 1)
 
-        B = np.zeros_like(C)
-        for i, (X, reg) in enumerate(zip(centred, regs)):
+        # B = blockdiag(C_vv + r_v I): its inverse square root is computed
+        # block by block rather than by eigendecomposing the full matrix.
+        B_inv_sqrt = np.zeros_like(C)
+        for i, reg in enumerate(regs):
             a, b = offsets[i], offsets[i + 1]
-            Cii = (X.T @ X) / max(1, n - 1)
-            B[a:b, a:b] = Cii + reg * np.eye(Cii.shape[0])
-
-        evals_B, evecs_B = np.linalg.eigh(B)
-        inv_sqrt = np.diag(1.0 / np.sqrt(np.maximum(evals_B, 1e-12)))
-        B_inv_sqrt = evecs_B @ inv_sqrt @ evecs_B.T
+            Bii = C[a:b, a:b] + reg * np.eye(b - a)
+            evals, evecs = np.linalg.eigh(Bii)
+            B_inv_sqrt[a:b, a:b] = (evecs / np.sqrt(np.maximum(evals, 1e-12))) @ evecs.T
         M = B_inv_sqrt @ C @ B_inv_sqrt
         M = (M + M.T) / 2.0
 
-        vals, vecs = np.linalg.eigh(M)
-        idx = np.argsort(vals)[::-1]
-        vals = vals[idx]
-        vecs = vecs[:, idx]
+        vals, vecs = truncated_eigh(M, k, largest=True, eigen_solver=self.eigen_solver)
 
-        A = B_inv_sqrt @ vecs[:, :k]
-        self.eigenvalues_ = vals[:k]
+        A = B_inv_sqrt @ vecs
+        self.eigenvalues_ = vals
         self.n_components_ = k
 
         self.weights_ = []
@@ -160,23 +161,19 @@ class MCCA(BaseMultiViewTransformer):
         regs: List[float],
         k: int,
     ) -> None:
-        n = self.n_samples_
+        M_agg, factors = smoother_sum_operator(centred, regs)
 
-        M_agg = np.zeros((n, n))
-        for X, reg in zip(centred, regs):
-            M_agg += self._smoother(X, reg)
-
-        vals, vecs = np.linalg.eigh(M_agg)
-        idx = np.argsort(vals)[::-1]
-        self.G_ = vecs[:, idx[:k]]
-        self.eigenvalues_ = vals[idx[:k]]
+        solver = resolve_smoother_solver(
+            self.eigen_solver, self.n_samples_, sum(X.shape[1] for X in centred), k
+        )
+        self.eigenvalues_, self.G_ = truncated_eigh(
+            M_agg, k, largest=True, eigen_solver=solver
+        )
         self.n_components_ = k
 
-        self.weights_ = []
-        for X, reg in zip(centred, regs):
-            XtX_reg = X.T @ X + reg * np.eye(X.shape[1])
-            W = np.linalg.solve(XtX_reg, X.T @ self.G_)
-            self.weights_.append(W)
+        self.weights_ = [
+            cho_solve(fac, X.T @ self.G_) for X, fac in zip(centred, factors)
+        ]
 
     def fit(self, views: List[np.ndarray], y=None) -> "MCCA":
         views = self._validate_views(views, reset=True)
