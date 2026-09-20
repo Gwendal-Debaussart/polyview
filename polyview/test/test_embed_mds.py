@@ -85,3 +85,30 @@ class TestMultiViewMDS:
         model = MultiViewMDS(n_components=2, init=bad_init)
         with pytest.raises(ValueError, match="init must have shape"):
             model.fit(views)
+
+    def test_guttman_transform_matches_pseudo_inverse(self):
+        views = _make_views(n_samples=30, seed=11)
+        model = MultiViewMDS(n_components=2)
+        deltas = model._compute_view_dissimilarities(views)
+        n = deltas[0].shape[0]
+        weight_mats = [np.ones((n, n)) - np.eye(n) for _ in deltas]
+        alpha = np.array([0.7, 0.3])
+        Z = np.random.default_rng(11).normal(size=(n, 2))
+        Z -= Z.mean(axis=0)
+        B = model._compute_b_matrix(Z, deltas, weight_mats, alpha)
+        V = model._compute_v_matrix(weight_mats, alpha)
+        # Pseudo-inverse of the singular V, discarding its null direction
+        w, U = np.linalg.eigh(V)
+        keep = w > 1e-8 * w.max()
+        V_pinv = (U[:, keep] / w[keep]) @ U[:, keep].T
+        expected = V_pinv @ B @ Z
+        expected -= expected.mean(axis=0)
+        np.testing.assert_allclose(
+            model._guttman_transform(B, Z, alpha), expected, rtol=1e-8, atol=1e-12
+        )
+
+    def test_objective_is_non_increasing(self):
+        views = _make_views(n_samples=40, seed=12)
+        model = MultiViewMDS(n_components=2, max_iter=100, tol=0.0, random_state=12)
+        history = model.fit(views).objective_history_
+        assert np.all(np.diff(history) <= 1e-10 * np.abs(history[:-1]))

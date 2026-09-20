@@ -65,6 +65,38 @@ class TestMCCA:
         Z_test = mcca.transform(test)
         assert Z_test.shape == (20, 2)
 
+    @pytest.mark.parametrize("objective", ["sumcor", "maxvar"])
+    def test_arpack_and_dense_solvers_agree(self, objective):
+        views = _make_correlated_views(seed=9)
+        dense = MCCA(n_components=2, objective=objective, eigen_solver="dense")
+        arpack = MCCA(n_components=2, objective=objective, eigen_solver="arpack")
+        Z_dense = dense.fit(views).transform(views)
+        Z_arpack = arpack.fit(views).transform(views)
+        assert np.allclose(dense.eigenvalues_, arpack.eigenvalues_)
+        # Leading eigenvalues may be (near-)degenerate, so compare subspaces
+        assert np.allclose(
+            Z_dense @ np.linalg.pinv(Z_dense) @ Z_arpack, Z_arpack, atol=1e-6
+        )
+
+    def test_sumcor_matches_full_generalized_eigenproblem(self):
+        views = _make_correlated_views(seed=10)
+        mcca = MCCA(n_components=3, objective="sumcor", regularisation=1e-2)
+        mcca.fit(views)
+        n = views[0].shape[0]
+        Xs = [X - X.mean(axis=0) for X in views]
+        Xcat = np.concatenate(Xs, axis=1)
+        C = Xcat.T @ Xcat / (n - 1)
+        B = np.zeros_like(C)
+        a = 0
+        for X in Xs:
+            b = a + X.shape[1]
+            B[a:b, a:b] = C[a:b, a:b] + 1e-2 * np.eye(b - a)
+            a = b
+        from scipy.linalg import eigh
+
+        vals = eigh(C, B, eigvals_only=True)[::-1]
+        assert np.allclose(mcca.eigenvalues_, vals[:3])
+
     def test_transform_before_fit_raises(self):
         mcca = MCCA(n_components=2)
         with pytest.raises(Exception):

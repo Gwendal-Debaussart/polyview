@@ -85,9 +85,7 @@ class TestMultiViewDataset:
         x1 = rng.normal(size=(90, 3))
         labels = np.repeat([0, 1, 2], 30)
         mvd = MultiViewDataset([x1], labels=labels)
-        train, test = mvd.train_test_split(
-            test_size=0.2, random_state=0, stratify=True
-        )
+        train, test = mvd.train_test_split(test_size=0.2, random_state=0, stratify=True)
         for cls in [0, 1, 2]:
             assert np.sum(test.labels == cls) == 6
 
@@ -115,6 +113,49 @@ class TestMultiViewDataset:
         text = repr(mvd)
         assert "n_views=2" in text
         assert "n_samples=15" in text
+
+    def test_invalid_constructor_arguments_raise(self):
+        x = np.zeros((10, 3))
+        with pytest.raises(ValueError, match="view_names has"):
+            MultiViewDataset([x, x], view_names=["a"])
+        with pytest.raises(TypeError, match="list"):
+            MultiViewDataset(np.zeros((10, 3)))
+        with pytest.raises(ValueError, match="2-D"):
+            MultiViewDataset([np.zeros(10)])
+        with pytest.raises(ValueError, match="At least one view"):
+            MultiViewDataset([])
+
+    def test_labels_setter(self):
+        mvd = _make_dataset(n_samples=10, seed=8)
+        mvd.labels = None
+        assert mvd.labels is None
+        mvd.labels = np.arange(10)
+        assert mvd.labels.shape == (10,)
+        with pytest.raises(ValueError, match="labels has"):
+            mvd.labels = np.arange(3)
+
+    def test_view_names_setter(self):
+        mvd = _make_dataset(n_samples=10, seed=9)
+        mvd.view_names = ["x", "y"]
+        assert mvd.view_names == ["x", "y"]
+        mvd.view_names = None
+        assert mvd.view_names == ["view_0", "view_1"]
+        with pytest.raises(TypeError, match="iterable of strings"):
+            mvd.view_names = "xy"
+        with pytest.raises(ValueError, match="entries"):
+            mvd.view_names = ["x"]
+        with pytest.raises(TypeError, match="must be a string"):
+            mvd.view_names = ["x", 1]
+
+    def test_iteration_yields_views(self):
+        mvd = _make_dataset(n_samples=10, seed=10)
+        assert [v.shape for v in mvd] == [(10, 5), (10, 3)]
+
+    def test_subset_views_by_index_and_unknown_name(self):
+        mvd = _make_dataset(seed=11)
+        assert mvd.subset_views([1]).view_names == ["video"]
+        with pytest.raises(KeyError):
+            mvd.subset_views(["nonexistent"])
 
 
 class TestMakeMultiviewGaussian:

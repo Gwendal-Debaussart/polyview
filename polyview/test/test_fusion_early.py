@@ -76,9 +76,7 @@ class TestNormalizedFusion:
 
     def test_constant_feature_does_not_divide_by_zero(self):
         rng = np.random.default_rng(6)
-        x1 = np.concatenate(
-            [np.full((20, 1), 5.0), rng.normal(size=(20, 2))], axis=1
-        )
+        x1 = np.concatenate([np.full((20, 1), 5.0), rng.normal(size=(20, 2))], axis=1)
         x2 = rng.normal(size=(20, 3))
         fused = NormalizedFusion().fit_transform([x1, x2])
         assert np.all(np.isfinite(fused))

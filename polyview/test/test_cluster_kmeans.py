@@ -72,9 +72,9 @@ class TestMultiViewKMeans:
         x_good = centers[y] + rng.normal(scale=0.2, size=(n, 4))  # informative
         x_bad = rng.normal(scale=15.0, size=(n, 4))  # pure noise, uninformative
 
-        model = MultiViewKMeans(
-            n_clusters=3, gamma=1.0, n_init=5, random_state=0
-        ).fit([x_good, x_bad])
+        model = MultiViewKMeans(n_clusters=3, gamma=1.0, n_init=5, random_state=0).fit(
+            [x_good, x_bad]
+        )
 
         assert np.count_nonzero(model.weights_) == 1
         assert model.weights_[0] == 1.0

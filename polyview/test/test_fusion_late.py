@@ -68,3 +68,56 @@ class TestMajorityVote:
         fused = model.predict(test_preds)
         # sample 1 is a tie (0 vs 1); tie_break="first" picks the smaller label.
         assert fused.tolist() == [1, 0, 1]
+
+    def test_align_labels_matches_permuted_clusterings(self):
+        ref = np.array([0, 0, 1, 1, 2, 2])
+        preds = [ref, np.array([2, 2, 0, 0, 1, 1]), np.array([1, 1, 2, 2, 0, 0])]
+        assert MajorityVote().fit_predict(preds).tolist() != ref.tolist()
+        assert (
+            MajorityVote(align_labels=True).fit_predict(preds).tolist() == ref.tolist()
+        )
+
+    def test_align_labels_handles_non_contiguous_labels(self):
+        preds = [np.array([3, 3, 7, 7]), np.array([7, 7, 3, 3])]
+        fused = MajorityVote(align_labels=True).fit_predict(preds)
+        assert fused.tolist() == [3, 3, 7, 7]
+
+    @pytest.mark.parametrize(
+        "model, preds, error, match",
+        [
+            (MajorityVote(), np.array([0, 1]), TypeError, "non-empty list"),
+            (MajorityVote(), [np.zeros((2, 2))], ValueError, "1-D"),
+            (
+                MajorityVote(weights=[[1.0, 1.0]]),
+                [np.array([0]), np.array([1])],
+                ValueError,
+                "1-D sequence",
+            ),
+            (
+                MajorityVote(weights=[1.0]),
+                [np.array([0]), np.array([1])],
+                ValueError,
+                "values but got",
+            ),
+            (
+                MajorityVote(weights=[0.0, 0.0]),
+                [np.array([0]), np.array([1])],
+                ValueError,
+                "At least one weight",
+            ),
+            (
+                MajorityVote(tie_break="bogus"),
+                [np.array([0]), np.array([1])],
+                ValueError,
+                "tie_break",
+            ),
+        ],
+    )
+    def test_invalid_inputs_raise(self, model, preds, error, match):
+        with pytest.raises(error, match=match):
+            model.fit_predict(preds)
+
+    def test_predict_requires_same_number_of_views(self):
+        model = MajorityVote().fit([np.array([0, 1]), np.array([0, 1])])
+        with pytest.raises(ValueError, match="Fitted on 2 views"):
+            model.predict([np.array([0, 1])])

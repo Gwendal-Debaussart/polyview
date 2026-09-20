@@ -79,9 +79,7 @@ class TestKernelSpec:
 
     def test_polynomial_kernel_runs(self):
         X = _make_X(seed=6)
-        K = KernelSpec(
-            "polynomial", center=False, normalize=False, degree=2
-        ).build(X)
+        K = KernelSpec("polynomial", center=False, normalize=False, degree=2).build(X)
         assert K.shape == (20, 20)
 
     def test_precomputed_requires_square_matrix(self):

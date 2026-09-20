@@ -53,8 +53,6 @@ class TestGCCA:
         assert corrs[0, 2, 0] > 0.95
 
     def test_transform_on_new_data_uses_fitted_weights(self):
-        # output="shared" always returns the training G_ (non-parametric),
-        # so out-of-sample projection needs "concat" or "mean" instead.
         views = _make_correlated_views(n_samples=120, seed=5)
         train = [v[:100] for v in views]
         test = [v[100:] for v in views]
@@ -63,15 +61,21 @@ class TestGCCA:
         Z_test = gcca.transform(test)
         assert Z_test.shape == (20, 2)
 
-    def test_shared_output_ignores_new_data_and_returns_training_embedding(self):
+    def test_shared_output_recovers_training_embedding(self):
+        views = _make_correlated_views(seed=11)
+        gcca = GCCA(n_components=2, output="shared").fit(views)
+        assert np.allclose(gcca.transform(views), gcca.G_, atol=1e-8)
+
+    def test_shared_output_extends_to_new_samples(self):
         views = _make_correlated_views(n_samples=120, seed=5)
         train = [v[:100] for v in views]
         test = [v[100:] for v in views]
 
         gcca = GCCA(n_components=2, output="shared").fit(train)
-        Z_test = gcca.transform(test)
-        assert Z_test.shape == (100, 2)
-        assert np.array_equal(Z_test, gcca.G_)
+        assert gcca.transform(test).shape == (20, 2)
+        # A subset of the training samples is mapped to its rows of G_
+        subset = [v[:10] for v in train]
+        assert np.allclose(gcca.transform(subset), gcca.G_[:10], atol=1e-8)
 
     def test_regularisation_list_length_mismatch_raises(self):
         views = _make_correlated_views(seed=6)
@@ -84,6 +88,30 @@ class TestGCCA:
         gcca = GCCA(n_components=2, output="bogus")
         with pytest.raises(ValueError, match="output must be"):
             gcca.fit_transform(views)
+
+    def test_arpack_and_dense_solvers_agree(self):
+        views = _make_correlated_views(seed=9)
+        dense = GCCA(n_components=2, eigen_solver="dense").fit(views)
+        arpack = GCCA(n_components=2, eigen_solver="arpack").fit(views)
+        assert np.allclose(dense.eigenvalues_, arpack.eigenvalues_)
+        # Leading eigenvalues may be (near-)degenerate, so compare subspaces
+        assert np.allclose(dense.G_ @ dense.G_.T, arpack.G_ @ arpack.G_.T, atol=1e-6)
+
+    def test_matches_explicit_smoother_eigendecomposition(self):
+        views = _make_correlated_views(seed=10)
+        gcca = GCCA(n_components=3, regularisation=1e-2).fit(views)
+        n = views[0].shape[0]
+        M = np.zeros((n, n))
+        for X in views:
+            X = X - X.mean(axis=0)
+            C = X.T @ X / n + 1e-2 * np.eye(X.shape[1])
+            M += X @ np.linalg.solve(C, X.T / n)
+        vals = np.linalg.eigvalsh(M)[::-1]
+        assert np.allclose(gcca.eigenvalues_, vals[:3])
+
+    def test_invalid_eigen_solver_raises(self):
+        with pytest.raises(ValueError, match="eigen_solver must be"):
+            GCCA(n_components=2, eigen_solver="bogus").fit(_make_correlated_views())
 
     def test_transform_before_fit_raises(self):
         gcca = GCCA(n_components=2)
