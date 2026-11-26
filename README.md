@@ -1,6 +1,6 @@
 # polyview
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/deepcharles/ruptures/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Gwendal-Debaussart/polyview/graphs/commit-activity)
 [![CI](https://github.com/Gwendal-Debaussart/polyview/actions/workflows/doc.yml/badge.svg)](https://github.com/Gwendal-Debaussart/polyview/actions/workflows/doc.yml/badge.svg)
 [![PyPI version](https://badge.fury.io/py/polyview.svg)](https://badge.fury.io/py/polyview)
 <a href="https://github.com/psf/black"><img alt="Code style: ruff" src="https://img.shields.io/badge/code%20style-ruff-000000.svg"></a>
@@ -85,6 +85,18 @@ print("Labels from imputed views:", imputed_labels.shape)
 
 Additional examples are available in the documentation: [https://gwendal-debaussart.github.io/polyview/examples/](https://gwendal-debaussart.github.io/polyview/examples/)
 
+
+## Use of AI in this project
+
+Part of the code in this repository was written with the help of AI coding assistants
+(tests, docstrings, boilerplate, refactoring). Every line that ends up in the package
+has been read, run and checked by a human before being merged.
+
+Using an AI assistant to contribute is perfectly fine. The requirement is not the tool,
+it is the verification: you should understand the code you submit, check that it does
+what it claims (and that the maths is right, not just the tests green), and be able to
+answer questions about it in review. See [CONTRIBUTING](CONTRIBUTING.md#use-of-ai-assistants)
+for details.
 
 ## Contributing
 

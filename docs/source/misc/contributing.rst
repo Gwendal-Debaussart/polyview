@@ -32,6 +32,23 @@ Please ensure that all public methods and attributes of the proposed change foll
 
 **Fitting.** The ``fit`` method should be used to train the model on the provided data, and should return the instance itself. Generally, the ``fit`` method should take as input a list of views and an optional array of labels.
 
+Use of AI assistants
+^^^^^^^^^^^^^^^^^^^^
+
+Part of polyview was written with the help of AI coding assistants, and contributions that
+use them are welcome. There is no need to avoid these tools, and no need to hide that you used them.
+
+What matters is that the code is verified by a human before it is proposed:
+
+- **Read every line you submit** and be able to explain why it is there. If you cannot explain a block, it should not be in the pull request.
+- **Check the method, not only the output.** Generated code often looks plausible while computing the wrong thing: verify the formulas against the cited reference, check the shapes and the normalisation conventions, and compare against a known result or a reference implementation when one exists.
+- **Check the docstrings and references.** Assistants happily invent citations, equations and parameter descriptions. Every reference in a docstring must be a real paper that actually describes the implemented method.
+- **Run the tests, and read the tests.** Generated tests sometimes assert whatever the implementation currently does, which passes without proving anything. A test should fail if the method is wrong.
+- **Keep it consistent with the rest of the library**, in style and in API (see above), rather than letting the assistant introduce a parallel way of doing things.
+- **Mention it in your pull request** if a substantial part of the contribution was AI-generated. This is not held against you; it only tells reviewers where to look closely.
+
+Pull requests that were clearly submitted without being read will be closed, whatever produced them.
+
 Code of conduct
 ---------------
 
